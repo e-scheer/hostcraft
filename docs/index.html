@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Primary -->
+  <title>hostcraft — self-hosted Minecraft server panel (Docker, mods, BlueMap)</title>
+  <meta name="description" content="hostcraft is a self-hosted web panel for your own Minecraft server. Live console, Modrinth + Hangar mod marketplace, one-click BlueMap, Playit.gg tunneling, automated backups. Single Docker Compose stack, MIT licensed."/>
+  <meta name="keywords" content="minecraft server panel, self-hosted minecraft, minecraft docker, minecraft web panel, minecraft server manager, modrinth integration, hangar plugins, bluemap, playit.gg, pterodactyl alternative, minecraft compose, open source minecraft panel"/>
+  <meta name="author" content="e-scheer"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="canonical" href="https://e-scheer.github.io/hostcraft/"/>
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="hostcraft"/>
+  <meta property="og:title" content="hostcraft — self-hosted Minecraft server panel"/>
+  <meta property="og:description" content="A self-hosted web panel for your own Minecraft server. Live console, mod &amp; plugin marketplace, BlueMap, Playit.gg tunneling. Single Compose stack, MIT."/>
+  <meta property="og:image" content="https://e-scheer.github.io/hostcraft/social-preview.png"/>
+  <meta property="og:image:width" content="1280"/>
+  <meta property="og:image:height" content="640"/>
+  <meta property="og:image:alt" content="hostcraft — self-hosted Minecraft server panel"/>
+  <meta property="og:url" content="https://e-scheer.github.io/hostcraft/"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="hostcraft — self-hosted Minecraft server panel"/>
+  <meta name="twitter:description" content="A self-hosted web panel for your own Minecraft server. Mod marketplace, BlueMap, Playit. Single Compose stack, MIT."/>
+  <meta name="twitter:image" content="https://e-scheer.github.io/hostcraft/social-preview.png"/>
+
+  <link rel="icon" type="image/svg+xml" href="logo.svg"/>
+
+  <!-- Structured data: schema.org/SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "hostcraft",
+    "alternateName": ["hostcraft panel", "hostcraft minecraft panel"],
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "Server administration",
+    "operatingSystem": "Linux, macOS, Windows (via Docker)",
+    "description": "A self-hosted web panel for your own Minecraft server. Live console, Modrinth + Hangar mod marketplace, BlueMap, Playit.gg tunneling, automated backups. Single Docker Compose stack.",
+    "url": "https://e-scheer.github.io/hostcraft/",
+    "downloadUrl": "https://github.com/e-scheer/hostcraft",
+    "softwareVersion": "0.1.0",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": {
+      "@type": "Person",
+      "name": "Egon Scheer",
+      "url": "https://github.com/e-scheer"
+    },
+    "codeRepository": "https://github.com/e-scheer/hostcraft",
+    "programmingLanguage": ["Python", "TypeScript", "Vue"],
+    "image": "https://e-scheer.github.io/hostcraft/social-preview.png",
+    "screenshot": [
+      "https://e-scheer.github.io/hostcraft/screenshots/dashboard.png",
+      "https://e-scheer.github.io/hostcraft/screenshots/console.png",
+      "https://e-scheer.github.io/hostcraft/screenshots/mods.png",
+      "https://e-scheer.github.io/hostcraft/screenshots/runtime.png",
+      "https://e-scheer.github.io/hostcraft/screenshots/network.png"
+    ],
+    "featureList": [
+      "Unified Modrinth + Hangar mod & plugin marketplace",
+      "Live xterm.js console with RCON command/reply correlation and Tab autocomplete",
+      "One-click BlueMap install (loader-aware Java compatibility)",
+      "Playit.gg tunneling in guided and managed modes",
+      "Engine swap (Paper / Forge / Fabric) with safety backups",
+      "Visual editors for server.properties, ops.json, whitelist.json",
+      "On-demand and scheduled backups",
+      "Full French and English internationalisation",
+      "Audit log for every panel action"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-2: #0f172a;
+      --panel: rgba(15, 23, 42, 0.65);
+      --border: rgba(148, 163, 184, 0.14);
+      --border-hi: rgba(148, 163, 184, 0.28);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --dim: #64748b;
+      --brand-1: #6ee7b7;
+      --brand-2: #34d399;
+      --brand-3: #10b981;
+      --brand-4: #047857;
+      --warn-bg: rgba(245, 158, 11, 0.10);
+      --warn-border: rgba(245, 158, 11, 0.28);
+      --warn-text: #fbbf24;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(52, 211, 153, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(4, 120, 87, 0.12) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Inter", "Segoe UI", sans-serif;
+      font-feature-settings: "cv11", "ss01";
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    /* Subtle grid */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at center top, black 30%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at center top, black 30%, transparent 90%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    main, header, footer { position: relative; z-index: 1; }
+
+    a { color: var(--brand-2); text-decoration: none; }
+    a:hover { color: var(--brand-1); }
+    code, pre { font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace; }
+
+    /* ---- Layout ---- */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---- Header ---- */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 24px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+    }
+    .brand img { width: 32px; height: 32px; }
+    .brand .h {
+      background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-3) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .brand-text { color: var(--text); }
+    .nav-links { margin-left: auto; display: flex; gap: 22px; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ---- Hero ---- */
+    .hero {
+      padding: 88px 0 64px;
+      text-align: center;
+    }
+    .badge-row {
+      display: inline-flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 28px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-hi);
+      background: var(--panel);
+      font-size: 13px; color: var(--muted);
+      backdrop-filter: blur(6px);
+    }
+    .badge .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--brand-2); box-shadow: 0 0 8px var(--brand-3); }
+    h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin: 0 0 18px;
+    }
+    h1 .grad {
+      background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 40%, var(--brand-3) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lede {
+      max-width: 720px; margin: 0 auto;
+      font-size: 19px; color: var(--muted);
+      line-height: 1.55;
+    }
+    .cta-row {
+      margin-top: 36px;
+      display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    }
+    .cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 600; font-size: 15px;
+      transition: transform 0.06s, box-shadow 0.12s;
+    }
+    .cta:active { transform: translateY(1px); }
+    .cta.primary {
+      background: linear-gradient(135deg, var(--brand-2) 0%, var(--brand-3) 100%);
+      color: #022c1f;
+      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.55);
+    }
+    .cta.primary:hover { box-shadow: 0 12px 36px -10px rgba(16, 185, 129, 0.75); color: #022c1f; }
+    .cta.ghost {
+      border: 1px solid var(--border-hi);
+      color: var(--text);
+      background: var(--panel);
+    }
+    .cta.ghost:hover { border-color: var(--brand-3); color: var(--text); }
+
+    .install {
+      margin: 40px auto 0;
+      max-width: 720px;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: rgba(2, 6, 23, 0.6);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-family: ui-monospace, "JetBrains Mono", monospace;
+      font-size: 14px;
+      color: var(--text);
+      display: flex; gap: 14px; align-items: center;
+    }
+    .install .prompt { color: var(--brand-3); user-select: none; }
+    .install .cmd { color: var(--text); flex: 1; overflow-x: auto; white-space: nowrap; }
+    .install .copy {
+      cursor: pointer;
+      background: rgba(148, 163, 184, 0.08);
+      color: var(--muted);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-family: inherit;
+    }
+    .install .copy:hover { color: var(--text); background: rgba(148, 163, 184, 0.16); }
+
+    /* ---- Status banner ---- */
+    .status {
+      max-width: 720px; margin: 36px auto 0;
+      padding: 14px 18px;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-radius: 12px;
+      color: var(--warn-text);
+      font-size: 14px;
+      display: flex; gap: 12px; align-items: flex-start;
+      text-align: left;
+    }
+    .status strong { color: #fde68a; }
+
+    /* ---- Sections ---- */
+    section { padding: 72px 0; }
+    .section-title {
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--brand-3); margin: 0 0 12px;
+    }
+    .section-headline {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin: 0 0 16px;
+    }
+    .section-lede {
+      font-size: 16px; color: var(--muted); max-width: 720px; margin: 0 0 40px;
+    }
+
+    /* ---- Screenshots gallery ---- */
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .shots .full { grid-column: 1 / -1; }
+    .shot {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--panel);
+      transition: border-color 0.18s, transform 0.18s;
+    }
+    .shot:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot .caption {
+      padding: 12px 14px;
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .shot .caption b { color: var(--text); }
+    @media (max-width: 800px) {
+      .shots { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Features ---- */
+    .features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    @media (max-width: 800px) { .features { grid-template-columns: 1fr; } }
+    .feature {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .feature h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--text); }
+    .feature p  { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .feature .icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.20), rgba(4, 120, 87, 0.10));
+      border: 1px solid rgba(52, 211, 153, 0.30);
+      display: grid; place-items: center;
+      margin-bottom: 14px;
+      color: var(--brand-2);
+      font-size: 18px;
+    }
+
+    /* ---- Stack ---- */
+    .stack {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    @media (max-width: 800px) { .stack { grid-template-columns: 1fr; } }
+    .stack-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .stack-card h3 { margin: 0 0 14px; font-size: 14px; color: var(--brand-2); text-transform: uppercase; letter-spacing: 1px; }
+    .stack-card .row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex; align-items: center;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid var(--border);
+      font-size: 13px; color: var(--text);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 44px 0;
+      margin-top: 64px;
+      color: var(--dim);
+      font-size: 13px;
+      text-align: center;
+    }
+    footer .links { display: flex; gap: 22px; justify-content: center; margin-bottom: 12px; }
+    footer .links a { color: var(--muted); }
+    footer .links a:hover { color: var(--text); }
+    footer .repo { font-family: ui-monospace, monospace; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top">
+      <img src="logo.svg" alt=""/>
+      <span><span class="h">h</span><span class="brand-text">ostcraft</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/e-scheer/hostcraft">GitHub →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="badge-row">
+        <span class="badge"><span class="dot"></span>MIT licensed</span>
+        <span class="badge">v0.1.0</span>
+        <span class="badge">Multi-arch image · amd64 + arm64</span>
+      </div>
+
+      <h1>
+        Run your Minecraft server,<br/>
+        <span class="grad">without the SaaS tax.</span>
+      </h1>
+      <p class="lede">
+        A self-hosted web panel for your own server — live console, mod &amp; plugin marketplace,
+        BlueMap, Playit tunneling, automated backups. Single Compose stack, no host tooling.
+      </p>
+
+      <div class="cta-row">
+        <a class="cta primary" href="https://github.com/e-scheer/hostcraft">Get started on GitHub →</a>
+        <a class="cta ghost" href="https://github.com/e-scheer/hostcraft/pkgs/container/hostcraft">View Docker image</a>
+      </div>
+
+      <div class="install" id="install">
+        <span class="prompt">$</span>
+        <span class="cmd">docker pull ghcr.io/e-scheer/hostcraft:latest</span>
+        <button class="copy" id="copy-btn" type="button">Copy</button>
+      </div>
+
+      <div class="status">
+        <span>⚠️</span>
+        <div><strong>Early personal project.</strong> Expect rough edges, breaking changes between commits, and the occasional "why is my world gone" moment. Bug reports and PRs are very welcome.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screenshots">
+    <div class="container">
+      <p class="section-title">See it in action</p>
+      <h2 class="section-headline">Five clicks from <code>docker compose up</code> to a working server.</h2>
+      <p class="section-lede">Dark mode by default, French &amp; English with full parity, every action audit-logged.</p>
+
+      <div class="shots">
+        <div class="shot">
+          <img src="screenshots/dashboard.png" alt="Dashboard"/>
+          <div class="caption"><b>Dashboard</b> — server vitals, public-access status, recent activity.</div>
+        </div>
+        <div class="shot">
+          <img src="screenshots/console.png" alt="Console"/>
+          <div class="caption"><b>Console</b> — xterm.js, Tab-completion on MC commands, copy/jump-to-latest.</div>
+        </div>
+        <div class="shot">
+          <img src="screenshots/mods.png" alt="Mods marketplace"/>
+          <div class="caption"><b>Marketplace</b> — unified Modrinth + Hangar search, version-aware install.</div>
+        </div>
+        <div class="shot full">
+          <img src="screenshots/network.png" alt="Network and Playit"/>
+          <div class="caption"><b>Network</b> — direct port forwarding or Playit.gg (guided / managed), tunnel target preview, hostname auto-detection.</div>
+        </div>
+        <div class="shot full">
+          <img src="screenshots/runtime.png" alt="Runtime tuning"/>
+          <div class="caption"><b>Runtime</b> — engine, Java image, memory &amp; JVM flags with compat warnings (★ recommended Java per MC version).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <p class="section-title">What you get</p>
+      <h2 class="section-headline">The things every paid host has,<br/>and no open-source panel does.</h2>
+
+      <div class="features">
+        <div class="feature">
+          <div class="icon">📦</div>
+          <h3>Unified mod &amp; plugin marketplace</h3>
+          <p>One search bar across Modrinth and Hangar. Filters by your MC version + loader family. Manual upload for <code>.jar</code> / <code>.mrpack</code> / CurseForge <code>.zip</code>.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">⌨️</div>
+          <h3>Console with RCON correlation</h3>
+          <p>xterm.js + WebSocket streaming. Tab autocomplete on vanilla &amp; Paper commands. Persistent RCON socket with auto-reconnect, jump-to-latest, copy to clipboard.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🗺️</div>
+          <h3>BlueMap, one click</h3>
+          <p>Loader-aware version pin: BlueMap 5.x on Java 21, 3.x on Java 17 — picks the right one so it actually loads. Iframe embedded directly in the panel.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🚀</div>
+          <h3>Engine-swap safety</h3>
+          <p>Paper ↔ Forge ↔ Fabric with full data-dir reset on swap (recoverable from auto-backup). Recommended-Java hint with ★ badge so old modpacks boot.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🌐</div>
+          <h3>Playit.gg, two modes</h3>
+          <p>"Guided" — you run the agent, paste the hostname. "Managed" — panel runs a sidecar in the MC container's netns. Hostname auto-detected via Playit API.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🔒</div>
+          <h3>Security by default</h3>
+          <p>Non-root containers. Docker socket fronted by socket-proxy with a minimal allowlist. <code>cap_drop:[ALL]</code>, <code>read_only</code> root filesystem, Argon2id passwords.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-title">Stack</p>
+      <h2 class="section-headline">No magic. Just open tools.</h2>
+
+      <div class="stack">
+        <div class="stack-card">
+          <h3>Backend</h3>
+          <div class="row">
+            <span class="pill">Django 6</span>
+            <span class="pill">DRF</span>
+            <span class="pill">Channels (ASGI)</span>
+            <span class="pill">SimpleJWT</span>
+            <span class="pill">SQLite</span>
+            <span class="pill">Argon2</span>
+            <span class="pill">Gunicorn</span>
+            <span class="pill">Docker SDK</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <h3>Frontend</h3>
+          <div class="row">
+            <span class="pill">Vue 3</span>
+            <span class="pill">Vite</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">Pinia</span>
+            <span class="pill">TanStack Query</span>
+            <span class="pill">Tailwind v4</span>
+            <span class="pill">Reka UI</span>
+            <span class="pill">xterm.js</span>
+            <span class="pill">Monaco</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <p class="section-title">Quick start</p>
+      <h2 class="section-headline">Three commands. No host tooling.</h2>
+      <p class="section-lede" style="margin-left:auto; margin-right:auto;">
+        Bring Docker. The panel brings everything else — Python runtime, Node build, the Minecraft container, the proxy, the playit agent. Nothing touches your host.
+      </p>
+
+      <div class="install" style="margin-top: 24px;">
+        <span class="prompt">$</span>
+        <span class="cmd">git clone https://github.com/e-scheer/hostcraft &amp;&amp; cd hostcraft</span>
+      </div>
+      <div class="install" style="margin-top: 8px;">
+        <span class="prompt">$</span>
+        <span class="cmd">cp .env.example .env  # set DJANGO_SECRET_KEY + MC_RCON_PASSWORD + admin password</span>
+      </div>
+      <div class="install" style="margin-top: 8px;">
+        <span class="prompt">$</span>
+        <span class="cmd">docker compose up -d  # open http://localhost:8080</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="https://github.com/e-scheer/hostcraft">Source</a>
+      <a href="https://github.com/e-scheer/hostcraft/issues">Issues</a>
+      <a href="https://github.com/e-scheer/hostcraft/releases">Releases</a>
+      <a href="https://github.com/e-scheer/hostcraft/pkgs/container/hostcraft">Container</a>
+      <a href="https://github.com/e-scheer/hostcraft/blob/main/LICENSE">MIT</a>
+    </div>
+    <div class="repo">github.com/e-scheer/hostcraft</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('copy-btn').addEventListener('click', async (e) => {
+    const cmd = e.target.parentElement.querySelector('.cmd').textContent.trim();
+    try { await navigator.clipboard.writeText(cmd); e.target.textContent = 'Copied'; setTimeout(() => (e.target.textContent = 'Copy'), 1200); }
+    catch { e.target.textContent = 'Press Ctrl+C'; }
+  });
+</script>
+</body>
+</html>

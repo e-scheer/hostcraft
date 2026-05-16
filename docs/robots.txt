@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://e-scheer.github.io/hostcraft/sitemap.xml
