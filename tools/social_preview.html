@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1280px; height: 640px;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(52, 211, 153, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(4, 120, 87, 0.20) 0%, transparent 55%),
+      linear-gradient(135deg, #020617 0%, #0f172a 100%);
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Inter", "Segoe UI", sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Subtle grid */
+  body::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  .stage {
+    position: relative;
+    width: 100%; height: 100%;
+    display: grid; place-items: center;
+    padding: 64px;
+    box-sizing: border-box;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-start;
+    max-width: 1100px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 22px;
+  }
+  .brand svg {
+    width: 96px; height: 96px;
+    filter: drop-shadow(0 12px 28px rgba(16, 185, 129, 0.28));
+  }
+  .wordmark {
+    font-size: 92px;
+    font-weight: 700;
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+  .wordmark .h {
+    background: linear-gradient(135deg, #6ee7b7 0%, #34d399 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tagline {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #cbd5e1;
+    max-width: 980px;
+    line-height: 1.2;
+  }
+  .meta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.20);
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    color: #cbd5e1;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .chip .dot {
+    width: 10px; height: 10px; border-radius: 999px; background: #34d399;
+    box-shadow: 0 0 10px #10b981;
+  }
+  .footer {
+    position: absolute;
+    bottom: 56px; left: 64px; right: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: #64748b; font-size: 22px;
+    font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace;
+  }
+  .footer .right { color: #94a3b8; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="content">
+      <div class="brand">
+        <!-- Cube -->
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 6 L58 19 L32 32 L6 19 Z" fill="#34d399"/>
+          <path d="M6 19 L32 32 L32 58 L6 45 Z" fill="#10b981"/>
+          <path d="M58 19 L32 32 L32 58 L58 45 Z" fill="#047857"/>
+          <path d="M32 6 L58 19 L32 32 Z" fill="#ffffff" fill-opacity="0.08"/>
+        </svg>
+        <span class="wordmark"><span class="h">h</span>ostcraft</span>
+      </div>
+      <div class="tagline">
+        A self-hosted web panel for your own Minecraft server.<br/>
+        Single Compose stack. Vue 3 + Django. Open source.
+      </div>
+      <div class="meta">
+        <span class="chip"><span class="dot"></span>MIT</span>
+        <span class="chip">Modrinth + Hangar</span>
+        <span class="chip">BlueMap</span>
+        <span class="chip">Playit.gg</span>
+        <span class="chip">RCON console</span>
+      </div>
+    </div>
+    <div class="footer">
+      <span>github.com/e-scheer/hostcraft</span>
+      <span class="right">docker pull ghcr.io/e-scheer/hostcraft</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo.svg" alt="hostcraft" width="96"/>
+
 # hostcraft
 
 **A self-hosted web panel for your own Minecraft server.**
