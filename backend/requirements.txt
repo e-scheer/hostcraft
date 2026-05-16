@@ -19,7 +19,7 @@ docker==7.1.0
 # RCON is implemented in stdlib (server/rcon.py) — no third-party dep needed.
 
 # Cron scheduling (schedules app)
-croniter==3.0.4
+croniter==6.2.2
 
 # S3-compatible off-site backup sync (Phase 1.6b)
 boto3==1.43.9
