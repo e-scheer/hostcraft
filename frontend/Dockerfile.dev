@@ -2,7 +2,7 @@
 # Frontend dev image: Node + Vite dev server with HMR.
 # Source code is bind-mounted at runtime; node_modules lives in a named volume.
 
-FROM node:22-alpine
+FROM node:26-alpine
 
 # node:alpine ships a 'node' user (UID 1000). We claim ownership of /app and
 # /app/node_modules in the image so the named volume picks up the right
