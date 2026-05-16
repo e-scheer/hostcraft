@@ -1,0 +1,104 @@
+# Hostcraft — French translations
+# Generated and curated by hand. Run `makemessages` if you add new gettext()
+# calls in Python source files; merge in your translations and re-run
+# `compilemessages` (the dev container does this automatically on boot).
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# --- files app -------------------------------------------------------------
+
+msgid "Path escapes the managed directory."
+msgstr "Le chemin sort du répertoire géré."
+
+msgid "Not found."
+msgstr "Introuvable."
+
+msgid "Not a directory."
+msgstr "Ce n’est pas un dossier."
+
+msgid "Permission denied."
+msgstr "Autorisation refusée."
+
+msgid "Missing path."
+msgstr "Chemin manquant."
+
+msgid "Not a file."
+msgstr "Ce n’est pas un fichier."
+
+msgid "File too large for editor preview."
+msgstr "Fichier trop volumineux pour l’éditeur."
+
+msgid "Binary file — use download instead."
+msgstr "Fichier binaire — utilisez le téléchargement à la place."
+
+msgid "Content must be a string."
+msgstr "Le contenu doit être une chaîne de caractères."
+
+msgid "Upload target is not a directory."
+msgstr "La cible de l’envoi n’est pas un dossier."
+
+msgid "Refusing to delete the data root."
+msgstr "Refus de supprimer la racine des données."
+
+msgid "`from` and `to` are required."
+msgstr "Les champs « from » et « to » sont requis."
+
+msgid "Source not found."
+msgstr "Source introuvable."
+
+# --- server app ------------------------------------------------------------
+
+msgid "Minecraft container not found."
+msgstr "Conteneur Minecraft introuvable."
+
+#, python-format
+msgid "Docker API error: %(err)s"
+msgstr "Erreur de l’API Docker : %(err)s"
+
+#, python-format
+msgid "Cannot reach docker-proxy: %(err)s"
+msgstr "Le proxy Docker est inaccessible : %(err)s"
+
+msgid "Invalid payload — expected an object under `values`."
+msgstr "Charge utile invalide — un objet est attendu sous « values »."
+
+msgid "Player name is required."
+msgstr "Le nom du joueur est requis."
+
+#, python-format
+msgid "Unknown Minecraft player: %(name)s"
+msgstr "Joueur Minecraft inconnu : %(name)s"
+
+#, python-format
+msgid "Mojang lookup failed (%(code)s)."
+msgstr "Échec de la recherche Mojang (%(code)s)."
+
+msgid "Mojang lookup unreachable."
+msgstr "Service Mojang injoignable."
+
+msgid "Mojang returned an unexpected response."
+msgstr "Réponse inattendue de Mojang."
+
+msgid "Missing uuid query parameter."
+msgstr "Paramètre « uuid » manquant."
+
+# --- backups app -----------------------------------------------------------
+
+msgid "Unknown backup kind."
+msgstr "Type de sauvegarde inconnu."
+
+msgid "Backup is not ready yet."
+msgstr "La sauvegarde n’est pas encore prête."
+
+msgid "Backup file missing on disk."
+msgstr "Fichier de sauvegarde introuvable sur le disque."
+
+msgid "Backup path escapes the managed directory."
+msgstr "Le chemin de sauvegarde sort du répertoire géré."
+
+msgid "A restore is already running."
+msgstr "Une restauration est déjà en cours."

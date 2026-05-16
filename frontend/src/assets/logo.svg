@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-label="hostcraft" role="img">
+  <title>hostcraft</title>
+  <!-- Isometric cube — top face (lightest) -->
+  <path d="M32 6 L58 19 L32 32 L6 19 Z" fill="oklch(0.78 0.16 155)"/>
+  <!-- Left face -->
+  <path d="M6 19 L32 32 L32 58 L6 45 Z" fill="oklch(0.55 0.16 155)"/>
+  <!-- Right face -->
+  <path d="M58 19 L32 32 L32 58 L58 45 Z" fill="oklch(0.42 0.13 155)"/>
+  <!-- Subtle top edge highlight -->
+  <path d="M32 6 L58 19 L32 32 Z" fill="oklch(1 0 0 / 0.06)"/>
+</svg>

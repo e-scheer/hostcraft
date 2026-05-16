@@ -1,0 +1,39 @@
+# Python
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Django
+backend/staticfiles/
+backend/spa/
+backend/*.db
+backend/*.db-*
+backend/*.sqlite3
+
+# Node / Vite
+frontend/dist/
+frontend/node_modules/
+frontend/.eslintcache
+
+# Dev / runtime
+.env
+.env.local
+*.log
+data/
+minecraft-data/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Claude Code workspace
+.claude/

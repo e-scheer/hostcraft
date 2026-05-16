@@ -1,0 +1,53 @@
+# Keep the build context tight — Docker BuildKit ships everything here to the
+# daemon over the wire even when nothing references it. Drop dev caches,
+# editor state, local DBs, secrets, the lot.
+
+.git
+.github
+.idea
+.vscode
+.editorconfig
+*.md
+LICENSE
+Makefile
+
+# Compose + envs (built image must never embed local secrets)
+.env
+.env.*
+docker-compose*.yml
+
+# Python
+**/__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Django runtime
+backend/staticfiles/
+backend/spa/
+backend/*.db
+backend/*.db-*
+backend/*.sqlite3
+backend/logs/
+backend/media/
+
+# Frontend
+frontend/dist/
+frontend/node_modules/
+frontend/.eslintcache
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local-only operator state
+.claude/
+data/
+minecraft-data/
+mc-data/
+*.log

@@ -1,0 +1,922 @@
+{
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "create": "Créer",
+    "refresh": "Actualiser",
+    "loading": "Chargement…",
+    "search": "Rechercher",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "edit": "Modifier",
+    "download": "Télécharger",
+    "upload": "Envoyer",
+    "rename": "Renommer",
+    "name": "Nom",
+    "size": "Taille",
+    "modified": "Modifié",
+    "actions": "Actions",
+    "clear": "Effacer",
+    "selected": "{n} sélectionné·s",
+    "working": "Traitement…",
+    "unknown": "Inconnu",
+    "none": "—",
+    "justNow": "à l’instant",
+    "minutesAgo": "il y a {n} min",
+    "hoursAgo": "il y a {n} h",
+    "daysAgo": "il y a {n} j",
+    "uptime": "En route depuis {h} h {m} min",
+    "themeLight": "Passer au thème clair",
+    "themeDark": "Passer au thème sombre",
+    "language": "Langue",
+    "discard": "Abandonner",
+    "downloading": "Téléchargement…",
+    "downloadStarted": "Téléchargement prêt",
+    "downloadFailed": "Échec du téléchargement",
+    "unsavedTitle": "Modifications non enregistrées",
+    "comingSoon": "Bientôt disponible",
+    "enabled": "Activé",
+    "reset": "Réinitialiser"
+  },
+
+  "auth": {
+    "title": "Content de te revoir",
+    "subtitle": "Connecte-toi à ton panneau hostcraft",
+    "username": "Nom d’utilisateur",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…",
+    "signedOut": "Déconnexion réussie",
+    "welcomeToast": "Content de te revoir",
+    "welcomeDesc": "Connecté en tant que {name}",
+    "signInFailed": "Échec de la connexion",
+    "signOut": "Se déconnecter",
+    "roleAdmin": "Admin",
+    "roleUser": "Utilisateur"
+  },
+
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "console": "Console",
+    "files": "Fichiers",
+    "mods": "Mods & plugins",
+    "players": "Joueurs",
+    "backups": "Sauvegardes",
+    "world": "Carte du monde",
+    "schedules": "Planifications",
+    "network": "Réseau",
+    "runtime": "Runtime",
+    "settings": "Paramètres"
+  },
+
+  "server": {
+    "label": "Serveur",
+    "states": {
+      "running": "En marche",
+      "stopped": "Arrêté",
+      "working": "Traitement…",
+      "booting": "Démarrage…",
+      "paused": "En pause",
+      "absent": "Non créé",
+      "unreachable": "Injoignable",
+      "unknown": "Inconnu"
+    },
+    "actions": {
+      "start": "Démarrer",
+      "stop": "Arrêter",
+      "restart": "Redémarrer",
+      "startServer": "Démarrer le serveur",
+      "stopServer": "Arrêter le serveur"
+    },
+    "toasts": {
+      "starting": "Démarrage du serveur…",
+      "stopping": "Arrêt du serveur…",
+      "restarting": "Redémarrage du serveur…",
+      "startFailed": "Impossible de démarrer le serveur",
+      "stopFailed": "Impossible d’arrêter le serveur",
+      "restartFailed": "Impossible de redémarrer le serveur"
+    }
+  },
+
+  "dashboard": {
+    "title": "Tableau de bord",
+    "loadingStatus": "Vérification du serveur…",
+    "panelUnreachable": "Proxy Docker injoignable",
+    "containerAbsent": "Le conteneur n’est pas encore créé",
+    "stats": {
+      "playersOnline": "Joueurs en ligne",
+      "playersHint": "Phase 1.3 (RCON)",
+      "tps": "TPS",
+      "tpsHint": "Phase 1.3 (RCON)",
+      "cpu": "CPU",
+      "cpuHint": "Phase 1 (flux de stats)",
+      "memory": "Mémoire",
+      "memoryHint": "Phase 1 (flux de stats)"
+    },
+    "performance": {
+      "title": "Performances",
+      "subtitle": "TPS, CPU et mémoire sur la dernière heure",
+      "placeholder": "Les graphes arrivent en Phase 1 (unovis)",
+      "collecting": "Collecte des données — premier point dans quelques secondes…"
+    },
+    "quickInfo": {
+      "title": "Coup d’œil",
+      "subtitle": "Identité du serveur",
+      "loader": "Loader",
+      "address": "Adresse",
+      "whitelist": "Liste blanche",
+      "difficulty": "Difficulté",
+      "motd": "MOTD",
+      "on": "Activé",
+      "off": "Désactivé",
+      "copyAddress": "Copier l’adresse dans le presse-papiers",
+      "addressCopied": "Adresse copiée",
+      "copyFailed": "Impossible de copier dans le presse-papiers",
+      "mcVersion": "Version MC",
+      "mcVersionResolved": "{alias} pointe vers {resolved}"
+    },
+    "crashLoop": {
+      "title": "Le serveur boucle en crash",
+      "body": "Docker a redémarré le conteneur {n} fois et le dernier code de sortie était {code}. Le serveur démarre, plante, et Docker le relance. Souvent causé par un changement d’engine ayant laissé un monde ou des mods incompatibles sur disque.",
+      "cta": "Ouvrir Runtime → Installation propre →"
+    },
+    "publicAccess": {
+      "label": "Accès public",
+      "status": {
+        "ok": "En ligne",
+        "warn": "À configurer",
+        "off": "LAN uniquement"
+      },
+      "copyHint": "Clic pour copier · clic droit → Réseau pour modifier",
+      "copied": "Adresse publique copiée",
+      "loading": "Chargement des paramètres réseau…",
+      "viaDirect": "Redirection de port directe depuis l’IP publique",
+      "viaPlayit": "Tunnel via playit.gg — aucune ouverture de port nécessaire",
+      "viaDomain": "Domaine personnalisé — enregistrements DNS chez ton hébergeur",
+      "noPublicIp": "Aucune IP publique détectée (CGNAT ? hors ligne ?). Configure Playit ou force une IP.",
+      "noPlayitHost": "Nom d’hôte Playit non renseigné — colle-le depuis ton dashboard playit.gg.",
+      "agentNotRunning": "L’agent Playit ne tourne pas — démarre-le depuis la page Réseau.",
+      "noTunnel": "Agent Playit connecté mais aucun tunnel configuré côté playit.gg."
+    }
+  },
+
+  "console": {
+    "title": "Console",
+    "connected": "Connecté",
+    "disconnected": "Déconnecté",
+    "connecting": "Connecté · flux des logs",
+    "placeholder": "list / say bonjour / op pseudo / save-all  (Tab = autocomplétion · ↑/↓ = historique)",
+    "autocompleteHint": "Tab pour accepter · ↑/↓ pour naviguer · Échap pour fermer",
+    "scrollToBottom": "Dernier message",
+    "scrollToBottomHint": "Aller à la ligne la plus récente",
+    "copy": "Copier",
+    "copiedShort": "Copié",
+    "copyHint": "Copier tout le buffer de la console dans le presse-papiers",
+    "copied": "{lines} ligne(s) copiée(s) dans le presse-papiers",
+    "copyEmpty": "Console vide — rien à copier",
+    "send": "Envoyer",
+    "clear": "Effacer",
+    "notAuthenticated": "Non authentifié.",
+    "disconnectedAuthFailed": "[déconnecté — échec d’authentification]",
+    "disconnectedReason": "[déconnecté : {reason}]",
+    "disconnectedGeneric": "[déconnecté]",
+    "wsError": "[erreur de connexion]"
+  },
+
+  "files": {
+    "title": "Fichiers",
+    "subtitle": "Édite les configs, dépose des mods et plugins, gère les mondes.",
+    "newFolder": "Nouveau dossier",
+    "newFolderName": "Nom du dossier",
+    "rootLabel": "données",
+    "emptyTitle": "Dossier vide",
+    "emptySubtitle": "Dépose des fichiers ici, ou clique sur Envoyer",
+    "loadFailed": "Impossible de charger le dossier",
+    "dropToUpload": "Relâche pour envoyer",
+    "dropTarget": "Les fichiers iront dans {path}",
+    "selectionInPath": "dans {path}",
+    "deleteSelected": "Supprimer la sélection",
+    "confirmDeleteOne": "Supprimer {name} ? Action irréversible.",
+    "confirmDeleteMany": "Supprimer {n} éléments ?",
+    "searchPlaceholder": "Rechercher dans ce dossier…",
+    "matchCount": "{n} résultats",
+    "noMatch": "Aucun fichier ne correspond à « {q} ».",
+    "toasts": {
+      "fileDeleted": "Fichier supprimé",
+      "itemsDeleted": "{n} éléments supprimés",
+      "deleteFailed": "Échec de la suppression",
+      "uploaded": "{name} envoyé",
+      "uploadedMany": "{n} fichiers envoyés",
+      "uploadFailed": "Échec de l’envoi",
+      "folderCreated": "Dossier {name} créé",
+      "folderFailed": "Impossible de créer le dossier"
+    }
+  },
+
+  "fileEditor": {
+    "title": "Édition",
+    "loading": "Ouverture du fichier…",
+    "saving": "Enregistrement…",
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "saveFailed": "Échec de l’enregistrement",
+    "back": "Retour",
+    "binaryHeading": "Ce fichier est binaire",
+    "binaryDescription": "Utilise le bouton de téléchargement pour le récupérer en octets.",
+    "tooLargeHeading": "Fichier trop volumineux",
+    "tooLargeDescription": "Les fichiers au-delà de 5 Mio ne peuvent pas être ouverts ici — télécharge-le à la place.",
+    "loadFailed": "Impossible d’ouvrir le fichier",
+    "unsaved": "Modifications non enregistrées",
+    "unsavedConfirm": "Tu as des modifications non enregistrées. Abandonner ?",
+    "shortcutSave": "Ctrl+S pour enregistrer"
+  },
+
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Édite server.properties via une UI typée — fini le texte brut.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saved": "Paramètres enregistrés",
+    "saveFailed": "Échec de l’enregistrement",
+    "loading": "Chargement…",
+    "loadFailed": "Impossible de charger server.properties",
+    "unsaved": "Modifications non enregistrées",
+    "discardConfirm": "Abandonner les modifications non enregistrées ?",
+    "restartHint": "La plupart des changements prennent effet au prochain redémarrage.",
+    "sections": {
+      "identity": "Identité",
+      "gameplay": "Jeu",
+      "world": "Monde",
+      "players": "Joueurs",
+      "performance": "Performances",
+      "spawning": "Spawn",
+      "permissions": "Permissions",
+      "security": "Sécurité",
+      "resource_pack": "Pack de ressources"
+    },
+    "fields": {
+      "motd": { "label": "MOTD du serveur", "help": "Message affiché dans la liste des serveurs (60 car. max). Les codes couleur § fonctionnent." },
+      "server-port": { "label": "Port du serveur", "help": "Port TCP d’écoute (par défaut 25565)." },
+      "server-ip": { "label": "IP de bind", "help": "Vide = écoute sur toutes les interfaces." },
+      "gamemode": { "label": "Mode de jeu par défaut", "help": "Mode des nouveaux joueurs." },
+      "difficulty": { "label": "Difficulté" },
+      "hardcore": { "label": "Hardcore", "help": "Mort = bannissement. Pas de respawn." },
+      "pvp": { "label": "PvP", "help": "Autoriser les dégâts entre joueurs." },
+      "allow-flight": { "label": "Autoriser le vol", "help": "Permet aux plugins/mods d’octroyer le vol sans déconnecter." },
+      "allow-nether": { "label": "Autoriser le Nether" },
+      "force-gamemode": { "label": "Forcer le mode par défaut", "help": "Reset le mode des joueurs qui se reconnectent." },
+      "level-name": { "label": "Nom du monde", "help": "Nom du dossier du monde principal." },
+      "level-seed": { "label": "Seed du monde", "help": "Vide pour aléatoire." },
+      "level-type": { "label": "Type de monde" },
+      "spawn-protection": { "label": "Rayon de protection du spawn", "help": "En blocs. 0 désactive." },
+      "max-world-size": { "label": "Taille max du monde" },
+      "generate-structures": { "label": "Générer les structures", "help": "Villages, forteresses, donjons, etc." },
+      "max-players": { "label": "Joueurs max" },
+      "online-mode": { "label": "Mode en ligne", "help": "Vérifier les comptes auprès de Mojang. À désactiver uniquement pour LAN hors ligne." },
+      "white-list": { "label": "Liste blanche", "help": "Seuls les joueurs listés peuvent rejoindre." },
+      "enforce-whitelist": { "label": "Appliquer la liste blanche", "help": "Kick les joueurs déjà en ligne s’ils ne sont pas dans la liste." },
+      "player-idle-timeout": { "label": "Kick si inactif (minutes)", "help": "0 = jamais." },
+      "view-distance": { "label": "Distance de vue (chunks)" },
+      "simulation-distance": { "label": "Distance de simulation (chunks)" },
+      "network-compression-threshold": { "label": "Seuil de compression réseau", "help": "Octets ; -1 désactive." },
+      "entity-broadcast-range-percentage": { "label": "Portée de diffusion des entités (%)" },
+      "spawn-monsters": { "label": "Spawn des monstres" },
+      "spawn-animals": { "label": "Spawn des animaux" },
+      "spawn-npcs": { "label": "Spawn des villageois" },
+      "op-permission-level": { "label": "Niveau OP", "help": "1 = bypass spawn · 2 = cheats solo · 3 = cheats multi · 4 = total." },
+      "function-permission-level": { "label": "Niveau fonctions" },
+      "enable-command-block": { "label": "Activer les command blocks" },
+      "enforce-secure-profile": { "label": "Profil sécurisé requis", "help": "Refuse les clients 1.19+ sans clé de chat Mojang signée." },
+      "prevent-proxy-connections": { "label": "Bloquer les connexions par proxy", "help": "Bloque les connexions qui semblent venir d’un proxy." },
+      "hide-online-players": { "label": "Cacher la liste des joueurs en ligne" },
+      "resource-pack": { "label": "URL du pack de ressources" },
+      "resource-pack-sha1": { "label": "SHA-1 du pack" },
+      "require-resource-pack": { "label": "Pack de ressources obligatoire" }
+    }
+  },
+
+  "mods": {
+    "title": "Mods & plugins",
+    "subtitle": "Recherche Modrinth et Hangar, installation en un clic, gestion du contenu sur disque.",
+    "kinds": {
+      "mod": "Mod",
+      "plugin": "Plugin",
+      "none": "Vanilla"
+    },
+    "unsupported": {
+      "title": "Ce serveur n’accepte ni mods ni plugins",
+      "desc": "Les serveurs {type} font tourner du Minecraft vanilla. Passe sur Paper, Forge, Fabric, NeoForge, Spigot, Purpur, Folia ou Quilt pour installer mods et plugins."
+    },
+    "tabs": {
+      "search": "Parcourir",
+      "installed": "Installés",
+      "upload": "Téléverser"
+    },
+    "manual": {
+      "title": "Téléverse ton propre .jar / .mrpack",
+      "subtitle": "Pour les mods ou plugins absents de Modrinth/Hangar. On lit les métadonnées de l’archive, on te dit si ça correspond à ton serveur, puis on le place dans le bon dossier.",
+      "sourcesHeader": "Sources de confiance",
+      "pickFile": "Clique pour choisir un fichier",
+      "pickHint": ".jar (mod / plugin) · .mrpack (modpack Modrinth) · .zip (serverpack CurseForge) — jusqu’à 1 Go",
+      "inspecting": "Lecture des métadonnées…",
+      "detectedKind": "Détecté",
+      "loader": "Loader",
+      "name": "Nom",
+      "version": "Version",
+      "mcRange": "Range MC déclarée",
+      "cantInstall": "Installation automatique impossible",
+      "pickKindPrompt": "Aucune métadonnée trouvée — indique où ce fichier doit aller :",
+      "install": "Installer",
+      "installAnyway": "Installer quand même",
+      "warnNote": "Ta version MC n’est pas dans la range déclarée — le mod peut refuser de charger.",
+      "inspectFailed": "Impossible de lire le fichier",
+      "verdict": {
+        "loader": {
+          "ok": "Loader compatible",
+          "mismatch": "Mauvais loader ({expected} attendu)",
+          "unknown": "Loader non déclaré"
+        },
+        "mc": {
+          "ok": "Supporte MC {current}",
+          "mismatch": "Ne supporte pas MC {current}",
+          "unknown": "Version MC non déclarée"
+        }
+      }
+    },
+    "searchPlaceholder": "Recherche des mods/plugins compatibles {source}…",
+    "searchHint": "Saisis au moins 2 caractères pour lancer la recherche.",
+    "providerErrored": "Certains fournisseurs n’ont pas répondu : {list}",
+    "noResults": "Aucun résultat pour « {q} ».",
+    "view": "Voir",
+    "install": "Installer",
+    "installing": "Installation…",
+    "installed": "Installé",
+    "uninstall": "Désinstaller",
+    "confirmUninstallTitle": "Désinstaller {name} ?",
+    "confirmUninstallDesc": "Le .jar sera supprimé du disque. Le serveur le prendra en compte au prochain redémarrage.",
+    "installedEmpty": "Rien d’installé via la marketplace pour l’instant",
+    "installedEmptyHint": "Parcours les mods/plugins et clique installer — tes installations apparaissent ici.",
+    "missingOnDisk": "Absent du disque",
+    "untrackedTitle": "Autres .jar sur le disque ({n})",
+    "untrackedHint": "Ceux-ci n’ont pas été installés via hostcraft (envoi via le gestionnaire de fichiers, restauré d’une sauvegarde…). Ils tournent à côté de tes mods/plugins installés.",
+    "versionResolved": "{alias} pointe vers {resolved}",
+    "types": {
+      "modpack": "Modpack",
+      "mod": "Mod",
+      "plugin": "Plugin"
+    },
+    "compat": {
+      "ok": "Compatible",
+      "mismatch": "Version non listée",
+      "okTooltip": "Le projet liste {v} comme version supportée.",
+      "mismatchTooltip": "Le projet ne liste pas {v} comme supportée. Ouvre la fiche pour vérifier les versions disponibles.",
+      "unknownTooltip": "Le projet ne liste aucune version Minecraft — l’installation va probablement échouer.",
+      "requiresExact": "Demande Minecraft {v}",
+      "requiresRange": "Demande Minecraft {min} – {max}",
+      "youHave": "ton serveur tourne en {v}"
+    },
+    "installBlocked": "Incompatible",
+    "modpackOpen": "Ouvrir sur Modrinth",
+    "modpackInstallDisabled": "L’installation de modpacks n’est pas encore supportée. Ouvre la fiche pour suivre la procédure recommandée.",
+    "broadenVersion": "Élargir aux autres versions (actuelle : {v})",
+    "strictLabel": "Filtrer sur {v}",
+    "strictTooltip": "N’afficher que les projets qui supportent explicitement Minecraft {v}.",
+    "idleTitle": "Cherche dans la marketplace",
+    "idleDesc": "Saisis au moins 2 caractères pour trouver des mods, plugins ou modpacks {source}. Seuls les compatibles s’installent — les autres apparaissent mais sans bouton.",
+    "emptyTitle": "Aucun résultat",
+    "emptyDesc": "Rien ne correspond à « {q} ». Essaie une requête plus courte ou d’autres mots-clés.",
+    "conflictAdvisory": {
+      "title": "À savoir — des mods individuels peuvent entrer en conflit",
+      "body": "Les mods ne sont pas isolés : deux installs peuvent se télescoper sur des classes, des IDs ou des plages de versions communes. Quand un modpack curaté correspond à ton besoin, privilégie-le — l’auteur a testé la combinaison."
+    },
+    "toasts": {
+      "installed": "{name} installé",
+      "installedVerified": "Hash vérifié",
+      "installedUnverified": "Hash non vérifié — le fournisseur n’en a pas fourni",
+      "installFailed": "Échec de l’installation",
+      "uninstalled": "{name} supprimé",
+      "uninstallFailed": "Échec de la désinstallation"
+    }
+  },
+
+  "icon": {
+    "title": "Icône du serveur",
+    "subtitle": "Choisis un préréglage, importe la tienne, ou reviens à l’icône par défaut.",
+    "presetsHeader": "Préréglages",
+    "currentLabel": "Actuelle",
+    "defaultLabel": "Par défaut",
+    "currentAlt": "Icône du serveur",
+    "upload": "Importer une icône",
+    "uploading": "Envoi…",
+    "uploadHint": "Redimensionnée auto en {size}×{size} · max {max} Ko · PNG / JPEG / WebP",
+    "reset": "Revenir à l’icône par défaut",
+    "resetTitle": "Réinitialiser l’icône ?",
+    "resetDesc": "L’icône Minecraft par défaut sera utilisée jusqu’à ce que tu en choisisses une autre.",
+    "savedHint": "Enregistré",
+    "restartHint": "Minecraft prend l’icône en compte au prochain démarrage du serveur.",
+    "editTooltip": "Changer l’icône du serveur",
+    "presets": {
+      "ember": "Braise",
+      "ocean": "Océan",
+      "forest": "Forêt",
+      "amethyst": "Améthyste",
+      "rose": "Rose",
+      "sand": "Sable",
+      "mint": "Menthe",
+      "slate": "Ardoise"
+    },
+    "toasts": {
+      "applied": "Icône mise à jour",
+      "applyFailed": "Impossible d’appliquer le préréglage",
+      "uploaded": "Icône importée",
+      "uploadFailed": "Impossible d’importer l’icône",
+      "reset": "Icône réinitialisée",
+      "resetFailed": "Impossible de réinitialiser l’icône"
+    }
+  },
+
+  "players": {
+    "title": "Joueurs",
+    "subtitle": "Gère qui peut rejoindre et qui a les pouvoirs admin.",
+    "tabs": {
+      "whitelist": "Liste blanche",
+      "ops": "Opérateurs"
+    },
+    "whitelist": {
+      "title": "Liste blanche",
+      "subtitle": "Seuls les joueurs listés peuvent rejoindre quand la whitelist est active.",
+      "addLabel": "Ajouter un joueur",
+      "addPlaceholder": "Pseudo Minecraft",
+      "add": "Ajouter",
+      "empty": "Personne en liste blanche."
+    },
+    "ops": {
+      "title": "Opérateurs",
+      "subtitle": "Joueurs avec des permissions élevées sur le serveur.",
+      "addLabel": "Promouvoir un joueur",
+      "addPlaceholder": "Pseudo Minecraft",
+      "level": "Niveau",
+      "levelHint": "1 = bypass spawn · 2 = cheats solo · 3 = cheats multi · 4 = total",
+      "bypassLimit": "Outrepasser la limite de joueurs",
+      "add": "Promouvoir",
+      "empty": "Aucun opérateur."
+    },
+    "headers": {
+      "player": "Joueur",
+      "uuid": "UUID",
+      "level": "Niveau",
+      "bypass": "Bypass limite",
+      "actions": ""
+    },
+    "remove": "Retirer",
+    "confirmRemoveWhitelist": "Retirer {name} de la liste blanche ?",
+    "confirmRemoveOp": "Rétrograder {name} ?",
+    "toasts": {
+      "whitelistAdded": "{name} ajouté à la liste blanche",
+      "whitelistAddFailed": "Impossible d’ajouter à la liste blanche",
+      "whitelistRemoved": "{name} retiré de la liste blanche",
+      "whitelistRemoveFailed": "Impossible de retirer de la liste blanche",
+      "opAdded": "{name} promu",
+      "opAddFailed": "Impossible de promouvoir",
+      "opUpdateFailed": "Impossible de modifier l’opérateur",
+      "opRemoved": "{name} rétrogradé",
+      "opRemoveFailed": "Impossible de rétrograder"
+    }
+  },
+
+  "backups": {
+    "title": "Sauvegardes",
+    "subtitle": "Snapshotte ton monde avant un changement risqué — restaure à la demande.",
+    "create": "Nouvelle sauvegarde",
+    "creating": "Mise en file…",
+    "tabs": {
+      "backups": "Sauvegardes",
+      "destinations": "Destinations off-site"
+    },
+    "kinds": {
+      "world": "Monde uniquement",
+      "world_help": "Compresse world / world_nether / world_the_end. Rapide.",
+      "full": "Données complètes",
+      "full_help": "Compresse tout /data, y compris mods, plugins, configs.",
+      "estimate": "≈ {size} brut",
+      "estimateLoading": "calcul…",
+      "compressionNote": "Le .tar.gz final est typiquement 30 à 60 % plus petit que la taille brute affichée ci-dessus."
+    },
+    "statuses": {
+      "pending": "En attente",
+      "running": "En cours",
+      "ready": "Prête",
+      "failed": "Échec"
+    },
+    "remote": {
+      "none": "Local uniquement",
+      "pending": "En file",
+      "uploading": "Envoi…",
+      "uploaded": "Off-site",
+      "failed": "Échec d’envoi"
+    },
+    "summary": "{ready} prête·s · {inFlight} en cours · {size} au total",
+    "headers": {
+      "name": "Nom",
+      "kind": "Type",
+      "size": "Taille",
+      "created": "Créée",
+      "status": "Statut"
+    },
+    "empty": "Aucune sauvegarde.",
+    "emptyHint": "Clique sur « Nouvelle sauvegarde » pour démarrer la première.",
+    "confirmDelete": "Supprimer la sauvegarde {name} ?",
+    "errorDetails": "Voir l’erreur",
+    "restoreAction": "Restaurer",
+    "restoring": "Restauration…",
+    "confirmRestoreTitle": "Restaurer depuis {name} ?",
+    "confirmRestoreDesc": "Le serveur sera arrêté, le dossier de données remplacé, puis le serveur redémarrera. Action irréversible.",
+    "uploadAction": "Envoyer en off-site",
+    "uploadPickTitle": "Vers quelle destination ?",
+    "uploadPickDesc": "Choisis une destination pour envoyer cette sauvegarde :",
+    "uploadPickHint": "Saisis le nom de la destination dans la fenêtre de confirmation.",
+    "toasts": {
+      "queued": "Sauvegarde {name} mise en file",
+      "queueFailed": "Impossible de planifier la sauvegarde",
+      "deleted": "Sauvegarde {name} supprimée",
+      "deleteFailed": "Impossible de supprimer la sauvegarde",
+      "restoreQueued": "Restauration en file — le serveur va redémarrer",
+      "restoreFailed": "Impossible de restaurer la sauvegarde",
+      "uploadQueued": "Envoi en file",
+      "uploadFailed": "Impossible de planifier l’envoi",
+      "noDestination": "Aucune destination off-site",
+      "noDestinationDesc": "Crée-en une dans l’onglet Destinations off-site d’abord."
+    }
+  },
+
+  "destinations": {
+    "subtitle": "Buckets compatibles S3 où les sauvegardes peuvent être miroitées off-site.",
+    "create": "Ajouter une destination",
+    "preset": "Préréglage",
+    "namePlaceholder": "ex. backblaze-eu",
+    "bucket": "Bucket",
+    "endpoint": "Endpoint",
+    "endpointHelp": "URL complète avec https:// — ex. https://s3.us-east-005.backblazeb2.com",
+    "region": "Région",
+    "prefix": "Préfixe",
+    "prefixPlaceholder": "hostcraft/",
+    "accessKey": "Access key ID",
+    "secretKey": "Secret access key",
+    "secretPlaceholderKeep": "Laisser vide pour conserver le secret",
+    "secretSet": "Secret enregistré",
+    "autoUpload": "Envoi auto des nouvelles sauvegardes",
+    "test": "Tester la connexion",
+    "empty": "Aucune destination off-site.",
+    "emptyHint": "Ajoute-en une ci-dessus pour miroiter vers S3, Backblaze B2, R2, etc.",
+    "confirmDelete": "Supprimer la destination {name} ?",
+    "toasts": {
+      "created": "Destination enregistrée",
+      "createFailed": "Impossible d’enregistrer la destination",
+      "updateFailed": "Impossible de modifier la destination",
+      "deleted": "Destination supprimée",
+      "deleteFailed": "Impossible de supprimer la destination",
+      "testing": "Test en cours…",
+      "testOk": "Connexion OK",
+      "testFailed": "Échec de connexion"
+    }
+  },
+
+  "schedules": {
+    "title": "Planifications",
+    "subtitle": "Tâches cron : redémarrages, sauvegardes, commandes RCON.",
+    "create": "Nouvelle planification",
+    "namePlaceholder": "ex. nightly-world",
+    "cron": "Expression cron",
+    "empty": "Aucune planification.",
+    "emptyHint": "Clique sur « Nouvelle planification » pour automatiser des redémarrages, sauvegardes ou commandes RCON.",
+    "confirmDelete": "Supprimer la planification {name} ?",
+    "runNow": "Lancer maintenant",
+    "fields": {
+      "command": "Commande RCON",
+      "namePrefix": "Préfixe de nom",
+      "enabled": "Activée"
+    },
+    "kinds": {
+      "restart": "Redémarrage du serveur",
+      "restartHelp": "Arrête proprement et redémarre le serveur Minecraft.",
+      "backup_world": "Sauvegarde monde",
+      "backupWorldHelp": "Compresse uniquement les dossiers world. Rapide.",
+      "backup_full": "Sauvegarde complète",
+      "backupFullHelp": "Compresse tout le dossier de données : mods, plugins, configs.",
+      "rcon": "Commande RCON",
+      "rconHelp": "Envoie une commande arbitraire via RCON (ex. « say bonjour », « save-all »)."
+    },
+    "headers": {
+      "kind": "Type",
+      "next": "Prochaine exécution",
+      "lastRun": "Dernière exécution",
+      "status": "Statut",
+      "enabled": "Activée"
+    },
+    "statuses": {
+      "never_run": "Jamais exécutée",
+      "running": "En cours",
+      "success": "Succès",
+      "failed": "Échec"
+    },
+    "toasts": {
+      "created": "Planification enregistrée",
+      "createFailed": "Impossible d’enregistrer la planification",
+      "updateFailed": "Impossible de modifier la planification",
+      "deleted": "Planification supprimée",
+      "deleteFailed": "Impossible de supprimer la planification",
+      "queued": "Exécution en file",
+      "runFailed": "Impossible de lancer la planification"
+    }
+  },
+
+  "activity": {
+    "title": "Activité récente",
+    "subtitle": "Journal d’audit du panneau et du serveur.",
+    "empty": "Aucune activité pour l’instant.",
+    "actions": {
+      "server": {
+        "start": "Serveur · démarrage",
+        "stop": "Serveur · arrêt",
+        "restart": "Serveur · redémarrage",
+        "runtime": "Runtime modifié",
+        "files": "Fichiers modifiés"
+      },
+      "mods": {
+        "install": "Mod installé",
+        "uninstall": "Mod désinstallé",
+        "upload": "Upload mod/plugin",
+        "upload.inspect": "Upload · inspection"
+      },
+      "network": {
+        "playit": {
+          "agent": "Agent Playit"
+        },
+        "allocation": {
+          "add": "Allocation ajoutée",
+          "remove": "Allocation supprimée"
+        }
+      },
+      "worldmap": {
+        "install": "BlueMap installé"
+      },
+      "backup": {
+        "create": "Sauvegarde créée",
+        "restore": "Restauration"
+      }
+    }
+  },
+
+  "network": {
+    "title": "Réseau",
+    "subtitle": "Accès public, domaine personnalisé, ports additionnels.",
+    "publicAccess": {
+      "title": "Accès public",
+      "subtitle": "Comment les joueurs accèdent à ton serveur depuis Internet.",
+      "modeLabel": "Mode de connexion",
+      "playitHostLabel": "Nom d’hôte Playit",
+      "playitHostHint": "Copie-le depuis le tableau de bord de ton agent Playit. Permanent — utilisable comme cible CNAME.",
+      "playitHostHintManaged": "Le nom d’hôte est géré par playit.gg — ce champ est juste un miroir utilisé pour l’aperçu DNS. Modifie-le sur playit.gg pour changer l’adresse réelle du tunnel.",
+      "useDetected": "Utiliser détecté : {host}",
+      "playitNotSet": "Nom d’hôte non renseigné (lance l’agent ou colle-le depuis playit.gg)",
+      "detectedAt": "IP publique détectée : {ip}",
+      "refresh": "Rafraîchir"
+    },
+    "modes": {
+      "direct": {
+        "label": "Direct (redirection de port)",
+        "help": "Ouvre le port 25565 sur ton routeur. Meilleure latence."
+      },
+      "playit_guided": {
+        "label": "Playit.gg (assisté)",
+        "help": "Tu lances un agent Playit, colle le nom d’hôte ici. Aucune ouverture de port."
+      },
+      "playit_managed": {
+        "label": "Playit.gg (managé)",
+        "help": "Hostcraft lance l’agent Playit dans un conteneur dédié."
+      }
+    },
+    "playit": {
+      "agent": {
+        "secretLabel": "Secret Playit",
+        "secretStored": "Secret enregistré — colle-en un nouveau pour le remplacer",
+        "secretSavedBadge": "Secret enregistré · chiffré au repos",
+        "secretReplace": "Remplacer",
+        "secretHint": "Récupère-le sur playit.gg → Compte → Agent secrets. Stocké chiffré, utilisé pour authentifier le sidecar auprès de playit.gg.",
+        "start": "Démarrer l’agent",
+        "restart": "Redémarrer l’agent",
+        "stop": "Arrêter l’agent",
+        "started": "Démarrage de l’agent Playit",
+        "stopped": "Agent Playit arrêté",
+        "startFailed": "Impossible de démarrer l’agent Playit",
+        "stopFailed": "Impossible d’arrêter l’agent Playit",
+        "viewLogs": "Voir les logs",
+        "hideLogs": "Masquer les logs",
+        "noLogs": "Pas encore de logs. L’agent affiche une URL de claim au premier boot si le secret n’est pas encore lié à un tunnel.",
+        "noTunnelTitle": "Secret valide, mais aucun tunnel configuré",
+        "noTunnelBody": "Ton agent est connecté à playit.gg mais a 0 tunnel. Va sur ton dashboard playit.gg, crée un tunnel Minecraft Java pointant vers l’adresse locale « minecraft:25565 », puis reviens ici — le nom d’hôte se remplira tout seul.",
+        "openDashboard": "Ouvrir le dashboard playit.gg",
+        "refresh": "Je viens d’en ajouter un — vérifier maintenant",
+        "refreshFailed": "Impossible de rafraîchir depuis playit.gg",
+        "tunnelTargetLabel": "Cible du tunnel — colle dans Local IP / Port sur playit.gg",
+        "tunnelTargetHint": "L’agent partage la network du conteneur Minecraft, donc son localhost est le serveur. Ça ne change jamais quelle que soit la recréation du conteneur, ton OS hôte ou ta config Docker.",
+        "state": {
+          "absent": "Non lancé",
+          "created": "Démarrage…",
+          "running": "Connecté à playit.gg",
+          "restarting": "Redémarrage…",
+          "exited": "Arrêté",
+          "error": "Erreur",
+          "unknown": "Inconnu"
+        }
+      }
+    },
+    "domain": {
+      "title": "Domaine personnalisé",
+      "subtitle": "Pointe un domaine vers ton serveur. On génère les enregistrements DNS.",
+      "label": "Domaine",
+      "hint": "Préfère un sous-domaine (ex. mc.exemple.com). Les domaines apex ne supportent pas le CNAME.",
+      "recordsToAdd": "Enregistrements DNS à ajouter",
+      "recordsHint": "Ajoute ces enregistrements chez ton hébergeur DNS. Clique sur une valeur pour la copier.",
+      "cantPreview": "Renseigne un domaine et (en mode Playit) un nom d’hôte pour prévisualiser les enregistrements DNS."
+    },
+    "allocations": {
+      "title": "Allocations",
+      "subtitle": "Ports additionnels pour BlueMap, Geyser, voice chat, cartes web…",
+      "preset": "Ajout rapide",
+      "labelPlaceholder": "BlueMap, Geyser, …",
+      "hostPort": "Port hôte",
+      "containerPort": "Port conteneur",
+      "protocol": "Protocole",
+      "add": "Ajouter une allocation",
+      "empty": "Aucune allocation supplémentaire.",
+      "confirmDelete": "Supprimer « {name} » ?",
+      "confirmDeleteDesc": "Le port sera supprimé et le conteneur recréé."
+    },
+    "toasts": {
+      "saved": "Paramètres réseau enregistrés",
+      "saveFailed": "Impossible d’enregistrer les paramètres réseau",
+      "allocationCreated": "Allocation ajoutée",
+      "allocationFailed": "Échec de l’opération d’allocation",
+      "allocationRemoved": "« {name} » supprimée"
+    }
+  },
+
+  "watchdog": {
+    "title": "Watchdog auto-restart",
+    "subtitle": "Redémarre automatiquement le serveur Minecraft quand son conteneur devient unhealthy.",
+    "enabledLabel": "Activé",
+    "enabledHelp": "Quand le conteneur reste unhealthy plus longtemps que le seuil ci-dessous, on le redémarre.",
+    "thresholdLabel": "Seuil unhealthy (secondes)",
+    "thresholdHelp": "Durée pendant laquelle le conteneur doit être unhealthy avant redémarrage. 30 à 3600 s.",
+    "maxLabel": "Restarts max / heure",
+    "maxHelp": "Plafond de sécurité contre les boucles de redémarrage. 1 à 20.",
+    "totalRestarts": "Auto-redémarrages totaux : {n}",
+    "saved": "Watchdog mis à jour",
+    "saveFailed": "Impossible de mettre à jour le watchdog"
+  },
+
+  "runtime": {
+    "title": "Runtime",
+    "subtitle": "Type de serveur, version, mémoire, flags JVM. Les changements recréent le conteneur.",
+    "loading": "Chargement…",
+    "loadFailed": "Impossible de lire la configuration runtime",
+    "applied": "Appliqué — redémarrage du serveur",
+    "applyFailed": "Impossible d’appliquer les changements",
+    "applying": "Application…",
+    "apply": "Appliquer et redémarrer",
+    "warningTitle": "Ceci redémarre le serveur",
+    "warningDescription": "Appliquer ces changements arrête proprement le conteneur Minecraft, le recrée avec le nouvel env, puis le redémarre. Les joueurs connectés seront déconnectés.",
+    "sections": {
+      "stack": "Type & version",
+      "memory": "Mémoire & JVM"
+    },
+    "fields": {
+      "TYPE": {
+        "label": "Type de serveur",
+        "help": "Vanilla, Paper, Forge, Fabric… Les plugins (API Bukkit) et les mods (Forge/Fabric) ne sont pas interchangeables."
+      },
+      "VERSION": {
+        "label": "Version Minecraft",
+        "help": "Utilise LATEST pour suivre la dernière stable, ou fige une version exacte (par ex. 1.21.4)."
+      },
+      "MEMORY": {
+        "label": "Mémoire",
+        "help": "Taille du tas JVM, par ex. 4G, 6G, 8192M."
+      },
+      "USE_AIKAR_FLAGS": {
+        "label": "Flags Aikar",
+        "help": "Active les flags JVM réputés d’Aikar, optimisés pour Minecraft. Recommandé."
+      },
+      "JVM_OPTS": {
+        "label": "JVM_OPTS",
+        "help": "Flags JVM additionnels. Power-user — laisse vide sauf si tu sais ce que tu fais."
+      },
+      "JVM_XX_OPTS": {
+        "label": "JVM_XX_OPTS",
+        "help": "Flags -XX additionnels. Combinés aux flags Aikar quand les deux sont actifs."
+      },
+      "JAVA": {
+        "label": "Runtime Java",
+        "help": "Choisit la variante d’image itzg/minecraft-server — indépendant de ton engine (Paper/Forge/…) et de la version MC. Auto choisit le bon Java pour la MC demandée.",
+        "tooOld": "Java {min}+ est requis pour Minecraft {mc}.",
+        "tooNew": "Plus récent que le Java {recommended} recommandé pour Minecraft {mc}. Le serveur démarre, mais des libs natives embarquées dans les vieux mods (le profiler de spark en tête) peuvent segfault. Préfère l’option marquée ★ pour rester stable.",
+        "minHint": "Java {min} minimum pour Minecraft {mc}.",
+        "recommendedBadge": "recommandé"
+      }
+    },
+    "risky": {
+      "title": "Changement majeur détecté",
+      "description": "Changer de type ou de version peut casser les mondes, mods et plugins. On recommande fortement une sauvegarde complète d’abord.",
+      "withBackup": "Sauvegarde puis appliquer",
+      "skipBackup": "Sauter la sauvegarde, appliquer quand même",
+      "backupRunning": "Sauvegarde de sécurité en cours…",
+      "backupFailed": "La sauvegarde a échoué — application annulée",
+      "backupReady": "Sauvegarde de sécurité prête"
+    },
+    "engineSwap": {
+      "title": "Changement d’engine : {old} → {new}",
+      "description": "Le dossier de données est rempli de fichiers spécifiques à l’ancien engine (mods/plugins, monde, configs, caches) qui ne se chargeront pas sur un serveur {new}. On recommande un reset propre — seuls server.properties, ops, whitelist et l’icône sont conservés. Restaure depuis la sauvegarde de sécurité si tu veux récupérer le reste. Sinon, garde tout à tes risques.",
+      "wipe": "Tout supprimer et continuer",
+      "keep": "Garder à mes risques"
+    },
+    "cleanInstall": {
+      "title": "Installation propre",
+      "subtitle": "Vide le dossier de données et laisse le serveur bootstrap depuis zéro. Utile quand le serveur boucle en crash après un changement d’engine.",
+      "confirm": "Installation propre maintenant",
+      "description": "Tout sera supprimé du dossier de données sauf server.properties, ops, whitelist, listes de bans, usercache, eula et l’icône. Le conteneur est recréé depuis zéro. Action irréversible.",
+      "hint": "Fais une sauvegarde complète d’abord si tu veux pouvoir récupérer quelque chose."
+    }
+  },
+
+  "world": {
+    "title": "Carte du monde",
+    "subtitle": "Carte web temps réel de tes mondes, propulsée par BlueMap.",
+    "unsupported": {
+      "title": "La carte n’est pas disponible sur cet engine",
+      "body": "BlueMap tourne sur Paper, Purpur, Spigot, Forge, NeoForge, Fabric et Quilt. Ton serveur est actuellement {type} — bascule sur un de ces engines depuis Runtime pour activer la carte."
+    },
+    "setup": {
+      "title": "Mise en place de BlueMap",
+      "subtitle": "On installe la bonne version BlueMap pour ton engine + ta version Minecraft, on ouvre le port 8100, et on intègre la carte live ici.",
+      "feature1": "Vue 3D temps réel du monde, rendue pendant que tu joues",
+      "feature2": "Nether, End et dimensions custom supportés",
+      "feature3": "Web app intégrée dans le panel — partageable aussi via URL",
+      "willInstallOn": "Sera installé sur",
+      "cta": "Installer BlueMap",
+      "installing": "Installation — redémarrage du serveur…",
+      "confirmTitle": "Installer BlueMap ?",
+      "confirmBody": "On va télécharger la dernière build BlueMap pour {loader} sur Minecraft {mc}, ouvrir le port 8100, et redémarrer le serveur. Les mondes existants gardent leurs données — BlueMap génère les tiles en arrière-plan à mesure que les chunks sont chargés.",
+      "confirmCta": "Installer et redémarrer",
+      "note": "Le premier rendu peut prendre quelques minutes par chunk — vide jusqu’à ce que ton monde commence à être exploré."
+    },
+    "installed": {
+      "ready": "BlueMap actif",
+      "reload": "Recharger",
+      "openInTab": "Ouvrir dans un nouvel onglet",
+      "iframeTitle": "Carte du monde BlueMap",
+      "tilesNote": "Les tiles sont générées au fil de l’eau quand les chunks sont chargés — garde le serveur allumé et explore ton monde pour que la carte se remplisse."
+    },
+    "toasts": {
+      "installed": "BlueMap installé",
+      "installedDesc": "Le serveur redémarre avec le port 8100 publié. La carte apparaîtra quand il sera de retour.",
+      "installFailed": "Impossible d’installer BlueMap"
+    }
+  },
+
+  "phaseStubs": {
+    "console": {
+      "title": "Console en direct",
+      "description": "xterm.js, corrélation commande/réponse, filtres erreur/warn/info et plein écran arrivent en Phase 1.",
+      "tag": "Phase 1"
+    },
+    "mods": {
+      "title": "Marketplace unifiée mods & plugins",
+      "description": "Modrinth, Hangar, Spigot et CurseForge dans une seule recherche, avec résolution des dépendances et rollback. La feature phare — Phase 2.",
+      "tag": "Phase 2"
+    },
+    "players": {
+      "title": "Joueurs",
+      "description": "Op, kick, ban et whitelist depuis une UI propre — éditeurs visuels en Phase 1.",
+      "tag": "Phase 1"
+    },
+    "backups": {
+      "title": "Sauvegardes",
+      "description": "Snapshots locaux, planifications, et destinations off-site (S3 / B2 / Backblaze / Google Drive) en Phase 1.",
+      "tag": "Phase 1"
+    },
+    "world": {
+      "title": "Carte du monde",
+      "description": "Installation BlueMap ou Squaremap en un clic, avec reverse-proxy par le panneau — y compris quand le serveur dort. Phase 3.",
+      "tag": "Phase 3"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Éditeurs visuels pour server.properties, ops, whitelist ; arguments JVM ; sélecteur multi-JDK ; compte et 2FA. Phase 1.",
+      "tag": "Phase 1"
+    }
+  }
+}

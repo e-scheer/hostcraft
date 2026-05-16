@@ -1,0 +1,49 @@
+/**
+ * Vue <Transition> classes + shared keyframes.
+ *
+ * Naming follows Vue's <Transition name="..."> pattern so any component can
+ * `<Transition name="view-fade">` without re-declaring the CSS locally.
+ */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ---------- Route / view transitions ---------- */
+
+.view-fade-enter-active,
+.view-fade-leave-active {
+  transition: opacity var(--duration-fast) var(--easing-out);
+}
+.view-fade-enter-from,
+.view-fade-leave-to {
+  opacity: 0;
+}
+
+/* ---------- Modal (overlay + card) ---------- */
+
+.modal-overlay-enter-active,
+.modal-overlay-leave-active {
+  transition: opacity var(--duration-base) var(--easing-out);
+}
+.modal-overlay-enter-from,
+.modal-overlay-leave-to {
+  opacity: 0;
+}
+
+.modal-card-enter-active,
+.modal-card-leave-active {
+  transition:
+    opacity var(--duration-slow) var(--easing-out),
+    transform var(--duration-slow) var(--easing-in-out);
+}
+.modal-card-enter-from,
+.modal-card-leave-to {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}

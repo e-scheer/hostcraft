@@ -1,0 +1,34 @@
+/**
+ * Theme overrides for @unovis/* — by default the tooltip wrapper uses a white
+ * background and dark text, which is invisible on our dark theme. Map every
+ * relevant Unovis CSS var to our design tokens.
+ */
+
+:root {
+  /* Tooltip wrapper */
+  --vis-tooltip-background-color: var(--card);
+  --vis-tooltip-text-color: var(--card-foreground);
+  --vis-tooltip-border-color: var(--border);
+  --vis-tooltip-shadow-color: rgb(0 0 0 / 0.4);
+
+  /* Crosshair vertical line */
+  --vis-crosshair-line-stroke-color: var(--muted-foreground);
+  --vis-crosshair-line-stroke-width: 1;
+  --vis-crosshair-circle-stroke-color: var(--card);
+  --vis-crosshair-circle-stroke-width: 2;
+
+  /* Axes — keep tick labels readable on the dark canvas */
+  --vis-axis-tick-color: var(--border);
+  --vis-axis-tick-label-color: var(--muted-foreground);
+  --vis-axis-tick-label-font-size: 11px;
+  --vis-axis-domain-color: transparent;
+  --vis-axis-grid-color: transparent;
+}
+
+/* Polish the tooltip surface — Unovis' default has no border-radius. */
+.unovis-xy-container .vis-tooltip,
+.vis-tooltip {
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--vis-tooltip-border-color) !important;
+  backdrop-filter: blur(8px);
+}

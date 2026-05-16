@@ -1,0 +1,141 @@
+# Full-containerized dev stack — nothing is installed on the host.
+#
+# Usage:   docker compose -f docker-compose.dev.yml up
+#          docker compose -f docker-compose.dev.yml down
+#
+# Frontend → http://localhost:5173 (Vite, HMR enabled)
+# Backend  → http://localhost:8000 (Django + DRF, autoreload)
+# Vite proxies /api/* to the `backend` service inside the Docker network.
+#
+# Security defaults applied to every service:
+#   - non-root user (UID/GID 1000 to match a typical Linux host)
+#   - all kernel capabilities dropped, no-new-privileges set
+#   - Minecraft container runs as the itzg image's stock 'minecraft' user
+
+services:
+  # docker-socket-proxy is the ONLY container that mounts /var/run/docker.sock.
+  # It exposes a restricted HTTP API to the rest of the stack — backend hits
+  # tcp://docker-proxy:2375, never the socket directly. The proxy refuses any
+  # call outside the whitelist.
+  #
+  # IMAGES=1 is needed for the Playit-managed sidecar: the panel pulls
+  # ghcr.io/playit-cloud/playit-agent on demand when the user enables
+  # managed mode.
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: hostcraft-docker-proxy-dev
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1
+      IMAGES: 1
+      NETWORKS: 1
+      POST: 1
+      LOG_LEVEL: warning
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: [hostcraft]
+    security_opt:
+      - no-new-privileges:true
+    # Not exposed to the host — only the Docker network.
+
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: hostcraft-minecraft-dev
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "${MC_EULA:-TRUE}"
+      TYPE: "${MC_TYPE:-PAPER}"
+      VERSION: "${MC_VERSION:-LATEST}"
+      MEMORY: "${MC_MEMORY:-2G}"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "${MC_RCON_PASSWORD:-dev}"
+      RCON_PORT: "25575"
+    volumes:
+      - mc-data-dev:/data
+    networks: [hostcraft]
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      hostcraft.managed: "true"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+      args:
+        USER_UID: "1000"
+        USER_GID: "1000"
+    image: hostcraft-backend-dev
+    container_name: hostcraft-backend-dev
+    restart: unless-stopped
+    user: "1000:1000"
+    working_dir: /app
+    # HOSTCRAFT_BACKEND_HOST_PORT lets you remap the host-facing port if 8001
+    # is taken by another project. Container internals always use 8000.
+    ports:
+      - "${HOSTCRAFT_BACKEND_HOST_PORT:-8001}:8000"
+    environment:
+      DJANGO_DEBUG: "true"
+      DJANGO_SECRET_KEY: "dev-secret-do-not-use-in-prod"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,backend"
+      DJANGO_CORS_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173"
+      DJANGO_LOG_LEVEL: "DEBUG"
+      HOSTCRAFT_DB_PATH: "/app/hostcraft.db"
+      HOSTCRAFT_INITIAL_ADMIN_USER: "admin"
+      HOSTCRAFT_INITIAL_ADMIN_PASSWORD: "admin"
+      MC_CONTAINER_NAME: "hostcraft-minecraft-dev"
+      MC_RCON_HOST: "minecraft"
+      MC_RCON_PORT: "25575"
+      MC_RCON_PASSWORD: "${MC_RCON_PASSWORD:-dev}"
+      DOCKER_HOST: "tcp://docker-proxy:2375"
+    volumes:
+      # Source code: bind-mounted for Django's autoreload.
+      - ./backend:/app
+      # Same MC data volume as the minecraft container — mounted read/write so
+      # the file manager can edit configs, mods, plugins, world files.
+      - mc-data-dev:/mc-data
+      # Backups land here — separate volume so they survive panel rebuilds.
+      - hostcraft-backups-dev:/backups
+    networks: [hostcraft]
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - minecraft
+      - docker-proxy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: hostcraft-frontend-dev
+    container_name: hostcraft-frontend-dev
+    restart: unless-stopped
+    user: "node"  # UID 1000 in node:alpine, matches host
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_BACKEND_URL: "http://backend:8000"
+    volumes:
+      # Source code: bind-mounted for Vite HMR.
+      - ./frontend:/app
+      # node_modules: named volume so the bind mount above doesn't shadow it.
+      - frontend-node-modules:/app/node_modules
+    networks: [hostcraft]
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - backend
+
+networks:
+  hostcraft:
+    driver: bridge
+
+volumes:
+  mc-data-dev:
+  frontend-node-modules:
+  hostcraft-backups-dev:

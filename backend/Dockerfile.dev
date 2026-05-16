@@ -1,0 +1,49 @@
+# syntax=docker/dockerfile:1.7
+# Backend dev image: Django + DRF with built-in autoreload.
+# Source code is bind-mounted at runtime; only the toolchain ships here.
+
+FROM python:3.12-slim
+
+# Build args so the in-container UID matches the host user, avoiding
+# permission headaches with bind mounts and SQLite databases owned by root.
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+# Hardening basics + minimal build deps for argon2-cffi.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        curl \
+        gettext \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user matching host UID/GID.
+RUN groupadd --gid ${USER_GID} app \
+    && useradd --uid ${USER_UID} --gid ${USER_GID} --create-home --shell /bin/bash app
+
+WORKDIR /app
+# Pre-create /backups with the right ownership so the Docker named volume
+# inherits it on first mount (same trick as frontend's /app/node_modules).
+RUN chown app:app /app \
+    && mkdir -p /backups \
+    && chown app:app /backups
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1
+
+# Install deps as root, run as app.
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+USER app
+
+EXPOSE 8000
+
+# Healthcheck — avoid hammering the app, runs once a minute after a 30s grace.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s \
+    CMD curl -fsS http://localhost:8000/api/health/ || exit 1
+
+# Migrate, compile translations, seed admin, then run Django dev server (ASGI).
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py compilemessages -i node_modules -i staticfiles 2>/dev/null && python manage.py bootstrap_admin && python manage.py runserver 0.0.0.0:8000"]

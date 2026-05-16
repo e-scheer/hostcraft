@@ -1,0 +1,27 @@
+/**
+ * Hostcraft style entry point.
+ *
+ * Order matters:
+ *   1. Tailwind itself
+ *   2. Plugins
+ *   3. dark mode variant
+ *   4. Tokens (CSS vars — needed before @theme reads them)
+ *   5. Theme inline (Tailwind ↔ tokens binding)
+ *   6. Base resets
+ *   7. Component patterns
+ *   8. Utilities
+ *   9. Animations / Vue transitions
+ */
+
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@import './tokens.css';
+@import './theme.css';
+@import './base.css';
+@import './components.css';
+@import './utilities.css';
+@import './animations.css';
+@import './charts.css';

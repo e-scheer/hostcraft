@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1.7
+# Frontend dev image: Node + Vite dev server with HMR.
+# Source code is bind-mounted at runtime; node_modules lives in a named volume.
+
+FROM node:22-alpine
+
+# node:alpine ships a 'node' user (UID 1000). We claim ownership of /app and
+# /app/node_modules in the image so the named volume picks up the right
+# ownership at first attach, then drop privileges.
+USER root
+RUN mkdir -p /app/node_modules \
+    && chown -R node:node /app
+
+WORKDIR /app
+USER node
+
+EXPOSE 5173
+
+# Test for the vite binary (not just the dir) — the named-volume mount creates
+# an empty dir on first boot, so a `-d` test wrongly returns true.
+CMD ["sh", "-c", "if [ ! -x node_modules/.bin/vite ]; then npm install; fi && exec npm run dev -- --host 0.0.0.0"]

@@ -1,0 +1,18 @@
+/**
+ * Custom Tailwind utilities. Stay small — most things are better as components.
+ */
+
+@layer utilities {
+  /* Brand wordmark gradient — used on the Logo and a few hero headings. */
+  .text-gradient-brand {
+    background: linear-gradient(135deg, var(--brand-300), var(--brand-500), var(--brand-700));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Tabular numerals for size/duration columns */
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}

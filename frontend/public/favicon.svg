@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <path d="M32 6 L58 19 L32 32 L6 19 Z" fill="oklch(0.78 0.16 155)"/>
+  <path d="M6 19 L32 32 L32 58 L6 45 Z" fill="oklch(0.55 0.16 155)"/>
+  <path d="M58 19 L32 32 L32 58 L58 45 Z" fill="oklch(0.42 0.13 155)"/>
+</svg>

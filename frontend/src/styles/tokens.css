@@ -1,0 +1,89 @@
+/**
+ * Design tokens — the single source of truth for hostcraft's visual identity.
+ *
+ * Edit nothing here that isn't a value. Anything mapping these to Tailwind or
+ * deriving classes lives in theme.css, components.css, or utilities.css.
+ */
+
+:root {
+  /* Background scale */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.16 0.01 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.01 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.01 260);
+
+  --secondary: oklch(0.96 0.005 260);
+  --secondary-foreground: oklch(0.16 0.01 260);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.5 0.01 260);
+  --accent: oklch(0.96 0.005 260);
+  --accent-foreground: oklch(0.16 0.01 260);
+
+  /* Action colors */
+  --primary: oklch(0.62 0.16 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Strokes & focus */
+  --border: oklch(0.92 0.005 260);
+  --input: oklch(0.92 0.005 260);
+  --ring: oklch(0.62 0.16 155 / 0.6);
+
+  /* Brand palette (emerald, custom-tuned) */
+  --brand-50:  oklch(0.97 0.05 155);
+  --brand-100: oklch(0.93 0.08 155);
+  --brand-300: oklch(0.82 0.13 155);
+  --brand-500: oklch(0.7 0.17 155);
+  --brand-600: oklch(0.62 0.17 155);
+  --brand-700: oklch(0.52 0.15 155);
+  --brand-900: oklch(0.32 0.1 155);
+
+  /* Geometry */
+  --radius: 0.625rem;
+
+  /* Motion — kept short by default for a premium feel */
+  --duration-instant: 60ms;
+  --duration-fast: 100ms;
+  --duration-base: 160ms;
+  --duration-slow: 220ms;
+  --easing-out: ease-out;
+  --easing-in-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* z-index scale (kept linear, only what we actually use) */
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-sidebar: 40;
+  --z-modal: 50;
+}
+
+.dark {
+  --background: oklch(0.13 0.005 260);
+  --foreground: oklch(0.97 0.005 260);
+  --card: oklch(0.16 0.005 260);
+  --card-foreground: oklch(0.97 0.005 260);
+  --popover: oklch(0.16 0.005 260);
+  --popover-foreground: oklch(0.97 0.005 260);
+
+  --secondary: oklch(0.2 0.005 260);
+  --secondary-foreground: oklch(0.97 0.005 260);
+  --muted: oklch(0.2 0.005 260);
+  --muted-foreground: oklch(0.65 0.01 260);
+  --accent: oklch(0.22 0.005 260);
+  --accent-foreground: oklch(0.97 0.005 260);
+
+  --primary: oklch(0.72 0.17 155);
+  --primary-foreground: oklch(0.13 0.005 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.24 0.005 260);
+  --input: oklch(0.24 0.005 260);
+  --ring: oklch(0.72 0.17 155 / 0.6);
+}
