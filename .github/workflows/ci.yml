@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # release job needs to create GitHub Releases
   packages: write
 
 concurrency:
@@ -123,3 +123,52 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  # ----- GitHub Release ---------------------------------------------------
+  # Every published image gets a matching GitHub Release. The job is gated
+  # on a successful image build, so the registry and the Releases page can
+  # never drift: if an image is published, its release exists; if it
+  # doesn't, neither does.
+  #
+  # Notes come from the tag annotation (``git tag -a vX.Y.Z -m "..."``)
+  # when present, otherwise we let GitHub auto-generate from the commit
+  # history since the previous tag.
+  release:
+    needs: [docker]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # need full history for `git tag -l`
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME}"
+
+          ANNOTATION="$(git tag -l --format='%(contents)' "$VERSION")"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/hostcraft:${VERSION}"
+
+          FOOTER=$(cat <<EOF
+
+
+          ---
+          Container image: \`${IMAGE}\` (also tagged \`:${VERSION#v}\`, \`:latest\`).
+          EOF
+          )
+
+          if [ -n "$ANNOTATION" ]; then
+            printf '%s\n%s' "$ANNOTATION" "$FOOTER" > /tmp/notes.md
+            gh release create "$VERSION" \
+              --title "$VERSION" \
+              --notes-file /tmp/notes.md
+          else
+            gh release create "$VERSION" \
+              --title "$VERSION" \
+              --generate-notes \
+              --notes "$FOOTER"
+          fi

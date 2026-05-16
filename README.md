@@ -137,7 +137,7 @@ Two containers, one shared volume.
 
 ## Container image
 
-Multi-arch (`linux/amd64`, `linux/arm64`) image, published on every `vX.Y.Z` git tag — main-branch builds are validated by CI but not pushed, so the registry only ever holds versioned releases.
+Multi-arch (`linux/amd64`, `linux/arm64`) image, published on every `vX.Y.Z` git tag — main-branch builds are validated by CI but not pushed, so the registry only ever holds versioned releases. CI also creates the matching GitHub Release in the same pipeline run, so the Packages and Releases views never drift. See [RELEASING.md](RELEASING.md) for the full procedure.
 
 ```bash
 docker pull ghcr.io/e-scheer/hostcraft:latest
