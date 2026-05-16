@@ -1,14 +1,14 @@
 # Core
 Django==5.1.4
-djangorestframework==3.15.2
-djangorestframework-simplejwt==5.3.1
-django-cors-headers==4.6.0
+djangorestframework==3.17.1
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.9.0
 
 # ASGI + Channels (for WebSocket console in Phase 1)
-channels[daphne]==4.2.0
+channels[daphne]==4.3.2
 
 # Static files / SPA serving in prod
-whitenoise==6.8.2
+whitenoise==6.12.0
 
 # Secrets / hashing
 argon2-cffi==23.1.0
@@ -22,13 +22,13 @@ docker==7.1.0
 croniter==3.0.4
 
 # S3-compatible off-site backup sync (Phase 1.6b)
-boto3==1.35.92
+boto3==1.43.9
 
 # Server-icon validation + preset generation (Phase 1.7d)
 Pillow==11.0.0
 
 # Plugin metadata (plugin.yml, paper-plugin.yml) for the manual upload flow
-PyYAML==6.0.2
+PyYAML==6.0.3
 
 # Server
 gunicorn==23.0.0
