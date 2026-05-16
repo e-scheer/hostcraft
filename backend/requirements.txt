@@ -11,7 +11,7 @@ channels[daphne]==4.3.2
 whitenoise==6.12.0
 
 # Secrets / hashing
-argon2-cffi==23.1.0
+argon2-cffi==25.1.0
 pyotp==2.9.0
 
 # Phase 1 (Minecraft container management)
