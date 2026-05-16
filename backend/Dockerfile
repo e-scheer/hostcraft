@@ -25,9 +25,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # --- Stage 3: runtime -----------------------------------------------------
 FROM python:3.12-slim AS runtime
 
-# Bring in only what's needed at runtime: curl for healthcheck.
+# Runtime needs:
+#  - curl: healthcheck
+#  - gettext: provides `msgfmt`, used by `compilemessages` during the image
+#    build below. (`gettext-base` does NOT include msgfmt — that's `gettext`.)
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl \
+    && apt-get install -y --no-install-recommends curl gettext \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --system --gid 1000 app \
     && useradd  --system --uid 1000 --gid app --home /app --shell /usr/sbin/nologin app
