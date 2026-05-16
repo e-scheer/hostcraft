@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/e-scheer/hostcraft/security/advisories/new
+    about: Don't open a public issue for security bugs. File a private advisory.
+  - name: Question or discussion
+    url: https://github.com/e-scheer/hostcraft/discussions
+    about: Open a Discussion rather than an Issue for "how do I…", "is X supported?", etc.

@@ -1,0 +1,100 @@
+name: Bug report
+description: Something's broken in the panel — crash, wrong behaviour, can't do X.
+title: "[bug] "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this — the more context you can give, the faster I can reproduce it.
+        Pre-checks:
+        - You're on the latest tag (or you tested against `main` recently): `docker image ls | grep hostcraft`
+        - You've skimmed the open issues: https://github.com/e-scheer/hostcraft/issues
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: One or two sentences. What did you do, what did you expect, what did you get instead?
+      placeholder: |
+        I clicked Apply on /runtime to switch from Paper to Forge.
+        I expected the server to restart on Forge.
+        Instead the container is stuck in CreatedExited and the UI shows a perpetual loader.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Numbered list, as minimal as you can make it.
+      placeholder: |
+        1. Fresh `docker compose up -d`
+        2. Login as admin
+        3. /runtime → set TYPE=FORGE, VERSION=1.20.1
+        4. Click Apply
+    validations:
+      required: true
+
+  - type: input
+    id: hostcraft-version
+    attributes:
+      label: Hostcraft version
+      description: The image tag you pulled, or "main@<short-sha>" if you built from source.
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft version + loader
+      description: Both — they interact a lot in this panel.
+      placeholder: "1.20.1 + Forge 47.4.10"
+    validations:
+      required: true
+
+  - type: input
+    id: java
+    attributes:
+      label: Java image tag
+      description: As shown in /runtime, e.g. `java17`, `java21`, `latest`.
+      placeholder: "java17"
+
+  - type: dropdown
+    id: host-os
+    attributes:
+      label: Host OS
+      options:
+        - Linux (Debian / Ubuntu / Fedora / Arch / …)
+        - macOS (Docker Desktop)
+        - Windows (Docker Desktop / WSL2)
+        - NAS (Synology / TrueNAS / Unraid / …)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: backend-logs
+    attributes:
+      label: Backend logs
+      description: |
+        `docker compose logs --tail 200 backend` (or `hostcraft-panel` in prod).
+        Strip anything that looks like a secret first.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: mc-logs
+    attributes:
+      label: Minecraft logs (if relevant)
+      description: |
+        `docker compose logs --tail 200 minecraft`. Especially important for runtime/mods/world bugs.
+      render: text
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Screenshots, crash reports under `/mc-data/crash-reports/`, related issues, hunches.

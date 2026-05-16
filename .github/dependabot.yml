@@ -1,0 +1,95 @@
+# Dependabot keeps deps + CVE-patched bases up to date. Weekly to keep noise
+# low; security PRs are still surfaced as soon as GitHub knows about them
+# regardless of this schedule.
+version: 2
+updates:
+  # Backend (Django, DRF, Channels, docker SDK, ...)
+  - package-ecosystem: pip
+    directory: /backend
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 5
+    labels: [dependencies, backend]
+    commit-message:
+      prefix: "deps(backend)"
+    groups:
+      django:
+        patterns: ["Django", "django*", "djangorestframework*", "channels*"]
+      docker-sdk:
+        patterns: ["docker"]
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # Frontend (Vue, Vite, TanStack, Tailwind, Reka UI, ...)
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 5
+    labels: [dependencies, frontend]
+    commit-message:
+      prefix: "deps(frontend)"
+    groups:
+      vue:
+        patterns: ["vue", "vue-*", "@vue/*", "@vitejs/*", "vite", "pinia", "vue-router"]
+      tailwind:
+        patterns: ["tailwindcss", "@tailwindcss/*"]
+      tanstack:
+        patterns: ["@tanstack/*"]
+      reka-shadcn:
+        patterns: ["reka-ui", "class-variance-authority", "clsx", "tailwind-merge", "lucide-vue-next"]
+      types:
+        patterns: ["@types/*", "typescript", "vue-tsc"]
+      eslint-and-prettier:
+        patterns: ["eslint*", "@eslint/*", "@typescript-eslint/*", "prettier*"]
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # itzg image pin, our own base images, playit agent image
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
+    commit-message:
+      prefix: "deps(docker)"
+
+  - package-ecosystem: docker
+    directory: /backend
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
+    commit-message:
+      prefix: "deps(docker)"
+
+  - package-ecosystem: docker
+    directory: /frontend
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, docker]
+    commit-message:
+      prefix: "deps(docker)"
+
+  # GitHub Actions versions (now that we bumped past Node 20, Dependabot will
+  # keep them tracked).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    labels: [dependencies, ci]
+    commit-message:
+      prefix: "ci"
