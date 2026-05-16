@@ -32,38 +32,26 @@ That's the whole install. Everything else is configured from the UI.
 
 ## Screenshots
 
-> Captures coming soon — the panel is mid-redesign on a couple of routes and I'd rather ship real visuals than chase a moving target. See [docs/screenshots/](docs/screenshots/) for the slot list if you want to PR them.
-
-<!-- When PNGs are ready, paste this back and drop the files in docs/screenshots/:
-
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/dashboard.png" alt="Dashboard"/></td>
-    <td width="50%"><img src="docs/screenshots/console.png" alt="Console with autocomplete"/></td>
+    <td width="33%"><img src="docs/screenshots/dashboard.png" alt="Dashboard"/></td>
+    <td width="33%"><img src="docs/screenshots/console.png" alt="Console with autocomplete"/></td>
+    <td width="33%"><img src="docs/screenshots/mods.png" alt="Mod marketplace"/></td>
   </tr>
   <tr>
     <td align="center"><sub><b>Dashboard</b> — server vitals, public-access status, recent activity</sub></td>
     <td align="center"><sub><b>Console</b> — xterm.js terminal, Tab-completion on MC commands, copy/jump-to-latest</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/mods.png" alt="Mod marketplace"/></td>
-    <td><img src="docs/screenshots/runtime.png" alt="Runtime tuning"/></td>
-  </tr>
-  <tr>
     <td align="center"><sub><b>Marketplace</b> — unified Modrinth + Hangar search, version-aware install</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/runtime.png" alt="Runtime tuning"/></td>
+    <td colspan="2"><img src="docs/screenshots/network.png" alt="Network and Playit"/></td>
+  </tr>
+  <tr>
     <td align="center"><sub><b>Runtime</b> — engine, Java image, memory & flags with compat warnings</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/network.png" alt="Network and Playit"/></td>
-    <td><img src="docs/screenshots/worldmap.png" alt="BlueMap world map"/></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Network</b> — direct port forwarding or Playit.gg (guided/managed)</sub></td>
-    <td align="center"><sub><b>World map</b> — one-click BlueMap, loader-aware version picker</sub></td>
+    <td colspan="2" align="center"><sub><b>Network</b> — direct port forwarding or Playit.gg (guided/managed), tunnel target preview, hostname auto-detection</sub></td>
   </tr>
 </table>
-
--->
 
 ## Status
 

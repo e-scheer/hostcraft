@@ -9,7 +9,8 @@ The repo README embeds six panel captures from this folder. Drop the PNGs here w
 | `mods.png` | `/mods` | Browse tab, with a search active (e.g. "create") so the cards have icons, compat badges, install button visible. |
 | `runtime.png` | `/runtime` | Engine + version + Java dropdown open showing the ★ recommended badge, plus an amber "newer than recommended" warn if you pick Java 25 on MC 1.20.x. |
 | `network.png` | `/network` | Playit "managed" mode with the agent connected, secret-stored badge, tunnel target card, hostname detected. |
-| `worldmap.png` | `/worldmap` | BlueMap iframe loaded with some terrain visible (zoom in on spawn area). |
+
+The BlueMap worldmap capture is intentionally skipped — its iframe is a WebGL canvas that doesn't render reliably in headless chromium (SwiftShader gives a black tile). Capture it manually on a real browser if you want to add a `worldmap.png` slot back.
 
 ## How to capture
 
