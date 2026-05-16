@@ -32,6 +32,10 @@ That's the whole install. Everything else is configured from the UI.
 
 ## Screenshots
 
+> Captures coming soon — the panel is mid-redesign on a couple of routes and I'd rather ship real visuals than chase a moving target. See [docs/screenshots/](docs/screenshots/) for the slot list if you want to PR them.
+
+<!-- When PNGs are ready, paste this back and drop the files in docs/screenshots/:
+
 <table>
   <tr>
     <td width="50%"><img src="docs/screenshots/dashboard.png" alt="Dashboard"/></td>
@@ -58,6 +62,8 @@ That's the whole install. Everything else is configured from the UI.
     <td align="center"><sub><b>World map</b> — one-click BlueMap, loader-aware version picker</sub></td>
   </tr>
 </table>
+
+-->
 
 ## Status
 
