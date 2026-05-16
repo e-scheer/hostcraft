@@ -31,4 +31,4 @@ Pillow==11.0.0
 PyYAML==6.0.3
 
 # Server
-gunicorn==23.0.0
+gunicorn==26.0.0
