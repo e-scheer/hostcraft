@@ -72,19 +72,31 @@ function setWindow(w: typeof PERF_WINDOWS[number]) {
 
       <div class="flex items-center gap-3 text-[11px] text-muted-foreground">
         <span class="inline-flex items-center gap-1.5">
-          <span class="size-2 rounded-full" :style="{ background: COLOR_CPU }" /> CPU
+          <span
+            class="size-2 rounded-full"
+            :style="{ background: COLOR_CPU }"
+          /> CPU
         </span>
         <span class="inline-flex items-center gap-1.5">
-          <span class="size-2 rounded-full" :style="{ background: COLOR_MEM }" /> Memory
+          <span
+            class="size-2 rounded-full"
+            :style="{ background: COLOR_MEM }"
+          /> Memory
         </span>
         <span class="inline-flex items-center gap-1.5">
-          <span class="size-2 rounded-full" :style="{ background: COLOR_TPS }" /> TPS
+          <span
+            class="size-2 rounded-full"
+            :style="{ background: COLOR_TPS }"
+          /> TPS
         </span>
       </div>
     </div>
 
     <div class="relative w-full h-56">
-      <div v-if="isInitialLoading" class="absolute inset-0 grid place-items-center">
+      <div
+        v-if="isInitialLoading"
+        class="absolute inset-0 grid place-items-center"
+      >
         <div class="size-8 rounded-full border-2 border-border border-t-brand-500 animate-spin" />
       </div>
 
@@ -94,7 +106,9 @@ function setWindow(w: typeof PERF_WINDOWS[number]) {
       >
         <div class="space-y-1">
           <div>{{ t('dashboard.performance.collecting') }}</div>
-          <div class="opacity-60">~30 s / sample</div>
+          <div class="opacity-60">
+            ~30 s / sample
+          </div>
         </div>
       </div>
 
@@ -104,9 +118,27 @@ function setWindow(w: typeof PERF_WINDOWS[number]) {
         :height="224"
         :margin="{ top: 8, right: 4, bottom: 24, left: 36 }"
       >
-        <VisLine :x="x" :y="yCpu" :color="COLOR_CPU" :line-width="1.5" :curve-type="'monotoneX'" />
-        <VisLine :x="x" :y="yMem" :color="COLOR_MEM" :line-width="1.5" :curve-type="'monotoneX'" />
-        <VisLine :x="x" :y="yTps" :color="COLOR_TPS" :line-width="1.5" :curve-type="'monotoneX'" />
+        <VisLine
+          :x="x"
+          :y="yCpu"
+          :color="COLOR_CPU"
+          :line-width="1.5"
+          :curve-type="'monotoneX'"
+        />
+        <VisLine
+          :x="x"
+          :y="yMem"
+          :color="COLOR_MEM"
+          :line-width="1.5"
+          :curve-type="'monotoneX'"
+        />
+        <VisLine
+          :x="x"
+          :y="yTps"
+          :color="COLOR_TPS"
+          :line-width="1.5"
+          :curve-type="'monotoneX'"
+        />
         <VisAxis
           type="x"
           :tick-format="xTickFormat"

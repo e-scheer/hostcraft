@@ -88,14 +88,22 @@ async function onOpRemove(entry: OpEntry) {
   <div class="space-y-6">
     <header class="space-y-1">
       <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <UsersIcon :size="22" class="text-brand-500" />
+        <UsersIcon
+          :size="22"
+          class="text-brand-500"
+        />
         {{ t('players.title') }}
       </h2>
-      <p class="text-sm text-muted-foreground">{{ t('players.subtitle') }}</p>
+      <p class="text-sm text-muted-foreground">
+        {{ t('players.subtitle') }}
+      </p>
     </header>
 
     <!-- Tabs -->
-    <div role="tablist" class="inline-flex rounded-lg border border-border bg-card p-1 gap-1">
+    <div
+      role="tablist"
+      class="inline-flex rounded-lg border border-border bg-card p-1 gap-1"
+    >
       <button
         v-for="key in (['whitelist', 'ops'] as const)"
         :key="key"
@@ -114,11 +122,17 @@ async function onOpRemove(entry: OpEntry) {
     </div>
 
     <!-- WHITELIST -->
-    <section v-if="tab === 'whitelist'" class="space-y-4">
+    <section
+      v-if="tab === 'whitelist'"
+      class="space-y-4"
+    >
       <Card>
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
-            <ShieldCheck :size="18" class="text-brand-500" />
+            <ShieldCheck
+              :size="18"
+              class="text-brand-500"
+            />
             {{ t('players.whitelist.title') }}
           </CardTitle>
           <p class="text-xs text-muted-foreground mt-1">
@@ -144,7 +158,10 @@ async function onOpRemove(entry: OpEntry) {
               class="sm:self-end"
               :disabled="!whitelistName.trim() || whitelistActions.add.isPending.value"
             >
-              <Loader2 v-if="whitelistActions.add.isPending.value" class="animate-spin" />
+              <Loader2
+                v-if="whitelistActions.add.isPending.value"
+                class="animate-spin"
+              />
               <UserPlus v-else />
               {{ t('players.whitelist.add') }}
             </Button>
@@ -154,7 +171,9 @@ async function onOpRemove(entry: OpEntry) {
             <table class="w-full text-sm">
               <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
                 <tr>
-                  <th class="px-3 py-2 text-left font-medium">{{ t('players.headers.player') }}</th>
+                  <th class="px-3 py-2 text-left font-medium">
+                    {{ t('players.headers.player') }}
+                  </th>
                   <th class="px-3 py-2 text-left font-medium hidden md:table-cell">
                     {{ t('players.headers.uuid') }}
                   </th>
@@ -163,12 +182,18 @@ async function onOpRemove(entry: OpEntry) {
               </thead>
               <tbody>
                 <tr v-if="whitelist.isPending.value && !whitelist.data.value">
-                  <td colspan="3" class="px-4 py-8 text-center text-muted-foreground">
+                  <td
+                    colspan="3"
+                    class="px-4 py-8 text-center text-muted-foreground"
+                  >
                     {{ t('common.loading') }}
                   </td>
                 </tr>
                 <tr v-else-if="!whitelist.data.value?.length">
-                  <td colspan="3" class="px-4 py-8 text-center text-muted-foreground">
+                  <td
+                    colspan="3"
+                    class="px-4 py-8 text-center text-muted-foreground"
+                  >
                     {{ t('players.whitelist.empty') }}
                   </td>
                 </tr>
@@ -211,11 +236,17 @@ async function onOpRemove(entry: OpEntry) {
     </section>
 
     <!-- OPS -->
-    <section v-if="tab === 'ops'" class="space-y-4">
+    <section
+      v-if="tab === 'ops'"
+      class="space-y-4"
+    >
       <Card>
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
-            <ShieldCheck :size="18" class="text-brand-500" />
+            <ShieldCheck
+              :size="18"
+              class="text-brand-500"
+            />
             {{ t('players.ops.title') }}
           </CardTitle>
           <p class="text-xs text-muted-foreground mt-1">
@@ -243,14 +274,23 @@ async function onOpRemove(entry: OpEntry) {
                 v-model.number="opLevel"
                 class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <option v-for="lvl in [1, 2, 3, 4]" :key="lvl" :value="lvl">{{ lvl }}</option>
+                <option
+                  v-for="lvl in [1, 2, 3, 4]"
+                  :key="lvl"
+                  :value="lvl"
+                >
+                  {{ lvl }}
+                </option>
               </select>
             </div>
             <Button
               type="submit"
               :disabled="!opName.trim() || opsActions.add.isPending.value"
             >
-              <Loader2 v-if="opsActions.add.isPending.value" class="animate-spin" />
+              <Loader2
+                v-if="opsActions.add.isPending.value"
+                class="animate-spin"
+              />
               <UserPlus v-else />
               {{ t('players.ops.add') }}
             </Button>
@@ -267,8 +307,12 @@ async function onOpRemove(entry: OpEntry) {
             <table class="w-full text-sm">
               <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
                 <tr>
-                  <th class="px-3 py-2 text-left font-medium">{{ t('players.headers.player') }}</th>
-                  <th class="w-24 px-3 py-2 text-left font-medium">{{ t('players.headers.level') }}</th>
+                  <th class="px-3 py-2 text-left font-medium">
+                    {{ t('players.headers.player') }}
+                  </th>
+                  <th class="w-24 px-3 py-2 text-left font-medium">
+                    {{ t('players.headers.level') }}
+                  </th>
                   <th class="w-32 px-3 py-2 text-left font-medium hidden sm:table-cell">
                     {{ t('players.headers.bypass') }}
                   </th>
@@ -280,12 +324,18 @@ async function onOpRemove(entry: OpEntry) {
               </thead>
               <tbody>
                 <tr v-if="ops.isPending.value && !ops.data.value">
-                  <td colspan="5" class="px-4 py-8 text-center text-muted-foreground">
+                  <td
+                    colspan="5"
+                    class="px-4 py-8 text-center text-muted-foreground"
+                  >
                     {{ t('common.loading') }}
                   </td>
                 </tr>
                 <tr v-else-if="!ops.data.value?.length">
-                  <td colspan="5" class="px-4 py-8 text-center text-muted-foreground">
+                  <td
+                    colspan="5"
+                    class="px-4 py-8 text-center text-muted-foreground"
+                  >
                     {{ t('players.ops.empty') }}
                   </td>
                 </tr>
@@ -311,7 +361,13 @@ async function onOpRemove(entry: OpEntry) {
                       class="h-7 rounded-md border border-input bg-background px-2 text-xs shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       @change="onOpLevelChange(entry, Number(($event.target as HTMLSelectElement).value))"
                     >
-                      <option v-for="lvl in [1, 2, 3, 4]" :key="lvl" :value="lvl">{{ lvl }}</option>
+                      <option
+                        v-for="lvl in [1, 2, 3, 4]"
+                        :key="lvl"
+                        :value="lvl"
+                      >
+                        {{ lvl }}
+                      </option>
                     </select>
                   </td>
                   <td class="px-3 py-2 hidden sm:table-cell">

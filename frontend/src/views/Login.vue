@@ -59,12 +59,22 @@ async function onSubmit() {
     <Card class="w-full max-w-sm border-border/80 bg-card/80 backdrop-blur-md shadow-xl">
       <CardContent class="p-8">
         <div class="flex flex-col items-center gap-2 mb-8">
-          <Logo :size="40" :show-wordmark="false" />
-          <h1 class="text-xl font-semibold tracking-tight mt-2">{{ t('auth.title') }}</h1>
-          <p class="text-sm text-muted-foreground">{{ t('auth.subtitle') }}</p>
+          <Logo
+            :size="40"
+            :show-wordmark="false"
+          />
+          <h1 class="text-xl font-semibold tracking-tight mt-2">
+            {{ t('auth.title') }}
+          </h1>
+          <p class="text-sm text-muted-foreground">
+            {{ t('auth.subtitle') }}
+          </p>
         </div>
 
-        <form class="space-y-4" @submit.prevent="onSubmit">
+        <form
+          class="space-y-4"
+          @submit.prevent="onSubmit"
+        >
           <div class="space-y-1.5">
             <Label for="username">{{ t('auth.username') }}</Label>
             <Input
@@ -84,8 +94,15 @@ async function onSubmit() {
               :disabled="submitting"
             />
           </div>
-          <Button type="submit" class="w-full" :disabled="submitting || !username || !password">
-            <Loader2 v-if="submitting" class="animate-spin" />
+          <Button
+            type="submit"
+            class="w-full"
+            :disabled="submitting || !username || !password"
+          >
+            <Loader2
+              v-if="submitting"
+              class="animate-spin"
+            />
             <span>{{ submitting ? t('auth.signingIn') : t('auth.signIn') }}</span>
           </Button>
         </form>

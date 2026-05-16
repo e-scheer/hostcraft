@@ -28,7 +28,10 @@ const LANG_NAMES: Record<SupportedLocale, string> = {
       <span class="hidden sm:inline text-foreground">
         {{ LANG_NAMES[locale as SupportedLocale] }}
       </span>
-      <ChevronDown :size="12" class="opacity-60" />
+      <ChevronDown
+        :size="12"
+        class="opacity-60"
+      />
     </DropdownMenuTrigger>
     <DropdownMenuPortal>
       <DropdownMenuContent

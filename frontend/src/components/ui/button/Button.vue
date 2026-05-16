@@ -40,12 +40,21 @@ withDefaults(
     disabled?: boolean
     class?: string
   }>(),
-  { type: 'button' },
+  {
+    type: 'button',
+    variant: 'default',
+    size: 'default',
+    class: undefined,
+  },
 )
 </script>
 
 <template>
-  <button :type="type" :disabled="disabled" :class="cn(buttonVariants({ variant, size }), $props.class)">
+  <button
+    :type="type"
+    :disabled="disabled"
+    :class="cn(buttonVariants({ variant, size }), $props.class)"
+  >
     <slot />
   </button>
 </template>

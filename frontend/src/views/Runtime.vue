@@ -335,18 +335,28 @@ onBeforeRouteLeave(async () => {
   <div class="space-y-6 pb-24">
     <header class="space-y-1">
       <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <Cpu :size="22" class="text-brand-500" />
+        <Cpu
+          :size="22"
+          class="text-brand-500"
+        />
         {{ t('runtime.title') }}
       </h2>
-      <p class="text-sm text-muted-foreground">{{ t('runtime.subtitle') }}</p>
+      <p class="text-sm text-muted-foreground">
+        {{ t('runtime.subtitle') }}
+      </p>
     </header>
 
     <div
       class="rounded-lg border border-amber-400/30 bg-amber-400/5 p-3 text-xs text-amber-300 flex items-start gap-2"
     >
-      <TriangleAlert :size="14" class="shrink-0 mt-0.5" />
+      <TriangleAlert
+        :size="14"
+        class="shrink-0 mt-0.5"
+      />
       <div>
-        <div class="font-medium">{{ t('runtime.warningTitle') }}</div>
+        <div class="font-medium">
+          {{ t('runtime.warningTitle') }}
+        </div>
         <div class="text-amber-300/80 leading-relaxed mt-0.5">
           {{ t('runtime.warningDescription') }}
         </div>
@@ -357,7 +367,10 @@ onBeforeRouteLeave(async () => {
       v-if="runtimeQuery.isPending.value && !runtimeQuery.data.value"
       class="flex items-center gap-2 text-muted-foreground text-sm"
     >
-      <Loader2 class="animate-spin" :size="14" />
+      <Loader2
+        class="animate-spin"
+        :size="14"
+      />
       {{ t('runtime.loading') }}
     </div>
 
@@ -378,8 +391,13 @@ onBeforeRouteLeave(async () => {
           <!-- TYPE -->
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-type" class="block">{{ t('runtime.fields.TYPE.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">TYPE</p>
+              <Label
+                for="rt-type"
+                class="block"
+              >{{ t('runtime.fields.TYPE.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                TYPE
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.TYPE.help') }}
               </p>
@@ -408,14 +426,23 @@ onBeforeRouteLeave(async () => {
           <!-- VERSION -->
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-version" class="block">{{ t('runtime.fields.VERSION.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">VERSION</p>
+              <Label
+                for="rt-version"
+                class="block"
+              >{{ t('runtime.fields.VERSION.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                VERSION
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.VERSION.help') }}
               </p>
             </div>
             <div class="space-y-1.5 max-w-[16rem]">
-              <Input id="rt-version" v-model="local.VERSION" placeholder="LATEST" />
+              <Input
+                id="rt-version"
+                v-model="local.VERSION"
+                placeholder="LATEST"
+              />
               <div class="flex flex-wrap gap-1">
                 <button
                   v-for="preset in optionsQuery.data.value?.version_presets ?? []"
@@ -436,8 +463,13 @@ onBeforeRouteLeave(async () => {
           <!-- Java image tag -->
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-java" class="block">{{ t('runtime.fields.JAVA.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">image tag</p>
+              <Label
+                for="rt-java"
+                class="block"
+              >{{ t('runtime.fields.JAVA.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                image tag
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.JAVA.help') }}
               </p>
@@ -454,13 +486,13 @@ onBeforeRouteLeave(async () => {
                   :value="j.tag"
                   :disabled="
                     j.java > 0 &&
-                    optionsQuery.data.value?.min_java_for_current_mc != null &&
-                    j.java < optionsQuery.data.value.min_java_for_current_mc
+                      optionsQuery.data.value?.min_java_for_current_mc != null &&
+                      j.java < optionsQuery.data.value.min_java_for_current_mc
                   "
                 >
                   {{ j.label }}{{
                     j.java > 0 &&
-                    optionsQuery.data.value?.recommended_java_for_current_mc === j.java
+                      optionsQuery.data.value?.recommended_java_for_current_mc === j.java
                       ? '  ★ ' + t('runtime.fields.JAVA.recommendedBadge')
                       : ''
                   }}
@@ -488,7 +520,10 @@ onBeforeRouteLeave(async () => {
                 v-else-if="javaCompat?.level === 'warn'"
                 class="inline-flex items-start gap-1.5 text-[11px] text-amber-500 leading-snug"
               >
-                <TriangleAlert :size="11" class="mt-0.5 shrink-0" />
+                <TriangleAlert
+                  :size="11"
+                  class="mt-0.5 shrink-0"
+                />
                 <span>
                   {{
                     t('runtime.fields.JAVA.tooNew', {
@@ -503,8 +538,8 @@ onBeforeRouteLeave(async () => {
               <p
                 v-else-if="
                   javaCompat &&
-                  javaCompat.java > 0 &&
-                  optionsQuery.data.value?.min_java_for_current_mc
+                    javaCompat.java > 0 &&
+                    optionsQuery.data.value?.min_java_for_current_mc
                 "
                 class="text-[11px] text-muted-foreground"
               >
@@ -528,48 +563,84 @@ onBeforeRouteLeave(async () => {
         <CardContent class="space-y-5">
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-mem" class="block">{{ t('runtime.fields.MEMORY.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">MEMORY</p>
+              <Label
+                for="rt-mem"
+                class="block"
+              >{{ t('runtime.fields.MEMORY.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                MEMORY
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.MEMORY.help') }}
               </p>
             </div>
-            <Input id="rt-mem" v-model="local.MEMORY" class="max-w-[12rem]" placeholder="4G" />
+            <Input
+              id="rt-mem"
+              v-model="local.MEMORY"
+              class="max-w-[12rem]"
+              placeholder="4G"
+            />
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-aikar" class="block">{{ t('runtime.fields.USE_AIKAR_FLAGS.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">USE_AIKAR_FLAGS</p>
+              <Label
+                for="rt-aikar"
+                class="block"
+              >{{ t('runtime.fields.USE_AIKAR_FLAGS.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                USE_AIKAR_FLAGS
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.USE_AIKAR_FLAGS.help') }}
               </p>
             </div>
             <div class="flex items-center">
-              <Switch id="rt-aikar" v-model="local.USE_AIKAR_FLAGS" />
+              <Switch
+                id="rt-aikar"
+                v-model="local.USE_AIKAR_FLAGS"
+              />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-opts" class="block">{{ t('runtime.fields.JVM_OPTS.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">JVM_OPTS</p>
+              <Label
+                for="rt-opts"
+                class="block"
+              >{{ t('runtime.fields.JVM_OPTS.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                JVM_OPTS
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.JVM_OPTS.help') }}
               </p>
             </div>
-            <Input id="rt-opts" v-model="local.JVM_OPTS" placeholder="-Dfile.encoding=UTF-8" />
+            <Input
+              id="rt-opts"
+              v-model="local.JVM_OPTS"
+              placeholder="-Dfile.encoding=UTF-8"
+            />
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6">
             <div>
-              <Label for="rt-xx" class="block">{{ t('runtime.fields.JVM_XX_OPTS.label') }}</Label>
-              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">JVM_XX_OPTS</p>
+              <Label
+                for="rt-xx"
+                class="block"
+              >{{ t('runtime.fields.JVM_XX_OPTS.label') }}</Label>
+              <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
+                JVM_XX_OPTS
+              </p>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('runtime.fields.JVM_XX_OPTS.help') }}
               </p>
             </div>
-            <Input id="rt-xx" v-model="local.JVM_XX_OPTS" placeholder="-XX:+UseG1GC" />
+            <Input
+              id="rt-xx"
+              v-model="local.JVM_XX_OPTS"
+              placeholder="-XX:+UseG1GC"
+            />
           </div>
         </CardContent>
       </Card>
@@ -581,10 +652,15 @@ onBeforeRouteLeave(async () => {
       <Card>
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
-            <Activity :size="16" class="text-brand-500" />
+            <Activity
+              :size="16"
+              class="text-brand-500"
+            />
             {{ t('watchdog.title') }}
           </CardTitle>
-          <p class="text-xs text-muted-foreground mt-1">{{ t('watchdog.subtitle') }}</p>
+          <p class="text-xs text-muted-foreground mt-1">
+            {{ t('watchdog.subtitle') }}
+          </p>
         </CardHeader>
         <CardContent class="space-y-5">
           <div
@@ -615,7 +691,10 @@ onBeforeRouteLeave(async () => {
             class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6 sm:items-center"
           >
             <div>
-              <Label for="wd-threshold" class="block">{{ t('watchdog.thresholdLabel') }}</Label>
+              <Label
+                for="wd-threshold"
+                class="block"
+              >{{ t('watchdog.thresholdLabel') }}</Label>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('watchdog.thresholdHelp') }}
               </p>
@@ -637,7 +716,10 @@ onBeforeRouteLeave(async () => {
             class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6 sm:items-center"
           >
             <div>
-              <Label for="wd-max" class="block">{{ t('watchdog.maxLabel') }}</Label>
+              <Label
+                for="wd-max"
+                class="block"
+              >{{ t('watchdog.maxLabel') }}</Label>
               <p class="text-xs text-muted-foreground mt-1 leading-snug">
                 {{ t('watchdog.maxHelp') }}
               </p>
@@ -674,8 +756,14 @@ onBeforeRouteLeave(async () => {
             :disabled="apply.isPending.value"
             @click="onCleanInstall"
           >
-            <Loader2 v-if="apply.isPending.value" class="animate-spin" />
-            <TriangleAlert v-else :size="14" />
+            <Loader2
+              v-if="apply.isPending.value"
+              class="animate-spin"
+            />
+            <TriangleAlert
+              v-else
+              :size="14"
+            />
             {{ t('runtime.cleanInstall.confirm') }}
           </Button>
           <span class="text-[11px] text-muted-foreground italic">
@@ -700,12 +788,23 @@ onBeforeRouteLeave(async () => {
         >
           {{ t('runtime.risky.title') }}
         </span>
-        <Button variant="ghost" size="sm" :disabled="apply.isPending.value" @click="onReset">
+        <Button
+          variant="ghost"
+          size="sm"
+          :disabled="apply.isPending.value"
+          @click="onReset"
+        >
           <RotateCcw />
           {{ t('common.cancel') }}
         </Button>
-        <Button :disabled="apply.isPending.value" @click="onApply">
-          <Loader2 v-if="apply.isPending.value" class="animate-spin" />
+        <Button
+          :disabled="apply.isPending.value"
+          @click="onApply"
+        >
+          <Loader2
+            v-if="apply.isPending.value"
+            class="animate-spin"
+          />
           <Save v-else />
           {{ apply.isPending.value ? t('runtime.applying') : t('runtime.apply') }}
         </Button>

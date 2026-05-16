@@ -15,7 +15,15 @@ const props = withDefaults(
     description?: string
     cta?: string
   }>(),
-  { icon: Construction },
+  {
+    icon: Construction,
+    titleKey: undefined,
+    descriptionKey: undefined,
+    ctaKey: undefined,
+    title: undefined,
+    description: undefined,
+    cta: undefined,
+  },
 )
 
 const { t, te } = useI18n()
@@ -35,10 +43,19 @@ const ctaText = () => tx(props.ctaKey, props.cta)
     <div
       class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-card border border-border shadow-sm"
     >
-      <component :is="icon" :size="22" class="text-brand-500" />
+      <component
+        :is="icon"
+        :size="22"
+        class="text-brand-500"
+      />
     </div>
-    <h3 class="text-lg font-semibold tracking-tight mb-2">{{ titleText() }}</h3>
-    <p v-if="descText()" class="text-sm text-muted-foreground max-w-md leading-relaxed">
+    <h3 class="text-lg font-semibold tracking-tight mb-2">
+      {{ titleText() }}
+    </h3>
+    <p
+      v-if="descText()"
+      class="text-sm text-muted-foreground max-w-md leading-relaxed"
+    >
       {{ descText() }}
     </p>
     <span

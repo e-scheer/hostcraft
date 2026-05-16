@@ -36,7 +36,6 @@ import {
 import { useDialogStore } from '@/stores/dialog'
 import type {
   ManualInspectPayload,
-  ManualMeta,
   ModProvider,
   ModSearchHit,
   InstalledMod,
@@ -240,10 +239,15 @@ const sources = [
     <header class="flex flex-wrap items-end justify-between gap-4">
       <div class="space-y-1">
         <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-          <Package :size="22" class="text-brand-500" />
+          <Package
+            :size="22"
+            class="text-brand-500"
+          />
           {{ t('mods.title') }}
         </h2>
-        <p class="text-sm text-muted-foreground">{{ t('mods.subtitle') }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ t('mods.subtitle') }}
+        </p>
       </div>
 
       <!-- Target indicator -->
@@ -253,15 +257,21 @@ const sources = [
         :title="
           target.data.value.mc_version_alias
             ? t('mods.versionResolved', {
-                alias: target.data.value.mc_version_alias,
-                resolved: target.data.value.mc_version,
-              })
+              alias: target.data.value.mc_version_alias,
+              resolved: target.data.value.mc_version,
+            })
             : ''
         "
       >
-        <Box :size="14" class="text-brand-500" />
+        <Box
+          :size="14"
+          class="text-brand-500"
+        />
         <span class="font-medium">{{ target.data.value.loader_label }}</span>
-        <span class="text-muted-foreground" v-if="target.data.value.mc_version">
+        <span
+          v-if="target.data.value.mc_version"
+          class="text-muted-foreground"
+        >
           ·
           <span class="font-mono">{{ target.data.value.mc_version }}</span>
           <span
@@ -285,11 +295,19 @@ const sources = [
     </header>
 
     <!-- Unsupported server type -->
-    <Card v-if="isUnsupported" class="border-amber-500/30">
+    <Card
+      v-if="isUnsupported"
+      class="border-amber-500/30"
+    >
       <CardContent class="p-5 flex items-start gap-3">
-        <AlertTriangle class="text-amber-500 shrink-0 mt-0.5" :size="20" />
+        <AlertTriangle
+          class="text-amber-500 shrink-0 mt-0.5"
+          :size="20"
+        />
         <div class="space-y-1">
-          <div class="font-medium">{{ t('mods.unsupported.title') }}</div>
+          <div class="font-medium">
+            {{ t('mods.unsupported.title') }}
+          </div>
           <p class="text-sm text-muted-foreground leading-relaxed">
             {{ t('mods.unsupported.desc', { type: target.data.value?.loader_label ?? '?' }) }}
           </p>
@@ -298,7 +316,10 @@ const sources = [
     </Card>
 
     <!-- Tabs -->
-    <div v-if="!isUnsupported" class="flex items-center gap-1 border-b border-border">
+    <div
+      v-if="!isUnsupported"
+      class="flex items-center gap-1 border-b border-border"
+    >
       <button
         v-for="key in (['search', 'installed', 'upload'] as const)"
         :key="key"
@@ -322,7 +343,10 @@ const sources = [
     </div>
 
     <!-- SEARCH TAB -->
-    <div v-if="!isUnsupported && tab === 'search'" class="space-y-4">
+    <div
+      v-if="!isUnsupported && tab === 'search'"
+      class="space-y-4"
+    >
       <div class="flex flex-wrap items-center gap-3">
         <div class="relative flex-1 min-w-[280px] max-w-2xl">
           <Search
@@ -340,7 +364,10 @@ const sources = [
             v-if="search.isFetching.value && searchInput.length >= 2"
             class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           >
-            <Loader2 class="animate-spin" :size="14" />
+            <Loader2
+              class="animate-spin"
+              :size="14"
+            />
           </span>
         </div>
 
@@ -353,7 +380,7 @@ const sources = [
             v-model="strictVersion"
             type="checkbox"
             class="size-3.5 rounded border-border bg-background accent-brand-500"
-          />
+          >
           <span>
             {{ t('mods.strictLabel', { v: target.data.value.mc_version }) }}
           </span>
@@ -365,7 +392,10 @@ const sources = [
         v-if="target.data.value?.kind === 'mod' && searchInput.length >= 2"
         class="rounded-lg border border-border bg-card/40 backdrop-blur p-3 flex items-start gap-2.5 text-xs leading-relaxed"
       >
-        <Info :size="14" class="text-brand-500 shrink-0 mt-0.5" />
+        <Info
+          :size="14"
+          class="text-brand-500 shrink-0 mt-0.5"
+        />
         <div class="space-y-1">
           <div class="font-medium text-foreground">
             {{ t('mods.conflictAdvisory.title') }}
@@ -425,10 +455,16 @@ const sources = [
           "
         >
           <div class="flex items-start gap-3 min-w-0">
-            <ProjectIcon :url="hit.icon_url" :alt="hit.title" size="md" />
+            <ProjectIcon
+              :url="hit.icon_url"
+              :alt="hit.title"
+              size="md"
+            />
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 min-w-0 flex-wrap">
-                <h3 class="font-medium text-sm truncate flex-1 min-w-0">{{ hit.title }}</h3>
+                <h3 class="font-medium text-sm truncate flex-1 min-w-0">
+                  {{ hit.title }}
+                </h3>
                 <span
                   v-if="isModpack(hit)"
                   class="inline-flex items-center gap-0.5 text-[9px] font-mono px-1.5 py-0.5 rounded bg-brand-500/15 text-brand-500 uppercase shrink-0"
@@ -447,7 +483,10 @@ const sources = [
                   <Download :size="10" />
                   {{ fmtDownloads(hit.downloads) }}
                 </span>
-                <span v-if="hit.follows" class="inline-flex items-center gap-0.5">
+                <span
+                  v-if="hit.follows"
+                  class="inline-flex items-center gap-0.5"
+                >
                   <Users :size="10" />
                   {{ fmtDownloads(hit.follows) }}
                 </span>
@@ -510,7 +549,10 @@ const sources = [
                 class="animate-spin"
                 :size="12"
               />
-              <Download v-else :size="12" />
+              <Download
+                v-else
+                :size="12"
+              />
               {{
                 installingId === `${hit.provider}:${hit.project_id}`
                   ? t('mods.installing')
@@ -558,16 +600,21 @@ const sources = [
           </Button>
         </div>
       </div>
-
     </div>
 
     <!-- INSTALLED TAB -->
-    <div v-if="!isUnsupported && tab === 'installed'" class="space-y-4">
+    <div
+      v-if="!isUnsupported && tab === 'installed'"
+      class="space-y-4"
+    >
       <div
         v-if="installed.isPending.value && !installed.data.value"
         class="text-sm text-muted-foreground"
       >
-        <Loader2 class="inline-block animate-spin mr-2" :size="14" />
+        <Loader2
+          class="inline-block animate-spin mr-2"
+          :size="14"
+        />
         {{ t('common.loading') }}
       </div>
 
@@ -578,13 +625,20 @@ const sources = [
         :description="t('mods.installedEmptyHint')"
       />
 
-      <div v-else class="space-y-2">
+      <div
+        v-else
+        class="space-y-2"
+      >
         <div
           v-for="m in installed.data.value!.tracked"
           :key="m.id"
           class="flex items-center gap-3 p-3 rounded-lg border border-border bg-card/40 backdrop-blur"
         >
-          <ProjectIcon :url="m.icon_url" :alt="m.title" size="sm" />
+          <ProjectIcon
+            :url="m.icon_url"
+            :alt="m.title"
+            size="sm"
+          />
           <div class="min-w-0 flex-1">
             <div class="flex items-center gap-2 min-w-0">
               <span class="text-sm font-medium truncate">{{ m.title }}</span>
@@ -634,7 +688,10 @@ const sources = [
           {{ t('mods.untrackedHint') }}
         </p>
         <ul class="space-y-1 font-mono text-[11px] text-muted-foreground">
-          <li v-for="j in installed.data.value.untracked" :key="`${j.folder}/${j.filename}`">
+          <li
+            v-for="j in installed.data.value.untracked"
+            :key="`${j.folder}/${j.filename}`"
+          >
             <span class="text-muted-foreground/60">{{ j.folder }}/</span>{{ j.filename }}
             <span class="text-muted-foreground/60"> · {{ fmtSize(j.size) }}</span>
           </li>
@@ -643,7 +700,10 @@ const sources = [
     </div>
 
     <!-- UPLOAD TAB ============================================== -->
-    <div v-if="!isUnsupported && tab === 'upload'" class="space-y-5">
+    <div
+      v-if="!isUnsupported && tab === 'upload'"
+      class="space-y-5"
+    >
       <!-- Curated upstream sources -->
       <div class="space-y-2">
         <div class="text-xs uppercase tracking-wider text-muted-foreground font-medium">
@@ -660,7 +720,10 @@ const sources = [
           >
             <div class="flex items-center justify-between">
               <span class="text-sm font-medium">{{ s.label }}</span>
-              <ExternalLink :size="12" class="text-muted-foreground group-hover:text-brand-500" />
+              <ExternalLink
+                :size="12"
+                class="text-muted-foreground group-hover:text-brand-500"
+              />
             </div>
             <div class="text-[10px] text-muted-foreground">{{ s.host }}</div>
             <div class="text-[10px] text-muted-foreground/70 leading-snug">{{ s.tag }}</div>
@@ -671,9 +734,14 @@ const sources = [
       <!-- Drop zone -->
       <div class="rounded-xl border border-border bg-card/40 backdrop-blur p-5 space-y-4">
         <div class="flex items-start gap-3">
-          <Upload :size="20" class="text-brand-500 shrink-0 mt-0.5" />
+          <Upload
+            :size="20"
+            class="text-brand-500 shrink-0 mt-0.5"
+          />
           <div class="space-y-1 flex-1 min-w-0">
-            <h3 class="font-medium">{{ t('mods.manual.title') }}</h3>
+            <h3 class="font-medium">
+              {{ t('mods.manual.title') }}
+            </h3>
             <p class="text-xs text-muted-foreground leading-relaxed">
               {{ t('mods.manual.subtitle') }}
             </p>
@@ -686,7 +754,7 @@ const sources = [
           accept=".jar,.mrpack,.zip"
           class="hidden"
           @change="onUploadFileChange"
-        />
+        >
 
         <!-- Empty state: pick a file -->
         <button
@@ -695,16 +763,29 @@ const sources = [
           class="w-full border-2 border-dashed border-border rounded-lg py-10 px-4 text-center hover:border-brand-500/60 hover:bg-accent/30 transition-colors"
           @click="pickUploadFile"
         >
-          <Upload :size="24" class="mx-auto text-muted-foreground" />
-          <div class="text-sm font-medium mt-2">{{ t('mods.manual.pickFile') }}</div>
-          <div class="text-[11px] text-muted-foreground mt-1">{{ t('mods.manual.pickHint') }}</div>
+          <Upload
+            :size="24"
+            class="mx-auto text-muted-foreground"
+          />
+          <div class="text-sm font-medium mt-2">
+            {{ t('mods.manual.pickFile') }}
+          </div>
+          <div class="text-[11px] text-muted-foreground mt-1">
+            {{ t('mods.manual.pickHint') }}
+          </div>
         </button>
 
         <!-- File selected: inspection result + install action -->
-        <div v-else class="space-y-3">
+        <div
+          v-else
+          class="space-y-3"
+        >
           <!-- Filename + clear -->
           <div class="flex items-center gap-2">
-            <Package :size="16" class="text-muted-foreground" />
+            <Package
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="font-mono text-sm truncate flex-1">{{ uploadFile.name }}</span>
             <span class="text-[11px] text-muted-foreground">{{ fmtSize(uploadFile.size) }}</span>
             <button
@@ -722,7 +803,10 @@ const sources = [
             v-if="inspectUpload.isPending.value"
             class="flex items-center gap-2 text-xs text-muted-foreground"
           >
-            <Loader2 class="animate-spin" :size="12" />
+            <Loader2
+              class="animate-spin"
+              :size="12"
+            />
             {{ t('mods.manual.inspecting') }}
           </div>
 
@@ -751,7 +835,10 @@ const sources = [
                 <span class="text-muted-foreground">{{ t('mods.manual.version') }}: </span>
                 <span class="font-mono">{{ uploadInspect.meta.version }}</span>
               </div>
-              <div v-if="uploadInspect.meta.mc_version_range" class="sm:col-span-2">
+              <div
+                v-if="uploadInspect.meta.mc_version_range"
+                class="sm:col-span-2"
+              >
                 <span class="text-muted-foreground">{{ t('mods.manual.mcRange') }}: </span>
                 <span class="font-mono">{{ uploadInspect.meta.mc_version_range }}</span>
               </div>
@@ -759,18 +846,42 @@ const sources = [
 
             <!-- Verdict badges -->
             <div class="flex flex-wrap gap-3 pt-1 border-t border-border text-xs">
-              <span class="inline-flex items-center gap-1" :class="verdictColor(uploadInspect.verdict.loader)">
-                <ShieldCheck v-if="uploadInspect.verdict.loader === 'ok'" :size="12" />
-                <AlertTriangle v-else-if="uploadInspect.verdict.loader === 'mismatch'" :size="12" />
-                <Info v-else :size="12" />
+              <span
+                class="inline-flex items-center gap-1"
+                :class="verdictColor(uploadInspect.verdict.loader)"
+              >
+                <ShieldCheck
+                  v-if="uploadInspect.verdict.loader === 'ok'"
+                  :size="12"
+                />
+                <AlertTriangle
+                  v-else-if="uploadInspect.verdict.loader === 'mismatch'"
+                  :size="12"
+                />
+                <Info
+                  v-else
+                  :size="12"
+                />
                 {{ t(`mods.manual.verdict.loader.${uploadInspect.verdict.loader}`, {
                   expected: uploadInspect.target.loader_label,
                 }) }}
               </span>
-              <span class="inline-flex items-center gap-1" :class="verdictColor(uploadInspect.verdict.mc)">
-                <ShieldCheck v-if="uploadInspect.verdict.mc === 'ok'" :size="12" />
-                <AlertTriangle v-else-if="uploadInspect.verdict.mc === 'mismatch'" :size="12" />
-                <Info v-else :size="12" />
+              <span
+                class="inline-flex items-center gap-1"
+                :class="verdictColor(uploadInspect.verdict.mc)"
+              >
+                <ShieldCheck
+                  v-if="uploadInspect.verdict.mc === 'ok'"
+                  :size="12"
+                />
+                <AlertTriangle
+                  v-else-if="uploadInspect.verdict.mc === 'mismatch'"
+                  :size="12"
+                />
+                <Info
+                  v-else
+                  :size="12"
+                />
                 {{ t(`mods.manual.verdict.mc.${uploadInspect.verdict.mc}`, {
                   current: uploadInspect.target.mc_version,
                 }) }}
@@ -782,9 +893,14 @@ const sources = [
               v-if="!uploadInspect.meta.can_install"
               class="rounded-md border border-amber-500/30 bg-amber-500/10 p-2.5 flex items-start gap-2 text-xs"
             >
-              <AlertTriangle :size="13" class="text-amber-500 shrink-0 mt-0.5" />
+              <AlertTriangle
+                :size="13"
+                class="text-amber-500 shrink-0 mt-0.5"
+              />
               <div>
-                <div class="font-medium">{{ t('mods.manual.cantInstall') }}</div>
+                <div class="font-medium">
+                  {{ t('mods.manual.cantInstall') }}
+                </div>
                 <p class="text-muted-foreground mt-0.5">
                   {{ uploadInspect.meta.install_reason }}
                 </p>
@@ -820,15 +936,22 @@ const sources = [
               type="button"
               :disabled="
                 !uploadInspect ||
-                uploadInstall.isPending.value ||
-                (uploadInspect.meta.can_install === false) ||
-                (uploadInspect.meta.kind === 'unknown' && !forceKind)
+                  uploadInstall.isPending.value ||
+                  (uploadInspect.meta.can_install === false) ||
+                  (uploadInspect.meta.kind === 'unknown' && !forceKind)
               "
               :variant="uploadInspect?.verdict.overall === 'warn' ? 'destructive' : 'default'"
               @click="commitUpload"
             >
-              <Loader2 v-if="uploadInstall.isPending.value" class="animate-spin" :size="14" />
-              <Upload v-else :size="14" />
+              <Loader2
+                v-if="uploadInstall.isPending.value"
+                class="animate-spin"
+                :size="14"
+              />
+              <Upload
+                v-else
+                :size="14"
+              />
               {{
                 uploadInspect?.verdict.overall === 'warn'
                   ? t('mods.manual.installAnyway')

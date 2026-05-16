@@ -43,10 +43,10 @@ const sizeClass = {
       loading="lazy"
       referrerpolicy="no-referrer"
       @error="failed = true"
-    />
+    >
     <component
-      v-else
       :is="fallbackIcon"
+      v-else
       :size="sizeClass.icon"
       class="text-muted-foreground/60"
     />

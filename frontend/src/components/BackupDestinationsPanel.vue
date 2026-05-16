@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
   CheckCircle,
-  CloudUpload,
   Loader2,
   Pencil,
   Plus,
@@ -150,7 +149,10 @@ function applyPreset(p: typeof PRESETS[number]) {
       <p class="text-sm text-muted-foreground">
         {{ t('destinations.subtitle') }}
       </p>
-      <Button size="sm" @click="openCreate">
+      <Button
+        size="sm"
+        @click="openCreate"
+      >
         <Plus />
         {{ t('destinations.create') }}
       </Button>
@@ -179,11 +181,19 @@ function applyPreset(p: typeof PRESETS[number]) {
           <div class="grid gap-3 sm:grid-cols-2">
             <div class="space-y-1.5">
               <Label for="d-name">{{ t('common.name') }}</Label>
-              <Input id="d-name" v-model="form.name" :placeholder="t('destinations.namePlaceholder')" />
+              <Input
+                id="d-name"
+                v-model="form.name"
+                :placeholder="t('destinations.namePlaceholder')"
+              />
             </div>
             <div class="space-y-1.5">
               <Label for="d-bucket">{{ t('destinations.bucket') }}</Label>
-              <Input id="d-bucket" v-model="form.bucket" placeholder="hostcraft-backups" />
+              <Input
+                id="d-bucket"
+                v-model="form.bucket"
+                placeholder="hostcraft-backups"
+              />
             </div>
             <div class="space-y-1.5 sm:col-span-2">
               <Label for="d-endpoint">{{ t('destinations.endpoint') }}</Label>
@@ -199,11 +209,19 @@ function applyPreset(p: typeof PRESETS[number]) {
             </div>
             <div class="space-y-1.5">
               <Label for="d-region">{{ t('destinations.region') }}</Label>
-              <Input id="d-region" v-model="form.region" placeholder="us-east-1" />
+              <Input
+                id="d-region"
+                v-model="form.region"
+                placeholder="us-east-1"
+              />
             </div>
             <div class="space-y-1.5">
               <Label for="d-prefix">{{ t('destinations.prefix') }}</Label>
-              <Input id="d-prefix" v-model="form.prefix" :placeholder="t('destinations.prefixPlaceholder')" />
+              <Input
+                id="d-prefix"
+                v-model="form.prefix"
+                :placeholder="t('destinations.prefixPlaceholder')"
+              />
             </div>
             <div class="space-y-1.5">
               <Label for="d-access">{{ t('destinations.accessKey') }}</Label>
@@ -241,7 +259,11 @@ function applyPreset(p: typeof PRESETS[number]) {
           </div>
 
           <div class="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" size="sm" @click="closeForm">
+            <Button
+              variant="ghost"
+              size="sm"
+              @click="closeForm"
+            >
               <X />
               {{ t('common.cancel') }}
             </Button>
@@ -268,27 +290,41 @@ function applyPreset(p: typeof PRESETS[number]) {
       <table class="w-full text-sm">
         <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
           <tr>
-            <th class="px-3 py-2 text-left font-medium">{{ t('common.name') }}</th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('common.name') }}
+            </th>
             <th class="px-3 py-2 text-left font-medium hidden sm:table-cell">
               {{ t('destinations.bucket') }}
             </th>
             <th class="px-3 py-2 text-left font-medium hidden md:table-cell">
               {{ t('destinations.endpoint') }}
             </th>
-            <th class="px-3 py-2 text-left font-medium">{{ t('destinations.autoUpload') }}</th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('destinations.autoUpload') }}
+            </th>
             <th class="w-32 px-3 py-2" />
           </tr>
         </thead>
         <tbody>
           <tr v-if="list.isPending.value && !list.data.value">
-            <td colspan="5" class="px-4 py-8 text-center text-muted-foreground">
+            <td
+              colspan="5"
+              class="px-4 py-8 text-center text-muted-foreground"
+            >
               {{ t('common.loading') }}
             </td>
           </tr>
           <tr v-else-if="!list.data.value?.length">
-            <td colspan="5" class="px-4 py-12 text-center text-muted-foreground">
-              <div class="text-base font-medium mb-1">{{ t('destinations.empty') }}</div>
-              <div class="text-xs">{{ t('destinations.emptyHint') }}</div>
+            <td
+              colspan="5"
+              class="px-4 py-12 text-center text-muted-foreground"
+            >
+              <div class="text-base font-medium mb-1">
+                {{ t('destinations.empty') }}
+              </div>
+              <div class="text-xs">
+                {{ t('destinations.emptyHint') }}
+              </div>
             </td>
           </tr>
           <tr
@@ -333,8 +369,15 @@ function applyPreset(p: typeof PRESETS[number]) {
                   :title="t('destinations.test')"
                   @click="actions.test.mutate(d)"
                 >
-                  <Loader2 v-if="actions.test.isPending.value" class="animate-spin" :size="14" />
-                  <RotateCcw v-else :size="14" />
+                  <Loader2
+                    v-if="actions.test.isPending.value"
+                    class="animate-spin"
+                    :size="14"
+                  />
+                  <RotateCcw
+                    v-else
+                    :size="14"
+                  />
                 </button>
                 <button
                   type="button"

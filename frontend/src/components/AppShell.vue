@@ -88,7 +88,10 @@ function onTogglePower() {
       :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
     >
       <div class="px-5 py-5 border-b border-border">
-        <RouterLink to="/" class="block">
+        <RouterLink
+          to="/"
+          class="block"
+        >
           <Logo />
         </RouterLink>
       </div>
@@ -124,7 +127,10 @@ function onTogglePower() {
 
       <div class="px-4 py-4 border-t border-border space-y-3">
         <div class="flex items-center gap-2.5 text-xs">
-          <span class="size-2 rounded-full" :class="statusDotClass" />
+          <span
+            class="size-2 rounded-full"
+            :class="statusDotClass"
+          />
           <span class="text-muted-foreground">{{ t('server.label') }}</span>
           <span class="ml-auto font-medium">{{ statusLabel }}</span>
         </div>
@@ -141,8 +147,8 @@ function onTogglePower() {
         >
           <Power :size="14" />
           {{ isBusy
-              ? t('server.states.working')
-              : isRunning ? t('server.actions.stopServer') : t('server.actions.startServer')
+            ? t('server.states.working')
+            : isRunning ? t('server.actions.stopServer') : t('server.actions.startServer')
           }}
         </button>
 
@@ -203,7 +209,10 @@ function onTogglePower() {
 
       <main class="flex-1 px-4 sm:px-6 py-6 max-w-[1600px] w-full mx-auto">
         <RouterView v-slot="{ Component }">
-          <Transition name="view-fade" mode="out-in">
+          <Transition
+            name="view-fade"
+            mode="out-in"
+          >
             <KeepAlive :max="8">
               <component :is="Component" />
             </KeepAlive>

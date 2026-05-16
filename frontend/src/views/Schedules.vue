@@ -178,12 +178,20 @@ watch(
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div class="space-y-1">
         <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-          <CalendarClock :size="22" class="text-brand-500" />
+          <CalendarClock
+            :size="22"
+            class="text-brand-500"
+          />
           {{ t('schedules.title') }}
         </h2>
-        <p class="text-sm text-muted-foreground">{{ t('schedules.subtitle') }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ t('schedules.subtitle') }}
+        </p>
       </div>
-      <Button size="sm" @click="openCreate">
+      <Button
+        size="sm"
+        @click="openCreate"
+      >
         <Plus />
         {{ t('schedules.create') }}
       </Button>
@@ -224,7 +232,12 @@ watch(
             </div>
             <div class="space-y-1.5">
               <Label for="sched-cron">{{ t('schedules.cron') }}</Label>
-              <Input id="sched-cron" v-model="form.cron" placeholder="0 4 * * *" class="font-mono" />
+              <Input
+                id="sched-cron"
+                v-model="form.cron"
+                placeholder="0 4 * * *"
+                class="font-mono"
+              />
               <div class="flex flex-wrap gap-1 pt-1">
                 <button
                   v-for="p in CRON_PRESETS"
@@ -241,7 +254,10 @@ watch(
           </div>
 
           <!-- Kind-specific -->
-          <div v-if="form.kind === 'rcon'" class="space-y-1.5">
+          <div
+            v-if="form.kind === 'rcon'"
+            class="space-y-1.5"
+          >
             <Label for="sched-cmd">{{ t('schedules.fields.command') }}</Label>
             <Input
               id="sched-cmd"
@@ -256,7 +272,11 @@ watch(
             class="space-y-1.5"
           >
             <Label for="sched-prefix">{{ t('schedules.fields.namePrefix') }}</Label>
-            <Input id="sched-prefix" v-model="form.namePrefix" placeholder="nightly" />
+            <Input
+              id="sched-prefix"
+              v-model="form.namePrefix"
+              placeholder="nightly"
+            />
           </div>
 
           <div class="flex items-center gap-2.5">
@@ -265,7 +285,11 @@ watch(
           </div>
 
           <div class="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" size="sm" @click="closeForm">
+            <Button
+              variant="ghost"
+              size="sm"
+              @click="closeForm"
+            >
               {{ t('common.cancel') }}
             </Button>
             <Button
@@ -294,26 +318,50 @@ watch(
       <table class="w-full text-sm">
         <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
           <tr>
-            <th class="px-3 py-2 text-left font-medium">{{ t('common.name') }}</th>
-            <th class="px-3 py-2 text-left font-medium hidden sm:table-cell">{{ t('schedules.headers.kind') }}</th>
-            <th class="px-3 py-2 text-left font-medium font-mono hidden md:table-cell">{{ t('schedules.cron') }}</th>
-            <th class="px-3 py-2 text-left font-medium hidden lg:table-cell">{{ t('schedules.headers.next') }}</th>
-            <th class="px-3 py-2 text-left font-medium hidden lg:table-cell">{{ t('schedules.headers.lastRun') }}</th>
-            <th class="px-3 py-2 text-left font-medium">{{ t('schedules.headers.status') }}</th>
-            <th class="px-3 py-2 text-left font-medium">{{ t('schedules.headers.enabled') }}</th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('common.name') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium hidden sm:table-cell">
+              {{ t('schedules.headers.kind') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium font-mono hidden md:table-cell">
+              {{ t('schedules.cron') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium hidden lg:table-cell">
+              {{ t('schedules.headers.next') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium hidden lg:table-cell">
+              {{ t('schedules.headers.lastRun') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('schedules.headers.status') }}
+            </th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('schedules.headers.enabled') }}
+            </th>
             <th class="w-32 px-3 py-2" />
           </tr>
         </thead>
         <tbody>
           <tr v-if="list.isPending.value && !list.data.value">
-            <td colspan="8" class="px-4 py-8 text-center text-muted-foreground">
+            <td
+              colspan="8"
+              class="px-4 py-8 text-center text-muted-foreground"
+            >
               {{ t('common.loading') }}
             </td>
           </tr>
           <tr v-else-if="!list.data.value?.length">
-            <td colspan="8" class="px-4 py-12 text-center text-muted-foreground">
-              <div class="text-base font-medium mb-1">{{ t('schedules.empty') }}</div>
-              <div class="text-xs">{{ t('schedules.emptyHint') }}</div>
+            <td
+              colspan="8"
+              class="px-4 py-12 text-center text-muted-foreground"
+            >
+              <div class="text-base font-medium mb-1">
+                {{ t('schedules.empty') }}
+              </div>
+              <div class="text-xs">
+                {{ t('schedules.emptyHint') }}
+              </div>
             </td>
           </tr>
           <tr
@@ -322,7 +370,9 @@ watch(
             class="border-t border-border hover:bg-accent/30 transition-colors"
           >
             <td class="px-3 py-2">
-              <div class="font-medium truncate">{{ s.name }}</div>
+              <div class="font-medium truncate">
+                {{ s.name }}
+              </div>
               <div
                 v-if="s.last_status === 'failed'"
                 class="text-xs text-destructive flex items-center gap-1 mt-0.5"
@@ -354,12 +404,19 @@ watch(
                 class="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium"
                 :class="statusBadgeClass(s.last_status)"
               >
-                <Loader2 v-if="s.last_status === 'running'" class="animate-spin" :size="10" />
+                <Loader2
+                  v-if="s.last_status === 'running'"
+                  class="animate-spin"
+                  :size="10"
+                />
                 {{ t(`schedules.statuses.${s.last_status}`) }}
               </span>
             </td>
             <td class="px-3 py-2">
-              <Switch :model-value="s.enabled" @update:model-value="onToggleEnabled(s, $event)" />
+              <Switch
+                :model-value="s.enabled"
+                @update:model-value="onToggleEnabled(s, $event)"
+              />
             </td>
             <td class="px-3 py-2">
               <div class="flex items-center justify-end gap-1">

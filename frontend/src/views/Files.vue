@@ -217,24 +217,50 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
   >
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div class="space-y-1">
-        <h2 class="text-2xl font-semibold tracking-tight">{{ t('files.title') }}</h2>
-        <p class="text-sm text-muted-foreground">{{ t('files.subtitle') }}</p>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          {{ t('files.title') }}
+        </h2>
+        <p class="text-sm text-muted-foreground">
+          {{ t('files.subtitle') }}
+        </p>
       </div>
       <div class="flex flex-wrap gap-2">
-        <Button variant="outline" size="sm" :disabled="listing.isFetching.value" @click="actions.refresh()">
+        <Button
+          variant="outline"
+          size="sm"
+          :disabled="listing.isFetching.value"
+          @click="actions.refresh()"
+        >
           <RefreshCw :class="listing.isFetching.value ? 'animate-spin' : ''" />
           {{ t('common.refresh') }}
         </Button>
-        <Button variant="outline" size="sm" @click="newFolderOpen = !newFolderOpen">
+        <Button
+          variant="outline"
+          size="sm"
+          @click="newFolderOpen = !newFolderOpen"
+        >
           <FolderPlus />
           {{ t('files.newFolder') }}
         </Button>
-        <Button size="sm" :disabled="actions.upload.isPending.value" @click="onUploadClick">
-          <Loader2 v-if="actions.upload.isPending.value" class="animate-spin" />
+        <Button
+          size="sm"
+          :disabled="actions.upload.isPending.value"
+          @click="onUploadClick"
+        >
+          <Loader2
+            v-if="actions.upload.isPending.value"
+            class="animate-spin"
+          />
           <UploadIcon v-else />
           {{ t('common.upload') }}
         </Button>
-        <input ref="uploadInput" type="file" multiple class="hidden" @change="onUploadFiles">
+        <input
+          ref="uploadInput"
+          type="file"
+          multiple
+          class="hidden"
+          @change="onUploadFiles"
+        >
       </div>
     </header>
 
@@ -248,8 +274,14 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
         <Home :size="14" />
         <span>{{ t('files.rootLabel') }}</span>
       </button>
-      <template v-for="(crumb, i) in breadcrumbs" :key="crumb.path">
-        <ChevronRight :size="14" class="text-muted-foreground/60" />
+      <template
+        v-for="(crumb, i) in breadcrumbs"
+        :key="crumb.path"
+      >
+        <ChevronRight
+          :size="14"
+          class="text-muted-foreground/60"
+        />
         <button
           type="button"
           class="px-2 py-1 rounded-md hover:bg-accent hover:text-foreground transition-colors"
@@ -262,12 +294,30 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
     </nav>
 
     <Transition name="view-fade">
-      <form v-if="newFolderOpen" class="flex gap-2 items-center" @submit.prevent="onCreateFolder">
-        <Input v-model="newFolderName" :placeholder="t('files.newFolderName')" autofocus class="max-w-xs" />
-        <Button type="submit" size="sm" :disabled="!newFolderName.trim() || actions.mkdir.isPending.value">
+      <form
+        v-if="newFolderOpen"
+        class="flex gap-2 items-center"
+        @submit.prevent="onCreateFolder"
+      >
+        <Input
+          v-model="newFolderName"
+          :placeholder="t('files.newFolderName')"
+          autofocus
+          class="max-w-xs"
+        />
+        <Button
+          type="submit"
+          size="sm"
+          :disabled="!newFolderName.trim() || actions.mkdir.isPending.value"
+        >
           {{ t('common.create') }}
         </Button>
-        <Button type="button" variant="ghost" size="sm" @click="newFolderOpen = false; newFolderName = ''">
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          @click="newFolderOpen = false; newFolderName = ''"
+        >
           {{ t('common.cancel') }}
         </Button>
       </form>
@@ -276,7 +326,10 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
     <!-- Search bar + result count -->
     <div class="flex items-center gap-3">
       <div class="relative flex-1 max-w-md">
-        <Search :size="14" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+        <Search
+          :size="14"
+          class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+        />
         <input
           v-model="searchQuery"
           type="search"
@@ -312,7 +365,12 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
         <span class="text-xs text-muted-foreground hidden sm:inline">
           {{ t('files.selectionInPath', { path: displayPath }) }}
         </span>
-        <Button variant="ghost" size="sm" class="ml-auto" @click="selection.clear()">
+        <Button
+          variant="ghost"
+          size="sm"
+          class="ml-auto"
+          @click="selection.clear()"
+        >
           <X />
           {{ t('common.clear') }}
         </Button>
@@ -322,7 +380,10 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
           :disabled="actions.remove.isPending.value"
           @click="onDeleteSelected"
         >
-          <Loader2 v-if="actions.remove.isPending.value" class="animate-spin" />
+          <Loader2
+            v-if="actions.remove.isPending.value"
+            class="animate-spin"
+          />
           <Trash2 v-else />
           {{ t('files.deleteSelected') }}
         </Button>
@@ -349,9 +410,18 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
                 @click="toggleSort('name')"
               >
                 {{ t('common.name') }}
-                <ArrowUp v-if="sortKey === 'name' && sortDir === 'asc'" :size="12" />
-                <ArrowDown v-else-if="sortKey === 'name' && sortDir === 'desc'" :size="12" />
-                <span v-else class="opacity-30 size-3 inline-block" />
+                <ArrowUp
+                  v-if="sortKey === 'name' && sortDir === 'asc'"
+                  :size="12"
+                />
+                <ArrowDown
+                  v-else-if="sortKey === 'name' && sortDir === 'desc'"
+                  :size="12"
+                />
+                <span
+                  v-else
+                  class="opacity-30 size-3 inline-block"
+                />
               </button>
             </th>
             <th class="px-3 py-2 text-right font-medium hidden sm:table-cell">
@@ -361,9 +431,18 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
                 @click="toggleSort('size')"
               >
                 {{ t('common.size') }}
-                <ArrowUp v-if="sortKey === 'size' && sortDir === 'asc'" :size="12" />
-                <ArrowDown v-else-if="sortKey === 'size' && sortDir === 'desc'" :size="12" />
-                <span v-else class="opacity-30 size-3 inline-block" />
+                <ArrowUp
+                  v-if="sortKey === 'size' && sortDir === 'asc'"
+                  :size="12"
+                />
+                <ArrowDown
+                  v-else-if="sortKey === 'size' && sortDir === 'desc'"
+                  :size="12"
+                />
+                <span
+                  v-else
+                  class="opacity-30 size-3 inline-block"
+                />
               </button>
             </th>
             <th class="px-3 py-2 text-right font-medium hidden md:table-cell">
@@ -373,9 +452,18 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
                 @click="toggleSort('modified')"
               >
                 {{ t('common.modified') }}
-                <ArrowUp v-if="sortKey === 'modified' && sortDir === 'asc'" :size="12" />
-                <ArrowDown v-else-if="sortKey === 'modified' && sortDir === 'desc'" :size="12" />
-                <span v-else class="opacity-30 size-3 inline-block" />
+                <ArrowUp
+                  v-if="sortKey === 'modified' && sortDir === 'asc'"
+                  :size="12"
+                />
+                <ArrowDown
+                  v-else-if="sortKey === 'modified' && sortDir === 'desc'"
+                  :size="12"
+                />
+                <span
+                  v-else
+                  class="opacity-30 size-3 inline-block"
+                />
               </button>
             </th>
             <th class="w-24 px-3 py-2" />
@@ -383,24 +471,42 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
         </thead>
         <tbody>
           <tr v-if="listing.isPending.value && !listing.data.value">
-            <td colspan="5" class="px-4 py-8 text-center text-muted-foreground">
+            <td
+              colspan="5"
+              class="px-4 py-8 text-center text-muted-foreground"
+            >
               {{ t('common.loading') }}
             </td>
           </tr>
           <tr v-else-if="listing.isError.value">
-            <td colspan="5" class="px-4 py-8 text-center text-destructive">
+            <td
+              colspan="5"
+              class="px-4 py-8 text-center text-destructive"
+            >
               {{ listing.error.value?.message ?? t('files.loadFailed') }}
             </td>
           </tr>
           <tr v-else-if="!listing.data.value?.entries.length">
-            <td colspan="5" class="px-4 py-12 text-center text-muted-foreground">
-              <div class="text-base font-medium mb-1">{{ t('files.emptyTitle') }}</div>
-              <div class="text-xs">{{ t('files.emptySubtitle') }}</div>
+            <td
+              colspan="5"
+              class="px-4 py-12 text-center text-muted-foreground"
+            >
+              <div class="text-base font-medium mb-1">
+                {{ t('files.emptyTitle') }}
+              </div>
+              <div class="text-xs">
+                {{ t('files.emptySubtitle') }}
+              </div>
             </td>
           </tr>
           <tr v-else-if="!visibleEntries.length">
-            <td colspan="5" class="px-4 py-8 text-center text-muted-foreground">
-              <div class="text-sm">{{ t('files.noMatch', { q: searchQuery }) }}</div>
+            <td
+              colspan="5"
+              class="px-4 py-8 text-center text-muted-foreground"
+            >
+              <div class="text-sm">
+                {{ t('files.noMatch', { q: searchQuery }) }}
+              </div>
             </td>
           </tr>
           <tr
@@ -418,11 +524,25 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
                 @change="selection.toggle(entry.name)"
               >
             </td>
-            <td class="px-3 py-2 cursor-pointer" @click="onRowClick(entry)">
+            <td
+              class="px-3 py-2 cursor-pointer"
+              @click="onRowClick(entry)"
+            >
               <div class="flex items-center gap-2.5 min-w-0">
-                <Folder v-if="entry.is_dir" :size="16" class="text-brand-500 shrink-0" />
-                <FileIcon v-else :size="16" class="text-muted-foreground shrink-0" />
-                <span class="truncate" :class="entry.is_dir ? 'font-medium' : ''">
+                <Folder
+                  v-if="entry.is_dir"
+                  :size="16"
+                  class="text-brand-500 shrink-0"
+                />
+                <FileIcon
+                  v-else
+                  :size="16"
+                  class="text-muted-foreground shrink-0"
+                />
+                <span
+                  class="truncate"
+                  :class="entry.is_dir ? 'font-medium' : ''"
+                >
                   {{ entry.name }}
                 </span>
               </div>
@@ -467,8 +587,13 @@ const displayPath = computed(() => `/${path.value || t('files.rootLabel')}`)
         class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
       >
         <div class="rounded-2xl border-2 border-dashed border-brand-500 bg-card/80 px-12 py-10 text-center shadow-2xl">
-          <UploadIcon :size="32" class="mx-auto text-brand-500 mb-3" />
-          <div class="text-base font-semibold tracking-tight mb-1">{{ t('files.dropToUpload') }}</div>
+          <UploadIcon
+            :size="32"
+            class="mx-auto text-brand-500 mb-3"
+          />
+          <div class="text-base font-semibold tracking-tight mb-1">
+            {{ t('files.dropToUpload') }}
+          </div>
           <div class="text-sm text-muted-foreground">
             {{ t('files.dropTarget', { path: displayPath }) }}
           </div>

@@ -65,10 +65,15 @@ async function onReset() {
   <Card>
     <CardHeader>
       <CardTitle class="flex items-center gap-2">
-        <ImageIcon :size="18" class="text-brand-500" />
+        <ImageIcon
+          :size="18"
+          class="text-brand-500"
+        />
         {{ t('icon.title') }}
       </CardTitle>
-      <p class="text-xs text-muted-foreground">{{ t('icon.subtitle') }}</p>
+      <p class="text-xs text-muted-foreground">
+        {{ t('icon.subtitle') }}
+      </p>
     </CardHeader>
 
     <CardContent class="space-y-5">
@@ -76,11 +81,17 @@ async function onReset() {
         v-if="iconQuery.isPending.value && !iconQuery.data.value"
         class="flex items-center gap-2 text-sm text-muted-foreground"
       >
-        <Loader2 class="animate-spin" :size="14" />
+        <Loader2
+          class="animate-spin"
+          :size="14"
+        />
         {{ t('common.loading') }}
       </div>
 
-      <div v-else class="flex flex-col sm:flex-row gap-5">
+      <div
+        v-else
+        class="flex flex-col sm:flex-row gap-5"
+      >
         <!-- Current preview -->
         <div class="flex flex-col items-center gap-2 shrink-0">
           <div
@@ -92,8 +103,11 @@ async function onReset() {
               :src="currentUrl"
               :alt="t('icon.currentAlt')"
               class="size-full object-cover [image-rendering:pixelated]"
+            >
+            <ImageIcon
+              v-else
+              :size="28"
             />
-            <ImageIcon v-else :size="28" />
           </div>
           <span class="text-[10px] uppercase tracking-wider text-muted-foreground">
             {{ currentUrl ? t('icon.currentLabel') : t('icon.defaultLabel') }}
@@ -121,15 +135,18 @@ async function onReset() {
                   :alt="p.name"
                   class="size-full object-cover [image-rendering:pixelated]"
                   loading="lazy"
-                />
+                >
                 <span
                   v-if="
                     applyPreset.isPending.value &&
-                    applyPreset.variables.value === p.id
+                      applyPreset.variables.value === p.id
                   "
                   class="absolute inset-0 flex items-center justify-center bg-black/50"
                 >
-                  <Loader2 class="animate-spin text-white" :size="16" />
+                  <Loader2
+                    class="animate-spin text-white"
+                    :size="16"
+                  />
                 </span>
                 <span
                   class="absolute inset-x-0 bottom-0 px-1 py-0.5 bg-gradient-to-t from-black/70 to-transparent text-[9px] font-medium text-white truncate text-center opacity-0 group-hover:opacity-100 transition-opacity"
@@ -147,7 +164,7 @@ async function onReset() {
               accept="image/png,image/jpeg,image/webp"
               class="hidden"
               @change="onFileChange"
-            />
+            >
             <Button
               type="button"
               variant="outline"
@@ -155,8 +172,14 @@ async function onReset() {
               :disabled="upload.isPending.value"
               @click="fileInput?.click()"
             >
-              <Loader2 v-if="upload.isPending.value" class="animate-spin" />
-              <Upload v-else :size="14" />
+              <Loader2
+                v-if="upload.isPending.value"
+                class="animate-spin"
+              />
+              <Upload
+                v-else
+                :size="14"
+              />
               {{ upload.isPending.value ? t('icon.uploading') : t('icon.upload') }}
             </Button>
 
@@ -168,8 +191,14 @@ async function onReset() {
               :disabled="remove.isPending.value"
               @click="onReset"
             >
-              <Loader2 v-if="remove.isPending.value" class="animate-spin" />
-              <RotateCcw v-else :size="14" />
+              <Loader2
+                v-if="remove.isPending.value"
+                class="animate-spin"
+              />
+              <RotateCcw
+                v-else
+                :size="14"
+              />
               {{ t('icon.reset') }}
             </Button>
 

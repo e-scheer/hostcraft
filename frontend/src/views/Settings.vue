@@ -89,10 +89,15 @@ onBeforeRouteLeave(async () => {
     <header class="flex flex-wrap items-end justify-between gap-4">
       <div class="space-y-1">
         <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-          <SettingsIcon :size="22" class="text-brand-500" />
+          <SettingsIcon
+            :size="22"
+            class="text-brand-500"
+          />
           {{ t('settings.title') }}
         </h2>
-        <p class="text-sm text-muted-foreground">{{ t('settings.subtitle') }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ t('settings.subtitle') }}
+        </p>
       </div>
     </header>
 
@@ -103,7 +108,10 @@ onBeforeRouteLeave(async () => {
       v-if="propsQuery.isPending.value && !propsQuery.data.value"
       class="flex items-center gap-2 text-muted-foreground text-sm"
     >
-      <Loader2 class="animate-spin" :size="14" />
+      <Loader2
+        class="animate-spin"
+        :size="14"
+      />
       {{ t('settings.loading') }}
     </div>
 
@@ -135,7 +143,10 @@ onBeforeRouteLeave(async () => {
             class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-2 sm:gap-6 sm:items-start"
           >
             <div class="min-w-0">
-              <Label :for="`f-${key}`" class="block">
+              <Label
+                :for="`f-${key}`"
+                class="block"
+              >
                 {{ fieldLabel(key) }}
               </Label>
               <p class="text-[11px] font-mono text-muted-foreground/70 mt-0.5 truncate">
@@ -215,11 +226,23 @@ onBeforeRouteLeave(async () => {
             <span class="size-1.5 rounded-full bg-amber-400 animate-pulse" />
             {{ t('settings.unsaved') }}
           </span>
-          <Button type="button" variant="ghost" size="sm" :disabled="save.isPending.value" @click="onReset">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            :disabled="save.isPending.value"
+            @click="onReset"
+          >
             {{ t('common.cancel') }}
           </Button>
-          <Button type="submit" :disabled="save.isPending.value">
-            <Loader2 v-if="save.isPending.value" class="animate-spin" />
+          <Button
+            type="submit"
+            :disabled="save.isPending.value"
+          >
+            <Loader2
+              v-if="save.isPending.value"
+              class="animate-spin"
+            />
             <Save v-else />
             {{ save.isPending.value ? t('settings.saving') : t('settings.save') }}
           </Button>

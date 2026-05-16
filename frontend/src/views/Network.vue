@@ -243,17 +243,25 @@ const sortedDnsRecords = computed(() => {
   <div class="space-y-6">
     <header class="space-y-1">
       <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <Cable :size="22" class="text-brand-500" />
+        <Cable
+          :size="22"
+          class="text-brand-500"
+        />
         {{ t('network.title') }}
       </h2>
-      <p class="text-sm text-muted-foreground">{{ t('network.subtitle') }}</p>
+      <p class="text-sm text-muted-foreground">
+        {{ t('network.subtitle') }}
+      </p>
     </header>
 
     <div
       v-if="network.isPending.value && !network.data.value"
       class="flex items-center gap-2 text-muted-foreground text-sm"
     >
-      <Loader2 class="animate-spin" :size="14" />
+      <Loader2
+        class="animate-spin"
+        :size="14"
+      />
       {{ t('common.loading') }}
     </div>
 
@@ -265,7 +273,10 @@ const sortedDnsRecords = computed(() => {
         <CardHeader class="flex flex-row items-center justify-between gap-3 space-y-0">
           <div class="space-y-1">
             <CardTitle class="flex items-center gap-2">
-              <Globe :size="16" class="text-brand-500" />
+              <Globe
+                :size="16"
+                class="text-brand-500"
+              />
               {{ t('network.publicAccess.title') }}
             </CardTitle>
             <p class="text-xs text-muted-foreground">
@@ -294,7 +305,9 @@ const sortedDnsRecords = computed(() => {
                 "
                 @click="localMode = m"
               >
-                <div class="text-sm font-medium">{{ t(`network.modes.${m}.label`) }}</div>
+                <div class="text-sm font-medium">
+                  {{ t(`network.modes.${m}.label`) }}
+                </div>
                 <div class="text-xs text-muted-foreground mt-0.5 leading-snug">
                   {{ t(`network.modes.${m}.help`) }}
                 </div>
@@ -302,7 +315,10 @@ const sortedDnsRecords = computed(() => {
             </div>
           </div>
 
-          <div v-if="isPlayitMode" class="space-y-1.5">
+          <div
+            v-if="isPlayitMode"
+            class="space-y-1.5"
+          >
             <Label for="playit-host">{{ t('network.publicAccess.playitHostLabel') }}</Label>
             <Input
               id="playit-host"
@@ -320,8 +336,8 @@ const sortedDnsRecords = computed(() => {
             <button
               v-if="
                 isPlayitManaged &&
-                detectedHostname &&
-                detectedHostname !== localPlayitHost.trim()
+                  detectedHostname &&
+                  detectedHostname !== localPlayitHost.trim()
               "
               type="button"
               class="text-[11px] text-brand-500 hover:underline inline-flex items-center gap-1"
@@ -390,8 +406,15 @@ const sortedDnsRecords = computed(() => {
                   :title="t('common.copy')"
                   @click="copyText(`${agentQuery.data.value!.mc_container_ip}`, 'mc-ip')"
                 >
-                  <Check v-if="copiedKey === 'mc-ip'" :size="12" class="text-emerald-500" />
-                  <Copy v-else :size="12" />
+                  <Check
+                    v-if="copiedKey === 'mc-ip'"
+                    :size="12"
+                    class="text-emerald-500"
+                  />
+                  <Copy
+                    v-else
+                    :size="12"
+                  />
                 </button>
               </div>
               <p class="text-[11px] text-muted-foreground leading-snug">
@@ -411,7 +434,10 @@ const sortedDnsRecords = computed(() => {
                 v-if="!showSecretInput"
                 class="flex items-center gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-2"
               >
-                <Check :size="14" class="text-emerald-500 shrink-0" />
+                <Check
+                  :size="14"
+                  class="text-emerald-500 shrink-0"
+                />
                 <span class="text-sm font-medium text-foreground flex-1">
                   {{ t('network.playit.agent.secretSavedBadge') }}
                 </span>
@@ -425,7 +451,10 @@ const sortedDnsRecords = computed(() => {
               </div>
 
               <!-- Replace / first-time entry -->
-              <div v-else class="space-y-1.5">
+              <div
+                v-else
+                class="space-y-1.5"
+              >
                 <div class="flex gap-2">
                   <Input
                     id="playit-secret"
@@ -457,7 +486,7 @@ const sortedDnsRecords = computed(() => {
                 size="sm"
                 :disabled="
                   agentActions.start.isPending.value ||
-                  (!agentQuery.data.value?.has_secret && !localSecret.trim())
+                    (!agentQuery.data.value?.has_secret && !localSecret.trim())
                 "
                 @click="startAgent"
               >
@@ -466,7 +495,10 @@ const sortedDnsRecords = computed(() => {
                   class="animate-spin"
                   :size="14"
                 />
-                <Play v-else :size="14" />
+                <Play
+                  v-else
+                  :size="14"
+                />
                 {{
                   agentRunning
                     ? t('network.playit.agent.restart')
@@ -486,7 +518,10 @@ const sortedDnsRecords = computed(() => {
                   class="animate-spin"
                   :size="14"
                 />
-                <Power v-else :size="14" />
+                <Power
+                  v-else
+                  :size="14"
+                />
                 {{ t('network.playit.agent.stop') }}
               </Button>
             </div>
@@ -495,11 +530,14 @@ const sortedDnsRecords = computed(() => {
             <div
               v-if="
                 agentRunning &&
-                agentQuery.data.value?.playit_setup === 'no_tunnel'
+                  agentQuery.data.value?.playit_setup === 'no_tunnel'
               "
               class="rounded-md border border-amber-500/30 bg-amber-500/10 p-3 flex items-start gap-2.5 text-xs leading-relaxed"
             >
-              <TriangleAlert :size="14" class="text-amber-500 shrink-0 mt-0.5" />
+              <TriangleAlert
+                :size="14"
+                class="text-amber-500 shrink-0 mt-0.5"
+              />
               <div class="space-y-1.5 min-w-0">
                 <div class="font-medium text-foreground">
                   {{ t('network.playit.agent.noTunnelTitle') }}
@@ -535,10 +573,15 @@ const sortedDnsRecords = computed(() => {
             <div
               v-if="showLogs"
               class="rounded-md border border-border bg-background/60 max-h-48 overflow-auto p-2 font-mono text-[10px] leading-relaxed text-muted-foreground whitespace-pre-wrap"
-            >{{ agentLogs.data.value?.logs || t('network.playit.agent.noLogs') }}</div>
+            >
+              {{ agentLogs.data.value?.logs || t('network.playit.agent.noLogs') }}
+            </div>
           </div>
 
-          <div v-else class="flex items-center gap-2">
+          <div
+            v-else
+            class="flex items-center gap-2"
+          >
             <span class="text-xs text-muted-foreground">
               {{ t('network.publicAccess.detectedAt', { ip: data.public_ip ?? '—' }) }}
             </span>
@@ -549,7 +592,10 @@ const sortedDnsRecords = computed(() => {
               :disabled="refreshIp.isPending.value"
               @click="refreshIp.mutate()"
             >
-              <RefreshCw :size="12" :class="refreshIp.isPending.value ? 'animate-spin' : ''" />
+              <RefreshCw
+                :size="12"
+                :class="refreshIp.isPending.value ? 'animate-spin' : ''"
+              />
             </button>
           </div>
         </CardContent>
@@ -561,7 +607,9 @@ const sortedDnsRecords = computed(() => {
       <Card>
         <CardHeader>
           <CardTitle>{{ t('network.domain.title') }}</CardTitle>
-          <p class="text-xs text-muted-foreground">{{ t('network.domain.subtitle') }}</p>
+          <p class="text-xs text-muted-foreground">
+            {{ t('network.domain.subtitle') }}
+          </p>
         </CardHeader>
         <CardContent class="space-y-4">
           <div class="space-y-1.5">
@@ -574,10 +622,15 @@ const sortedDnsRecords = computed(() => {
               autocomplete="off"
               spellcheck="false"
             />
-            <p class="text-xs text-muted-foreground">{{ t('network.domain.hint') }}</p>
+            <p class="text-xs text-muted-foreground">
+              {{ t('network.domain.hint') }}
+            </p>
           </div>
 
-          <div v-if="sortedDnsRecords.length" class="space-y-1">
+          <div
+            v-if="sortedDnsRecords.length"
+            class="space-y-1"
+          >
             <div class="flex items-center justify-between">
               <Label class="text-xs uppercase tracking-wider text-muted-foreground">
                 {{ t('network.domain.recordsToAdd') }}
@@ -590,10 +643,18 @@ const sortedDnsRecords = computed(() => {
               <table class="w-full text-xs">
                 <thead class="bg-muted/40 text-[10px] uppercase tracking-wider text-muted-foreground">
                   <tr>
-                    <th class="px-3 py-2 text-left font-medium w-16">Type</th>
-                    <th class="px-3 py-2 text-left font-medium">Name</th>
-                    <th class="px-3 py-2 text-left font-medium">Value</th>
-                    <th class="px-3 py-2 text-right font-medium w-14">TTL</th>
+                    <th class="px-3 py-2 text-left font-medium w-16">
+                      Type
+                    </th>
+                    <th class="px-3 py-2 text-left font-medium">
+                      Name
+                    </th>
+                    <th class="px-3 py-2 text-left font-medium">
+                      Value
+                    </th>
+                    <th class="px-3 py-2 text-right font-medium w-14">
+                      TTL
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -616,8 +677,16 @@ const sortedDnsRecords = computed(() => {
                         @click="copyText(rec.name, `name-${i}`)"
                       >
                         <span class="truncate">{{ rec.name }}</span>
-                        <Check v-if="copiedKey === `name-${i}`" :size="10" class="text-brand-500" />
-                        <Copy v-else :size="10" class="opacity-40 group-hover:opacity-100" />
+                        <Check
+                          v-if="copiedKey === `name-${i}`"
+                          :size="10"
+                          class="text-brand-500"
+                        />
+                        <Copy
+                          v-else
+                          :size="10"
+                          class="opacity-40 group-hover:opacity-100"
+                        />
                       </button>
                     </td>
                     <td class="px-3 py-2 font-mono">
@@ -627,8 +696,16 @@ const sortedDnsRecords = computed(() => {
                         @click="copyText(rec.value, `value-${i}`)"
                       >
                         <span class="truncate">{{ rec.value }}</span>
-                        <Check v-if="copiedKey === `value-${i}`" :size="10" class="text-brand-500 shrink-0" />
-                        <Copy v-else :size="10" class="opacity-40 group-hover:opacity-100 shrink-0" />
+                        <Check
+                          v-if="copiedKey === `value-${i}`"
+                          :size="10"
+                          class="text-brand-500 shrink-0"
+                        />
+                        <Copy
+                          v-else
+                          :size="10"
+                          class="opacity-40 group-hover:opacity-100 shrink-0"
+                        />
                       </button>
                       <div
                         v-if="rec.comment"
@@ -650,7 +727,10 @@ const sortedDnsRecords = computed(() => {
             v-else-if="localDomain && !sortedDnsRecords.length"
             class="rounded-lg border border-amber-400/30 bg-amber-400/5 p-3 text-xs text-amber-300 flex items-start gap-2"
           >
-            <TriangleAlert :size="14" class="shrink-0 mt-0.5" />
+            <TriangleAlert
+              :size="14"
+              class="shrink-0 mt-0.5"
+            />
             <span>{{ t('network.domain.cantPreview') }}</span>
           </div>
         </CardContent>
@@ -664,8 +744,14 @@ const sortedDnsRecords = computed(() => {
         >
           <span class="size-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span class="text-sm">{{ t('settings.unsaved') }}</span>
-          <Button :disabled="updateProfile.isPending.value" @click="saveProfile">
-            <Loader2 v-if="updateProfile.isPending.value" class="animate-spin" />
+          <Button
+            :disabled="updateProfile.isPending.value"
+            @click="saveProfile"
+          >
+            <Loader2
+              v-if="updateProfile.isPending.value"
+              class="animate-spin"
+            />
             {{ t('common.save') }}
           </Button>
         </div>
@@ -682,7 +768,10 @@ const sortedDnsRecords = computed(() => {
               {{ t('network.allocations.subtitle') }}
             </p>
           </div>
-          <Button size="sm" @click="allocFormOpen = !allocFormOpen">
+          <Button
+            size="sm"
+            @click="allocFormOpen = !allocFormOpen"
+          >
             <Plus />
             {{ t('network.allocations.add') }}
           </Button>
@@ -758,7 +847,11 @@ const sortedDnsRecords = computed(() => {
               </div>
 
               <div class="flex justify-end gap-2 pt-1">
-                <Button variant="ghost" size="sm" @click="allocFormOpen = false; resetAllocForm()">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  @click="allocFormOpen = false; resetAllocForm()"
+                >
                   {{ t('common.cancel') }}
                 </Button>
                 <Button
@@ -771,7 +864,10 @@ const sortedDnsRecords = computed(() => {
                   "
                   @click="onSubmitAllocation"
                 >
-                  <Loader2 v-if="allocations.create.isPending.value" class="animate-spin" />
+                  <Loader2
+                    v-if="allocations.create.isPending.value"
+                    class="animate-spin"
+                  />
                   <Plus v-else />
                   {{ t('network.allocations.add') }}
                 </Button>
@@ -783,7 +879,9 @@ const sortedDnsRecords = computed(() => {
             <table class="w-full text-sm">
               <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
                 <tr>
-                  <th class="px-3 py-2 text-left font-medium">{{ t('common.name') }}</th>
+                  <th class="px-3 py-2 text-left font-medium">
+                    {{ t('common.name') }}
+                  </th>
                   <th class="px-3 py-2 text-left font-medium font-mono">
                     {{ t('network.allocations.hostPort') }}
                   </th>
@@ -798,7 +896,10 @@ const sortedDnsRecords = computed(() => {
               </thead>
               <tbody>
                 <tr v-if="!data.allocations.length">
-                  <td colspan="5" class="px-4 py-8 text-center text-xs text-muted-foreground">
+                  <td
+                    colspan="5"
+                    class="px-4 py-8 text-center text-xs text-muted-foreground"
+                  >
                     {{ t('network.allocations.empty') }}
                   </td>
                 </tr>
@@ -807,9 +908,15 @@ const sortedDnsRecords = computed(() => {
                   :key="alloc.id"
                   class="border-t border-border hover:bg-accent/30 transition-colors"
                 >
-                  <td class="px-3 py-2 font-medium">{{ alloc.label }}</td>
-                  <td class="px-3 py-2 font-mono tabular-nums">{{ alloc.host_port }}</td>
-                  <td class="px-3 py-2 font-mono tabular-nums">{{ alloc.container_port }}</td>
+                  <td class="px-3 py-2 font-medium">
+                    {{ alloc.label }}
+                  </td>
+                  <td class="px-3 py-2 font-mono tabular-nums">
+                    {{ alloc.host_port }}
+                  </td>
+                  <td class="px-3 py-2 font-mono tabular-nums">
+                    {{ alloc.container_port }}
+                  </td>
                   <td class="px-3 py-2">
                     <span class="text-xs font-mono text-muted-foreground">{{ alloc.protocol }}</span>
                   </td>

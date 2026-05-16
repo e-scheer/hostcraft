@@ -117,10 +117,16 @@ function onEsc() {
 </script>
 
 <template>
-  <div ref="wrapper" class="flex flex-col h-[calc(100vh-7rem)] gap-3">
+  <div
+    ref="wrapper"
+    class="flex flex-col h-[calc(100vh-7rem)] gap-3"
+  >
     <header class="flex items-center gap-3">
       <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <TerminalIcon :size="22" class="text-brand-500" />
+        <TerminalIcon
+          :size="22"
+          class="text-brand-500"
+        />
         {{ t('console.title') }}
       </h2>
       <span
@@ -152,8 +158,15 @@ function onEsc() {
           :title="t('console.copyHint')"
           @click="copyContents"
         >
-          <Check v-if="copied" :size="14" class="text-emerald-500" />
-          <Copy v-else :size="14" />
+          <Check
+            v-if="copied"
+            :size="14"
+            class="text-emerald-500"
+          />
+          <Copy
+            v-else
+            :size="14"
+          />
           {{ copied ? t('console.copiedShort') : t('console.copy') }}
         </button>
         <button
@@ -213,8 +226,11 @@ function onEsc() {
         @keydown.down="onDown"
         @keydown.tab="onTab"
         @keydown.esc="onEsc"
-      />
-      <Button type="submit" :disabled="!connected || !cmd.trim()">
+      >
+      <Button
+        type="submit"
+        :disabled="!connected || !cmd.trim()"
+      >
         <SendHorizontal />
         {{ t('console.send') }}
       </Button>

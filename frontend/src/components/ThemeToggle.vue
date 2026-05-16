@@ -16,7 +16,13 @@ const isDark = computed(() => theme.theme === 'dark')
     :aria-label="isDark ? t('common.themeLight') : t('common.themeDark')"
     @click="theme.toggle()"
   >
-    <Sun v-if="isDark" :size="16" />
-    <Moon v-else :size="16" />
+    <Sun
+      v-if="isDark"
+      :size="16"
+    />
+    <Moon
+      v-else
+      :size="16"
+    />
   </button>
 </template>

@@ -6,6 +6,7 @@ import { useMutation, useQuery } from '@tanstack/vue-query'
 import { HTTPError } from 'ky'
 import { ArrowLeft, Download, Loader2, Save } from 'lucide-vue-next'
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
+import type * as Monaco from 'monaco-editor'
 import { toast } from 'vue-sonner'
 import { Button } from '@/components/ui/button'
 import { downloadAuthenticated, extractErrorMessage, filesApi } from '@/lib/api'
@@ -80,7 +81,7 @@ function trySave() {
 }
 
 // Wire Ctrl+S / Cmd+S inside Monaco AND globally on the page.
-function onMonacoMount(editor: any, monaco: any) {
+function onMonacoMount(editor: Monaco.editor.IStandaloneCodeEditor, monaco: typeof Monaco) {
   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, trySave)
 }
 
@@ -172,7 +173,11 @@ function detectLanguage(name: string): string {
   <div class="flex flex-col h-[calc(100vh-7rem)] gap-3">
     <!-- Toolbar -->
     <header class="flex items-center gap-2 flex-wrap">
-      <Button variant="ghost" size="sm" @click="goBack">
+      <Button
+        variant="ghost"
+        size="sm"
+        @click="goBack"
+      >
         <ArrowLeft />
         {{ t('fileEditor.back') }}
       </Button>
@@ -196,7 +201,10 @@ function detectLanguage(name: string): string {
         :disabled="!isDirty || save.isPending.value || fileQuery.isPending.value || errorStatus !== null"
         @click="trySave"
       >
-        <Loader2 v-if="save.isPending.value" class="animate-spin" />
+        <Loader2
+          v-if="save.isPending.value"
+          class="animate-spin"
+        />
         <Save v-else />
         {{ save.isPending.value ? t('fileEditor.saving') : t('fileEditor.save') }}
       </Button>
@@ -209,7 +217,10 @@ function detectLanguage(name: string): string {
         v-if="fileQuery.isPending.value"
         class="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground"
       >
-        <Loader2 class="animate-spin mr-2" :size="14" />
+        <Loader2
+          class="animate-spin mr-2"
+          :size="14"
+        />
         {{ t('fileEditor.loading') }}
       </div>
 
@@ -237,11 +248,17 @@ function detectLanguage(name: string): string {
           }}
         </p>
         <div class="flex gap-2 mt-2">
-          <Button variant="outline" @click="goBack">
+          <Button
+            variant="outline"
+            @click="goBack"
+          >
             <ArrowLeft />
             {{ t('fileEditor.back') }}
           </Button>
-          <Button v-if="errorStatus === 415 || errorStatus === 413" @click="onDownload">
+          <Button
+            v-if="errorStatus === 415 || errorStatus === 413"
+            @click="onDownload"
+          >
             <Download />
             {{ t('common.download') }}
           </Button>

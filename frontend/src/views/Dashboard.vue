@@ -282,29 +282,47 @@ async function copyAddress() {
             :src="iconUrl"
             :alt="t('icon.currentAlt')"
             class="size-full object-cover [image-rendering:pixelated]"
-          />
+          >
         </RouterLink>
         <div class="space-y-1 min-w-0">
           <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-3">
             {{ t('dashboard.title') }}
             <span class="status-pill status-pill--idle">
-              <span class="dot" :class="dotClass" />
+              <span
+                class="dot"
+                :class="dotClass"
+              />
               {{ label }}
             </span>
           </h2>
-          <p class="text-sm text-muted-foreground">{{ subtitle }}</p>
+          <p class="text-sm text-muted-foreground">
+            {{ subtitle }}
+          </p>
         </div>
       </div>
       <div class="flex gap-2">
-        <Button variant="outline" :disabled="isBusy || !isRunning" @click="restart.mutate()">
+        <Button
+          variant="outline"
+          :disabled="isBusy || !isRunning"
+          @click="restart.mutate()"
+        >
           <RotateCcw />
           {{ t('server.actions.restart') }}
         </Button>
-        <Button v-if="isRunning" variant="destructive" :disabled="isBusy" @click="stop.mutate()">
+        <Button
+          v-if="isRunning"
+          variant="destructive"
+          :disabled="isBusy"
+          @click="stop.mutate()"
+        >
           <Power />
           {{ t('server.actions.stop') }}
         </Button>
-        <Button v-else :disabled="isBusy" @click="start.mutate()">
+        <Button
+          v-else
+          :disabled="isBusy"
+          @click="start.mutate()"
+        >
           <Power />
           {{ t('server.actions.start') }}
         </Button>
@@ -320,7 +338,10 @@ async function copyAddress() {
       class="block rounded-xl border border-destructive/40 bg-destructive/10 p-4 text-sm hover:bg-destructive/15 transition-colors"
     >
       <div class="flex items-start gap-3">
-        <AlertTriangle class="text-destructive shrink-0 mt-0.5" :size="20" />
+        <AlertTriangle
+          class="text-destructive shrink-0 mt-0.5"
+          :size="20"
+        />
         <div class="flex-1 min-w-0">
           <div class="font-medium text-foreground">
             {{ t('dashboard.crashLoop.title') }}
@@ -340,23 +361,42 @@ async function copyAddress() {
 
     <!-- Stat cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card v-for="s in stats" :key="s.labelKey" class="overflow-hidden">
+      <Card
+        v-for="s in stats"
+        :key="s.labelKey"
+        class="overflow-hidden"
+      >
         <CardContent class="p-5">
           <div class="flex items-center justify-between">
             <span class="text-xs uppercase tracking-wider text-muted-foreground font-medium">
               {{ t(s.labelKey) }}
             </span>
-            <component :is="s.icon" :size="16" class="text-brand-500" />
+            <component
+              :is="s.icon"
+              :size="16"
+              class="text-brand-500"
+            />
           </div>
           <div
             v-if="loadingStats && s.value === '—'"
             class="mt-2 h-8 w-28 rounded-md bg-muted animate-pulse"
           />
-          <div v-else class="mt-2 text-2xl font-semibold tracking-tight nums">
+          <div
+            v-else
+            class="mt-2 text-2xl font-semibold tracking-tight nums"
+          >
             {{ s.value }}
           </div>
-          <div v-if="s.hint" class="mt-0.5 text-xs text-muted-foreground">{{ s.hint }}</div>
-          <div v-else-if="loadingStats && s.value === '—'" class="mt-0.5 h-3 w-16 rounded bg-muted animate-pulse" />
+          <div
+            v-if="s.hint"
+            class="mt-0.5 text-xs text-muted-foreground"
+          >
+            {{ s.hint }}
+          </div>
+          <div
+            v-else-if="loadingStats && s.value === '—'"
+            class="mt-0.5 h-3 w-16 rounded bg-muted animate-pulse"
+          />
         </CardContent>
       </Card>
     </div>
@@ -383,7 +423,10 @@ async function copyAddress() {
             to="/runtime"
             class="flex items-center gap-3 py-1 rounded-md hover:bg-accent/40 transition-colors"
           >
-            <Box :size="16" class="text-muted-foreground" />
+            <Box
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="text-muted-foreground">{{ t('dashboard.quickInfo.loader') }}</span>
             <span class="ml-auto font-medium">
               {{ loaderLabel }}
@@ -398,13 +441,16 @@ async function copyAddress() {
             :title="
               mcVersionAlias
                 ? t('dashboard.quickInfo.mcVersionResolved', {
-                    alias: mcVersionAlias,
-                    resolved: mcVersionLabel,
-                  })
+                  alias: mcVersionAlias,
+                  resolved: mcVersionLabel,
+                })
                 : ''
             "
           >
-            <Cpu :size="16" class="text-muted-foreground" />
+            <Cpu
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="text-muted-foreground">{{ t('dashboard.quickInfo.mcVersion') }}</span>
             <span class="ml-auto font-medium font-mono text-xs">
               {{ mcVersionLabel }}
@@ -423,7 +469,10 @@ async function copyAddress() {
             :title="t('dashboard.quickInfo.copyAddress')"
             @click="copyAddress"
           >
-            <Globe :size="16" class="text-muted-foreground" />
+            <Globe
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="text-muted-foreground">{{ t('dashboard.quickInfo.address') }}</span>
             <span class="ml-auto inline-flex items-center gap-1.5 font-medium font-mono text-xs">
               {{ addressLabel }}
@@ -500,7 +549,10 @@ async function copyAddress() {
             to="/settings"
             class="flex items-center gap-3 py-1 rounded-md hover:bg-accent/40 transition-colors"
           >
-            <Skull :size="16" class="text-muted-foreground" />
+            <Skull
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="text-muted-foreground">{{ t('dashboard.quickInfo.difficulty') }}</span>
             <span class="ml-auto font-medium">{{ difficultyLabel }}</span>
           </RouterLink>
@@ -509,7 +561,10 @@ async function copyAddress() {
             to="/players"
             class="flex items-center gap-3 py-1 rounded-md hover:bg-accent/40 transition-colors"
           >
-            <ShieldCheck :size="16" class="text-muted-foreground" />
+            <ShieldCheck
+              :size="16"
+              class="text-muted-foreground"
+            />
             <span class="text-muted-foreground">{{ t('dashboard.quickInfo.whitelist') }}</span>
             <span class="ml-auto font-medium">{{ whitelistLabel }}</span>
           </RouterLink>
@@ -518,7 +573,9 @@ async function copyAddress() {
             <div class="text-[10px] uppercase tracking-wider text-muted-foreground/70 mb-1">
               {{ t('dashboard.quickInfo.motd') }}
             </div>
-            <div class="text-xs italic text-muted-foreground line-clamp-2">{{ motd }}</div>
+            <div class="text-xs italic text-muted-foreground line-clamp-2">
+              {{ motd }}
+            </div>
           </div>
         </CardContent>
       </Card>

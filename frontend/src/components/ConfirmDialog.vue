@@ -41,7 +41,10 @@ watch(
         aria-modal="true"
         @click.self="dialog.answer('cancel')"
       >
-        <Transition name="modal-card" appear>
+        <Transition
+          name="modal-card"
+          appear
+        >
           <div
             v-if="dialog.open"
             class="w-full max-w-sm rounded-xl border border-border bg-card shadow-2xl p-6 space-y-4"
@@ -58,7 +61,11 @@ watch(
               </p>
             </div>
             <div class="flex flex-wrap justify-end gap-2 pt-2">
-              <Button variant="ghost" size="sm" @click="dialog.answer('cancel')">
+              <Button
+                variant="ghost"
+                size="sm"
+                @click="dialog.answer('cancel')"
+              >
                 {{ dialog.options.cancelLabel ?? t('common.cancel') }}
               </Button>
               <Button

@@ -33,7 +33,10 @@ function actionLabel(action: string): string {
     <CardHeader class="flex flex-row items-center justify-between gap-2 space-y-0">
       <div class="space-y-1">
         <CardTitle class="flex items-center gap-2">
-          <Activity :size="16" class="text-brand-500" />
+          <Activity
+            :size="16"
+            class="text-brand-500"
+          />
           {{ t('activity.title') }}
         </CardTitle>
         <CardDescription>{{ t('activity.subtitle') }}</CardDescription>
@@ -52,7 +55,10 @@ function actionLabel(action: string): string {
       >
         {{ t('activity.empty') }}
       </div>
-      <ul v-else class="divide-y divide-border">
+      <ul
+        v-else
+        class="divide-y divide-border"
+      >
         <li
           v-for="entry in activity.data.value ?? []"
           :key="entry.id"
@@ -63,7 +69,11 @@ function actionLabel(action: string): string {
             :size="14"
             class="text-brand-500 shrink-0"
           />
-          <XCircle v-else :size="14" class="text-destructive shrink-0" />
+          <XCircle
+            v-else
+            :size="14"
+            class="text-destructive shrink-0"
+          />
 
           <div class="min-w-0 flex-1">
             <div class="text-sm truncate">
@@ -79,7 +89,10 @@ function actionLabel(action: string): string {
               {{ entry.user ?? '—' }}
               <span class="opacity-60 mx-1">·</span>
               {{ formatRelativeTime(unixOf(entry.created_at)) }}
-              <span v-if="entry.duration_ms != null" class="opacity-60 ml-1">
+              <span
+                v-if="entry.duration_ms != null"
+                class="opacity-60 ml-1"
+              >
                 · {{ entry.duration_ms }} ms
               </span>
             </div>

@@ -59,10 +59,15 @@ function reloadIframe() {
   <div class="space-y-6">
     <header class="space-y-1">
       <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <MapIcon :size="22" class="text-brand-500" />
+        <MapIcon
+          :size="22"
+          class="text-brand-500"
+        />
         {{ t('world.title') }}
       </h2>
-      <p class="text-sm text-muted-foreground">{{ t('world.subtitle') }}</p>
+      <p class="text-sm text-muted-foreground">
+        {{ t('world.subtitle') }}
+      </p>
     </header>
 
     <!-- Loading state — first paint, before status is known -->
@@ -70,18 +75,29 @@ function reloadIframe() {
       v-if="wm.isPending.value && !wm.data.value"
       class="flex items-center gap-2 text-sm text-muted-foreground"
     >
-      <Loader2 class="animate-spin" :size="14" />
+      <Loader2
+        class="animate-spin"
+        :size="14"
+      />
       {{ t('common.loading') }}
     </div>
 
     <!-- ============================================================== -->
     <!-- Unsupported engine (Vanilla, unknown)                            -->
     <!-- ============================================================== -->
-    <Card v-else-if="wm.data.value?.state === 'unsupported'" class="border-amber-500/30">
+    <Card
+      v-else-if="wm.data.value?.state === 'unsupported'"
+      class="border-amber-500/30"
+    >
       <CardContent class="p-5 flex items-start gap-3">
-        <AlertTriangle :size="20" class="text-amber-500 shrink-0 mt-0.5" />
+        <AlertTriangle
+          :size="20"
+          class="text-amber-500 shrink-0 mt-0.5"
+        />
         <div class="space-y-1">
-          <div class="font-medium">{{ t('world.unsupported.title') }}</div>
+          <div class="font-medium">
+            {{ t('world.unsupported.title') }}
+          </div>
           <p class="text-sm text-muted-foreground leading-relaxed">
             {{ t('world.unsupported.body', { type: wm.data.value.target_loader || '?' }) }}
           </p>
@@ -95,10 +111,15 @@ function reloadIframe() {
     <Card v-else-if="wm.data.value?.state === 'not_installed'">
       <CardHeader>
         <CardTitle class="flex items-center gap-2">
-          <Sparkles :size="18" class="text-brand-500" />
+          <Sparkles
+            :size="18"
+            class="text-brand-500"
+          />
           {{ t('world.setup.title') }}
         </CardTitle>
-        <p class="text-xs text-muted-foreground mt-1">{{ t('world.setup.subtitle') }}</p>
+        <p class="text-xs text-muted-foreground mt-1">
+          {{ t('world.setup.subtitle') }}
+        </p>
       </CardHeader>
       <CardContent class="space-y-5">
         <!-- What you'll get -->
@@ -108,7 +129,10 @@ function reloadIframe() {
             :key="line"
             class="flex items-start gap-2"
           >
-            <CheckCircle2 :size="14" class="text-brand-500 shrink-0 mt-0.5" />
+            <CheckCircle2
+              :size="14"
+              class="text-brand-500 shrink-0 mt-0.5"
+            />
             <span>{{ t(`world.setup.${line}`) }}</span>
           </li>
         </ul>
@@ -142,8 +166,15 @@ function reloadIframe() {
           :disabled="install.isPending.value || !target.data.value"
           @click="onInstall"
         >
-          <Loader2 v-if="install.isPending.value" class="animate-spin" :size="16" />
-          <Sparkles v-else :size="16" />
+          <Loader2
+            v-if="install.isPending.value"
+            class="animate-spin"
+            :size="16"
+          />
+          <Sparkles
+            v-else
+            :size="16"
+          />
           {{
             install.isPending.value
               ? t('world.setup.installing')

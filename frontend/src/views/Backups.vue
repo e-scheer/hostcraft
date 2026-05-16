@@ -153,13 +153,21 @@ const statusBadgeClass = computed(() => (status: string) => {
     <header class="flex flex-wrap items-end justify-between gap-3">
       <div class="space-y-1">
         <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-2">
-          <Archive :size="22" class="text-brand-500" />
+          <Archive
+            :size="22"
+            class="text-brand-500"
+          />
           {{ t('backups.title') }}
         </h2>
-        <p class="text-sm text-muted-foreground">{{ t('backups.subtitle') }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ t('backups.subtitle') }}
+        </p>
       </div>
       <div class="flex flex-wrap items-center gap-3">
-        <span v-if="tab === 'backups'" class="text-xs text-muted-foreground tabular-nums">
+        <span
+          v-if="tab === 'backups'"
+          class="text-xs text-muted-foreground tabular-nums"
+        >
           {{
             t('backups.summary', {
               ready: summary.ready,
@@ -168,14 +176,21 @@ const statusBadgeClass = computed(() => (status: string) => {
             })
           }}
         </span>
-        <Button v-if="tab === 'backups'" size="sm" @click="formOpen = !formOpen">
+        <Button
+          v-if="tab === 'backups'"
+          size="sm"
+          @click="formOpen = !formOpen"
+        >
           <Plus />
           {{ t('backups.create') }}
         </Button>
       </div>
     </header>
 
-    <div role="tablist" class="inline-flex rounded-lg border border-border bg-card p-1 gap-1">
+    <div
+      role="tablist"
+      class="inline-flex rounded-lg border border-border bg-card p-1 gap-1"
+    >
       <button
         v-for="key in (['backups', 'destinations'] as const)"
         :key="key"
@@ -194,7 +209,10 @@ const statusBadgeClass = computed(() => (status: string) => {
     <BackupDestinationsPanel v-if="tab === 'destinations'" />
 
     <!-- Create form -->
-    <Transition v-if="tab === 'backups'" name="view-fade">
+    <Transition
+      v-if="tab === 'backups'"
+      name="view-fade"
+    >
       <Card v-if="formOpen">
         <CardContent class="p-5 space-y-4">
           <div class="grid gap-3 sm:grid-cols-2">
@@ -243,7 +261,11 @@ const statusBadgeClass = computed(() => (status: string) => {
             />
           </div>
           <div class="flex justify-end gap-2">
-            <Button variant="ghost" size="sm" @click="formOpen = false">
+            <Button
+              variant="ghost"
+              size="sm"
+              @click="formOpen = false"
+            >
               {{ t('common.cancel') }}
             </Button>
             <Button
@@ -251,7 +273,10 @@ const statusBadgeClass = computed(() => (status: string) => {
               :disabled="actions.create.isPending.value"
               @click="onCreate"
             >
-              <Loader2 v-if="actions.create.isPending.value" class="animate-spin" />
+              <Loader2
+                v-if="actions.create.isPending.value"
+                class="animate-spin"
+              />
               <Plus v-else />
               {{ actions.create.isPending.value ? t('backups.creating') : t('backups.create') }}
             </Button>
@@ -261,11 +286,16 @@ const statusBadgeClass = computed(() => (status: string) => {
     </Transition>
 
     <!-- List -->
-    <div v-if="tab === 'backups'" class="rounded-xl border border-border bg-card overflow-hidden">
+    <div
+      v-if="tab === 'backups'"
+      class="rounded-xl border border-border bg-card overflow-hidden"
+    >
       <table class="w-full text-sm">
         <thead class="bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
           <tr>
-            <th class="px-3 py-2 text-left font-medium">{{ t('backups.headers.name') }}</th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('backups.headers.name') }}
+            </th>
             <th class="px-3 py-2 text-left font-medium hidden sm:table-cell">
               {{ t('backups.headers.kind') }}
             </th>
@@ -275,20 +305,32 @@ const statusBadgeClass = computed(() => (status: string) => {
             <th class="px-3 py-2 text-left font-medium hidden md:table-cell">
               {{ t('backups.headers.created') }}
             </th>
-            <th class="px-3 py-2 text-left font-medium">{{ t('backups.headers.status') }}</th>
+            <th class="px-3 py-2 text-left font-medium">
+              {{ t('backups.headers.status') }}
+            </th>
             <th class="w-24 px-3 py-2" />
           </tr>
         </thead>
         <tbody>
           <tr v-if="list.isPending.value && !list.data.value">
-            <td colspan="6" class="px-4 py-8 text-center text-muted-foreground">
+            <td
+              colspan="6"
+              class="px-4 py-8 text-center text-muted-foreground"
+            >
               {{ t('common.loading') }}
             </td>
           </tr>
           <tr v-else-if="!list.data.value?.length">
-            <td colspan="6" class="px-4 py-12 text-center text-muted-foreground">
-              <div class="text-base font-medium mb-1">{{ t('backups.empty') }}</div>
-              <div class="text-xs">{{ t('backups.emptyHint') }}</div>
+            <td
+              colspan="6"
+              class="px-4 py-12 text-center text-muted-foreground"
+            >
+              <div class="text-base font-medium mb-1">
+                {{ t('backups.empty') }}
+              </div>
+              <div class="text-xs">
+                {{ t('backups.emptyHint') }}
+              </div>
             </td>
           </tr>
           <tr
@@ -310,14 +352,20 @@ const statusBadgeClass = computed(() => (status: string) => {
                     class="animate-spin"
                     :size="9"
                   />
-                  <CloudUpload v-else :size="10" />
+                  <CloudUpload
+                    v-else
+                    :size="10"
+                  />
                   {{ t(`backups.remote.${entry.remote_status}`) }}
                 </span>
                 <span
                   v-if="entry.restore_status === 'running'"
                   class="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-300 px-2 py-0.5 text-[10px] font-medium"
                 >
-                  <Loader2 class="animate-spin" :size="9" />
+                  <Loader2
+                    class="animate-spin"
+                    :size="9"
+                  />
                   {{ t('backups.restoring') }}
                 </span>
               </div>
