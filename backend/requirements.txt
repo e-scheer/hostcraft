@@ -25,7 +25,7 @@ croniter==6.2.2
 boto3==1.43.9
 
 # Server-icon validation + preset generation (Phase 1.7d)
-Pillow==11.0.0
+Pillow==12.2.0
 
 # Plugin metadata (plugin.yml, paper-plugin.yml) for the manual upload flow
 PyYAML==6.0.3
