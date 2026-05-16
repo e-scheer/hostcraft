@@ -82,14 +82,14 @@ jobs:
           PY
 
   # ----- Docker image ------------------------------------------------------
-  # Publish to GHCR on:
-  #   - push to main         -> :main + :sha-<short>
-  #   - tag v*               -> :vX.Y.Z + :latest
-  # PRs build but do NOT push (no credentials, no pollution of the registry).
+  # Publish to GHCR ONLY on tag v* — every release goes through an explicit
+  # ``git tag vX.Y.Z`` so the registry never holds untagged main-branch builds.
+  # PRs and main pushes still run backend+frontend for lint/test feedback;
+  # they just don't produce an image.
   docker:
     needs: [backend, frontend]
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - uses: actions/checkout@v5
       - uses: docker/setup-qemu-action@v4
@@ -108,10 +108,9 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository_owner }}/hostcraft
           tags: |
-            type=ref,event=branch
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            type=raw,value=latest
 
       - name: Build & push multi-arch image
         uses: docker/build-push-action@v7

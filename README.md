@@ -137,7 +137,7 @@ Two containers, one shared volume.
 
 ## Container image
 
-Multi-arch (`linux/amd64`, `linux/arm64`) image published on every push to `main` and every tag.
+Multi-arch (`linux/amd64`, `linux/arm64`) image, published on every `vX.Y.Z` git tag — main-branch builds are validated by CI but not pushed, so the registry only ever holds versioned releases.
 
 ```bash
 docker pull ghcr.io/e-scheer/hostcraft:latest
