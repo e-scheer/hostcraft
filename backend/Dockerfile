@@ -11,7 +11,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # --- Stage 2: build Python venv -------------------------------------------
-FROM python:3.12-slim AS deps
+FROM python:3.14-slim AS deps
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1
 RUN apt-get update \
@@ -23,7 +23,7 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- Stage 3: runtime -----------------------------------------------------
-FROM python:3.12-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 # Runtime needs:
 #  - curl: healthcheck

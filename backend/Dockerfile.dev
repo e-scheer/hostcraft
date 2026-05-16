@@ -2,7 +2,7 @@
 # Backend dev image: Django + DRF with built-in autoreload.
 # Source code is bind-mounted at runtime; only the toolchain ships here.
 
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # Build args so the in-container UID matches the host user, avoiding
 # permission headaches with bind mounts and SQLite databases owned by root.
