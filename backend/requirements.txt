@@ -1,5 +1,5 @@
 # Core
-Django==6.0.5
+Django==6.0.6
 djangorestframework==3.17.1
 djangorestframework-simplejwt==5.5.1
 django-cors-headers==4.9.0
@@ -12,7 +12,7 @@ whitenoise==6.12.0
 
 # Secrets / hashing
 argon2-cffi==25.1.0
-pyotp==2.9.0
+pyotp==2.10.0
 
 # Phase 1 (Minecraft container management)
 docker==7.1.0
@@ -22,7 +22,7 @@ docker==7.1.0
 croniter==6.2.2
 
 # S3-compatible off-site backup sync (Phase 1.6b)
-boto3==1.43.9
+boto3==1.43.29
 
 # Server-icon validation + preset generation (Phase 1.7d)
 Pillow==12.2.0
